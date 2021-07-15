@@ -1,0 +1,20 @@
+#doc h2 {
+    font-size: 2rem;
+}
+
+#doc h3 {
+    font-size: 1.5rem;
+}
+
+#doc ol {
+    list-style: number;
+    margin-left: 2rem;
+}
+
+#doc li {
+    margin: 1rem 0;
+}
+
+#doc p {
+    margin: 1rem 0;
+}
