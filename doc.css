@@ -32,3 +32,11 @@
 #doc p {
     margin: 1rem 0;
 }
+
+#doc a {
+    color: blue;
+}
+
+#doc a:hover {
+    color: lightblue;
+}

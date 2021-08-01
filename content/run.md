@@ -26,7 +26,7 @@ start(program)
 program.parse(process.argv)
 ```
 
-2) The file that actually starts the server:
+2) The file that starts the server:
 
 ```typescript
 
@@ -70,7 +70,7 @@ no other changes are needed.
 
 Serverless is a little bit harder due to the way it bundles things for deployment
 
-**Important: in yarn workspaces all dependencies needs to be mentioned in the serverless package file**
+**Important: in yarn workspaces, all dependencies need to be mentioned in the serverless package file**
 
 This file is the serverless entry point:
 
@@ -131,9 +131,9 @@ module.exports = {
 };
 ```
 
-And this (subset of) file does the entire deployment. It's pretty specific to our usecase but it provides the gist.
+And this (subset of) file does the entire deployment. It's pretty specific to our use case but it provides the gist.
 
-```yaml
+```YAML
 # serverless.yml
 service: api
 
@@ -188,5 +188,5 @@ functions:
 
 ## Binary
 
-The last thing we can do is package up express into a binary. I didn't have the need to do that yet,
-but it would mostly just be nexe ontop of express and if theres enough demand for it can be done relatively easy.
+The last thing we can do is package up express into a binary. I didn't need to do that yet,
+but it would mostly just be nexe on top of express and if there's enough demand for it can be done relatively easy.

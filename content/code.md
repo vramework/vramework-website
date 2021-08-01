@@ -5,7 +5,7 @@ description: Code Concepts
 
 ## Dependency Injection
 
-Lets take a look at how are services are setup.
+Let's take a look at how our services are set up.
 
 First, the interfaces:
 
@@ -32,9 +32,9 @@ export interface CoreSingletonServices {
 // The type of the core services
 // Examples are:
 // - header service: This is a service that just exposes the header via a cleaner API
-// - database service: This returns a lazy loaded transaction so that everything in the function
-// runs within one. If you don't need a transaction you can just use the databasePool on the 
-// singleton sessions which in can point to read replicas
+// - database service: This returns a lazy-loaded transaction so that everything in the function
+// runs within one. If you don't need a transaction you can just use the database pool on the 
+// singleton sessions which can point to read replicas
 export interface CoreServices extends CoreSingletonServices {
 }
 ```
@@ -106,7 +106,7 @@ export const routes: APIRoutes = [{
 Regardless if a session is required or not, vramework will try and find a session for each API call. This is useful
 for APIs open to the public as well as registered users.
 
-In order to define the session, you need to create your UserSession type:
+To define the session, you need to create your UserSession type:
 
 ```typescript
 // Vramework only needs this
@@ -137,10 +137,10 @@ export type APIFunctionSessionless<In, Out> = (services: Services, data: In, ses
 
 ## API Permissions
 
-Permissions in vramework are done on the route layer. You can in theory also do it within the functions themselves, I just
-find it more convienient to do those checks outside since they tend to be quite repetitive.
+Permissions in vramework are done on the routeing layer. You can in theory also do it within the functions themselves, I just
+find it more convenient to do those checks outside since they tend to be quite repetitive.
 
-So in our usecases we have multiple different actor types (Admin, Consultant, User). Each one can get access to certain APIs
+So in our use cases, we have multiple different actor types (Admin, Consultant, User). Each one can get access to certain APIs
 based on their role OR permissions OR both. Hence we have this greedy mechanism to try doing that:
 
 ```typescript
@@ -168,8 +168,4 @@ export const routes: APIRoutes = [{
   }]
 }]
 ```
-
-You also don't need a session to apply permissions. We tend to check for special flags in the query
-to enable features for example. Not data sensitive features, just things we don't need the public
-to see until it's fully vetted.
 

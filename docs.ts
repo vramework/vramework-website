@@ -66,7 +66,8 @@ export const getBlog = async (path: string) => {
       __html: String(result),
       data: {
         title: result.data.title,
-        description: result.data.description
+        description: result.data.description,
+        svg: result.data.svg
       }
     }
   }
