@@ -7,7 +7,6 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Vramework.io</title>
                     <meta name="description" content="A serverless app" />
                     <link rel="icon" href="/favicon.ico" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />

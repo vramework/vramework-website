@@ -1,9 +1,23 @@
 #doc h2 {
     font-size: 2rem;
+    text-transform: uppercase;
 }
 
 #doc h3 {
     font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+#doc h4 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+#doc h5 {
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 #doc ol {

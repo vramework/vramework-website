@@ -20,6 +20,7 @@ export const Layout: React.FunctionComponent<{}> = ({ children }) => {
           <li><Link href="/design">Design</Link></li>
           <li><Link href="/code">Code</Link></li>
           <li><Link href="/run">Run</Link></li>
+          <li><Link href="/blog">Blog</Link></li>
           <li><Link href="/faq">FAQ</Link></li>
         </ul>
       </header>

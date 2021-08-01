@@ -46,3 +46,28 @@ export const getDoc = async (filename: string) => {
     }
   }
 }
+
+export const getBlog = async (path: string) => {
+  const markdown = await readFile(path, 'utf-8')
+  const result: any = await unified()
+    .use(parser)
+    .use(gfm)
+    .use(slug)
+    .use(stringify)
+    .use(frontmatter, ['yaml'])
+    .use(extract, { yaml: parseYaml })
+    .use(externalLinks, { protocols: ['http', 'https', 'mailto', 'tel'] })
+    .use(prism)
+    .use(html)
+    .process(markdown)
+
+  return {
+    props: {
+      __html: String(result),
+      data: {
+        title: result.data.title,
+        description: result.data.description
+      }
+    }
+  }
+}
