@@ -4,4 +4,5 @@ module.exports = withSvgr({
   webpack(config, options) {
     return config;
   },
+  trailingSlash: true,
 });

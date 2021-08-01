@@ -17,7 +17,8 @@ export interface SessionService<UserSession = CoreUserSession> {
   getCookieName: (headers: Record<string, string>) => string
 }
 
-// These are the core services vramework needs to work.
+// These are the singleton services vramework needs to work and are long lived / shared across
+// all function invocations
 export interface CoreSingletonServices {
   // This provides the config
   config: CoreConfig
@@ -29,7 +30,8 @@ export interface CoreSingletonServices {
   createSessionServices: (services: CoreSingletonServices, headers: Record<string, any>, session?: CoreUserSession) => CoreServices
 }
 
-// The type of the core services
+// These are services that are created for specific API calls. They tend to be lazy, meaning
+// they initialize once used instead of by default.
 // Examples are:
 // - header service: This is a service that just exposes the header via a cleaner API
 // - database service: This returns a lazy-loaded transaction so that everything in the function

@@ -6,6 +6,7 @@ import { Layout } from '../components/layout'
 import { DetailSection } from '../components/detail-section'
 
 import { codeDetails, designDetails, runDetails } from '../details'
+import Link from 'next/link'
 
 const Page: React.FunctionComponent = () => {    
   useEffect(() => {
@@ -14,46 +15,68 @@ const Page: React.FunctionComponent = () => {
 
   return <Layout>
     <div className="flex flex-col w-full">
-      <DetailSection className="pb-8" {...designDetails} />
-      <DetailSection className="pb-8 border-b" {...codeDetails} />
-      <DetailSection className="pb-8 border-b" {...runDetails} />
-      <pre className="m-0">
+    <div className="max-w-screen-lg w-full mx-auto">
+      <pre className="m-0 ">
         <code className="language-typescript">{`
-
-// Lets look at code!
-// Creating this file and running the generateRoutes will automatically add this API endpoint to
+// Creating this file and running generateRoutes will automatically add this API endpoint to
 // express or/and serverless.
+import { APIFunction, APIPermission, APIRoutes } from "../api"
+import { UserNotFoundError } from "../errors"
+import * as DB from '../../generated/db-types'
 
-interface SendGreedingCard {
-  toUser: string,
+/**
+ * The IN data type to validate against
+ */
+export interface SendGreetingCard {
+  toUserId: string,
   emailText: string
 }
 
-interface SendGreedingCardResult {
+/**
+ * The resulting data type
+ */
+export interface SendGreetingCardResult {
   message: string
 }
 
-const sendGreetingCard: APIFunction<SendGreedingCard, SendGreedingCardResult> = (services, data, session) => {
-  // This line can be any database driver
-  const [fromUser, toUser] = await Promise.all(
-    services.database.getCrud('user', ['email'], { userId: session.userId }, new UserNotFoundError())
-    services.database.getCrud('user', ['email'], { userId: data.toUser }, new UserNotFoundError())
-  )
-  // Assuming you have en email service hooked up!
-  await services.email.sendGreetingEmail({
-    fromEmail: fromUser.email,
-    toUser: toUser.email,
-    body: data.emailText
-  })
-  return {
-    message: 'Email sent!'
+/**
+ * The API function. This will be invoked with the services, incoming data
+ * and session
+ */
+const sendGreetingCard: APIFunction<SendGreetingCard, SendGreetingCardResult> =
+  async (services, { toUserId, emailText }, { userId }) => {
+    // This line can be any database driver
+    const [fromUser, toUser] = await Promise.all([
+      services.database.crudGet<DB.User>('user', ['email'], { userId }, new UserNotFoundError()),
+      services.database.crudGet<DB.User>('user', ['email'], { userId: toUserId }, new UserNotFoundError())
+    ])
+
+    // Assuming you have en email service hooked up!
+    await services.email.sendEmail({
+      template: 'getting',
+      from: fromUser.email,
+      to: toUser.email,
+      body: emailText
+    })
+
+    return {
+      message: 'Email sent!'
+    }
   }
+
+/*
+* A Permission function, returns true/false to allow/dissallow access to the API Function
+*/
+const isBelowEmailLimit: APIPermission<SendGreetingCard> = async (services, data, session) => {
+  const { emailsSent } = await services.database.crudGet<DB.User>('user', ['emailsSent'], { userId: session.userId }, new UserNotFoundError())
+  return emailsSent <= 100
 }
 
-const isBelowEmailLimit: APIPermission = async (services, data, session) => {
-  // Assuming you have your limits set in a cache TTL record
-  const limit = services.cache.getUserGreetingCardLimit(session.userId)
-  return limit < 300
+/*
+* A Permission function, returns true/false to allow/dissallow access to the API Function
+*/
+const isPaidMember: APIPermission<SendGreetingCard> = async (services, data, session) => {
+  return session.isPaidMember
 }
 
 export const routes: APIRoutes = [{
@@ -64,17 +87,24 @@ export const routes: APIRoutes = [{
   // The function to execute
   func: sendGreetingCard,
   // The JSON schema to generate from typescript and validate against
-  schema: 'SendGreedingCard',
+  schema: 'SendGreetingCard',
   // A set of permissions to check against, at least one has to be valid
-  permissions: { 
+  permissions: {
     // Either a collection of permissions to be anded
-    canSendCard: [isFreeMember, isBelowEmailLimit],
+    canSendCard: [isBelowEmailLimit],
     // Or a single one
     isPaidMember
   }
 }]
         `}</code>
       </pre>
+      <div className="text-center text-xl my-4 uppercase hover:text-gray-500">
+      <Link href="https://github.com/vramework/vramework-example">Checkout the github example repo</Link>
+      </div>
+      </div>
+      <DetailSection className="pb-8" {...designDetails} />
+      <DetailSection className="pb-8 border-b" {...codeDetails} />
+      <DetailSection className="pb-8 border-b" {...runDetails} />
     </div>
   </Layout>
 }

@@ -31,7 +31,7 @@ program.parse(process.argv)
 ```typescript
 
 import commander from 'commander'
-import { ExpressServer } from '@vramework/express/express-server'
+import { ExpressServer } from '@vramework/deploy-express/dist/express-server'
 
 import { config } from '@myproject/functions/src/config'
 import { setupServices } from '@myproject/functions/src/services'
@@ -77,7 +77,7 @@ This file is the serverless entry point:
 ```typescript
 import { APIGatewayProxyEvent } from 'aws-lambda'
 
-import { processCors, processCorsless } from '@vramework/lambda/lambda'
+import { processCors, processCorsless } from '@vramework/deploy-lambda/lambda'
 
 import { config } from '@myproject/functions/src/config'
 import { setupServices } from '@myproject/functions/src/services'

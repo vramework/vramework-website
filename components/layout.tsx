@@ -11,17 +11,13 @@ export const Layout: React.FunctionComponent<{}> = ({ children }) => {
         <h2 className="mb-12 w-full text-2xl md:text-4xl font-semibold text-center">
           FUNCTIONS AS A DESIGN
         </h2>
-        <h3 className="p-4 max-w-screen-lg mx-auto text-center">
-          <b>Disclaimer:</b> Vramework is not properly documented and is currently setup via submodules.
-          This site to explain the foundations and principles of the framework for those who may be 
-          interested in using it, since maintaing opensource software is expensive and time consuming.
-        </h3>
         <ul className="flex m-auto uppercase space-x-4">
           <li><Link href="/design">Design</Link></li>
           <li><Link href="/code">Code</Link></li>
           <li><Link href="/run">Run</Link></li>
           <li><Link href="/blog">Blog</Link></li>
           <li><Link href="/faq">FAQ</Link></li>
+          <li><a href="https://github.com/vramework/vramework" target="_blank" rel="noreferrer">GitHub ⭐️</a></li>
         </ul>
       </header>
 

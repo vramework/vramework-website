@@ -10,7 +10,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 const Page: React.FunctionComponent<Doc> = (props) => {
-    return <Layout>
+    return <Layout title="Vramework.io: Code">
         <article id="doc" className="p-4 w-full max-w-screen-lg mx-auto" dangerouslySetInnerHTML={props} />
     </Layout>
 }
