@@ -7,7 +7,7 @@ description: Code Concepts
 
 Let's take a look at how our services are set up.
 
-First, the interfaces:
+### The interfaces
 
 ```typescript
 // The Session Service is required to get the user session out of the request. It currently
@@ -41,7 +41,7 @@ export interface CoreServices extends CoreSingletonServices {
 }
 ```
 
-Now we got that, lets see how we an example initializion of the services:
+### The implementation
 
 ```typescript
 export const setupServices = async (config: Config): Promise<Services> => {

@@ -1,5 +1,6 @@
 import '../doc.css'
 import 'prismjs/themes/prism-tomorrow.css'
+import "prismjs/plugins/line-numbers/prism-line-numbers.css"
 import 'tailwindcss/tailwind.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'

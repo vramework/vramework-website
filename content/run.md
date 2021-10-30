@@ -9,11 +9,11 @@ We are a massive fan of [commander](https://github.com/tj/commander.js#readme) a
 
 There are two files:
 
-1) The main file:
+### The main file
 
 ```typescript
 #!/usr/bin/env node
-import pkg = require('../package.json')
+import pkg = require('../package.json') 
 
 import { Command } from 'commander'
 import { start } from './express-start'
@@ -26,7 +26,7 @@ start(program)
 program.parse(process.argv)
 ```
 
-2) The file that starts the server:
+### The file that starts the server
 
 ```typescript
 
