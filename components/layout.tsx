@@ -22,19 +22,21 @@ export const Layout: React.FunctionComponent = ({ children }) => {
       </main>
 
       <footer className="flex space-2 bg-black text-white p-4">
-        <ul className="max-w-screen-lg">
-          <li className="mb-2">Vlandor LTD 2021</li>
-          <li className="mb-2"><a href='https://opensource.org/licenses/MIT'>MIT LICENSE</a></li>
-          <li className="mb-2"><a href="https://github.com/vramework/vramework" rel="noreferrer" target='_blank'>Github</a></li>
-        </ul>
-        <ul className="flex flex-col uppercase ml-4">
-          <li><Link href="/design">Design</Link></li>
-          <li><Link href="/code">Code</Link></li>
-          <li><Link href="/run">Run</Link></li>
-          <li><Link href="/faq">FAQ</Link></li>
-          <li><Link href="/blog">Blog</Link></li>
-          <li><a href="https://github.com/vramework/vramework" target="_blank" rel="noreferrer">GitHub ⭐️</a></li>
-        </ul>
+        <div className="flex max-w-screen-lg mx-auto w-full">
+          <ul className="">
+            <li className="mb-2">Vlandor LTD 2021</li>
+            <li className="mb-2"><a href='https://opensource.org/licenses/MIT'>MIT LICENSE</a></li>
+            <li className="mb-2"><a href="https://github.com/vramework/vramework" rel="noreferrer" target='_blank'>Github</a></li>
+          </ul>
+          <ul className="flex flex-col uppercase ml-4">
+            <li><Link href="/design">Design</Link></li>
+            <li><Link href="/code">Code</Link></li>
+            <li><Link href="/run">Run</Link></li>
+            <li><Link href="/faq">FAQ</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
+            <li><a href="https://github.com/vramework/vramework" target="_blank" rel="noreferrer">GitHub ⭐️</a></li>
+          </ul>
+        </div>
       </footer>
     </div>
   )

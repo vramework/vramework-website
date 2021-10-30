@@ -6,6 +6,7 @@ import { Doc, getBlog } from '../../docs'
 
 import { promises } from 'fs'
 import { resolve } from 'path'
+import { PageTitle } from '../../components/page-title'
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const files = await promises.readdir(`${__dirname}/../../../../blog`)
@@ -26,6 +27,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const Page: React.FunctionComponent<Doc> = (props) => {
     return <Layout>
+        <PageTitle title={props.data.title} subTitle={props.data.description} />
         {props.__html && <article id="doc" className="p-4 w-full max-w-screen-lg mx-auto" dangerouslySetInnerHTML={props} />}
     </Layout>
 }
