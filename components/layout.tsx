@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import Link from 'next/link'
 import React from 'react'
 
@@ -5,7 +6,7 @@ export const Layout: React.FunctionComponent = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex bg-black text-white flex p-4 items-center">
-        <span className="mr-4 text-xl uppercase">vramework</span>
+        <Link href="/"><span className="mr-4 text-xl uppercase">vramework</span></Link>
         <ul className="hidden sm:flex uppercase space-x-4 items-center">
           <li><Link href="/design">Design</Link></li>
           <li><Link href="/code">Code</Link></li>
