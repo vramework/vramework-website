@@ -26,7 +26,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
         })
     }
     return {
-        props: { blogs: blogs.sort((a, b) => a.date.localeCompare(b.date)) }
+        props: { blogs: blogs.sort((a, b) => {
+            return Number(a.date) - Number(b.date) ? -1 : 1
+        })
+        }
     }
 }
 
@@ -43,7 +46,7 @@ const Page: React.FunctionComponent<{ blogs: BlogSummary[] }> = (props) => {
             </h2>
             <div className="mx-4">
                 <ul className="max-w-screen-lg w-full select-none">
-                    {props.blogs.sort((a, b) => b.formattedDate.localeCompare(a.formattedDate)).map(({ title, slug, description, formattedDate, svg }) => {
+                    {props.blogs.map(({ title, slug, description, formattedDate, svg }) => {
                         return <li onClick={() => router.push(`/blog/${slug}`)} key={slug} className="border rounded w-full px-4 my-4 py-2 cursor-pointer hover:bg-gray-100" style={{ height: 'fit-content' }}>
                             <article className="flex flex-col md:flex-row items-center">
                                 <img alt={svg} className="w-28 h-28 md:w-16 md:h-16 mt-4 mb-4 md:mt-4 md:mb-0 md:mr-4" src={`/svg/${svg}.svg`} />

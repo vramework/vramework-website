@@ -1,5 +1,5 @@
 ---
-title: Service Injection
+title: Service Lookup
 description: How and why vramework uses services
 svg: service
 ---
