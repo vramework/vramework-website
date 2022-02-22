@@ -59,7 +59,7 @@ export interface SingletonServices {
 }
 ```
 
-Let's take a deeper dive into the ContentServic interface:
+Let's take a deeper dive into the ContentService interface:
 
 ```typescript
 export interface ContentService {
@@ -146,18 +146,18 @@ So now multiply this by the number of services used (as mentioned in pt1, we use
 So I get this point a lot when I talk to people about local vs cloud development. My *(personal)* opinion is that companies that spin-up entire AWS accounts for each developer are going at it wrong. I know that's a strong statement, and I don't mean offence. Conflicting opinions are what leads to so many exciting solutions!
 
 The reason I think it's wrong is that:
-- it's slow (to apply infra changes everywhere)
-- it's hard to decouple from those services if you ever decide to ship an enterprise edition or move to another cloud suddenly
-- it's pretty expensive
-- debugging is occasionally a pain compared to locally
+1) it's slow (to apply infra changes everywhere)
+2)  it's hard to decouple from those services if you ever decide to ship an enterprise edition or move to another cloud suddenly (like cloudflare if AWS costs are too insane)
+3) it's pretty expensive
+4) debugging is occasionally a pain compared to locally
 
-The main question I usually like to ask is: what benefit do you get out of it? In the case of `incognito`, I understand implementing user management is a pain. However, what's the downside of running rabbitMQ locally? Or not sending real-time notifications into the void? Or not uploading useless files inside of S3?
+The main question I usually like to ask is: what benefit do you get out of it? In the case of `aws incognito`, I understand implementing user management is a pain. However, what's the downside of running rabbitMQ locally vs creating an SQS queue? Or not sending real-time notifications into the void? Or not uploading useless files inside of S3?
 
-Is it possible we got a bit too excited about current settings and just ended up uploading our functions to serverless via hot deploy because we can? Or that docker and Kubernetes are so incredible that we run complex infrastructure locally to mimic production? Running my side projects on the side, I sure don't want to tell anyone who helps that I'll need to give them AWS access to add a few simple features.
+Is it possible we got a bit too excited about current settings and just ended up uploading our functions to serverless via hot deploy because we can? Or that docker and Kubernetes are so incredible that we run complex infrastructure locally to mimic production, regardless of the CPU/Memory overhead? Running my side projects on the side, I sure don't want to tell anyone who helps that I'll need to give them AWS access to add a few simple features.
 
 #### Why not use factory methods and stick to it is more functional?
 
-That works entirely. I didn't want to create factory methods because I  like the autocompletion provided by just writing `services.` and seeing what shows up. So far, I have built a few complex SaaS products with a maximum of ten services. Also, factories require the same amount of work to be set up as services.
+That works entirely. I didn't want to create factory methods because I  like the autocompletion provided by just writing `services` and seeing what shows up. So far, I have built a few complex SaaS products with a maximum of ten services. Also, factories require the same amount of work to be set up as services.
 
 #### Using singleton services is not the same as using global state
 
@@ -234,4 +234,6 @@ This part is pretty important. Singleton services are singletons only because th
 
 I completely get how alot of people prefer doing things differently. There isn't always a right or wrong! I hope I provided a few insights into why I find this approach easier though.
 
-I hope this helps bring a bit more insight!
+### Feedback wanted <3
+
+I would love some feedback on why you think this might be a terrible approach. I understand that dependency injection / service lookups in other solutions can get very complex and involve config files and hair pulling. If there's anything you think can be improved or products in common please let me know!

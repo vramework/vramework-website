@@ -6,15 +6,19 @@ export const Layout: React.FunctionComponent = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex bg-black text-white flex p-4 items-center">
-        <Link href="/"><span className="mr-4 text-xl uppercase">vramework</span></Link>
+        <div  className="flex max-w-screen-lg text-white flex p-4 space-x-4 items-center mx-auto">
         <ul className="hidden sm:flex uppercase space-x-4 items-center">
-          <li><Link href="/design">Design</Link></li>
-          <li><Link href="/code">Code</Link></li>
-          <li><Link href="/run">Run</Link></li>
-          <li><Link href="/faq">FAQ</Link></li>
-          <li><Link href="/blog">Blog</Link></li>
-          <li><a href="https://github.com/vramework/vramework" target="_blank" rel="noreferrer">GitHub ⭐️</a></li>
-        </ul>
+            <li className="transform hover:scale-105"><Link href="/design">Design</Link></li>
+            <li className="transform hover:scale-105"><Link href="/code">Code</Link></li>
+            <li className="transform hover:scale-105"><Link href="/run">Run</Link></li>
+          </ul>
+          <Link href="/"><span className="mr-4 text-xl uppercase cursor-pointer transition transform hover:scale-105">vramework</span></Link>
+          <ul className="hidden sm:flex uppercase space-x-4 items-center">
+            <li className="transform hover:scale-105"><Link href="/faq">FAQ</Link></li>
+            <li className="transform hover:scale-105"><Link href="/blog">Blog</Link></li>
+            <li className="transform hover:scale-105"><a href="https://github.com/vramework/vramework" target="_blank" rel="noreferrer">GitHub</a></li>
+          </ul>
+        </div>
       </header>
 
       <main className="flex flex-col flex-grow">
