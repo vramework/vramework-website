@@ -1,0 +1,81 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@3.1.3
+  aws-s3: circleci/aws-s3@3.0.0
+
+jobs:
+  setup:
+    resource_class: large
+    docker:
+      - image: node:16
+    working_directory: ~/vramework
+    steps:
+      - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+      - run: apt-get -y install git-lfs
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn install --immutable
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - .yarn/cache
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  website:
+    resource_class: small
+    docker:
+      - image: node:16
+    working_directory: ~/vramework
+    steps:
+      - attach_workspace:
+          at: ~/agreewe
+      - run:
+          command: cd apps/web && yarn build && yarn export
+      # - aws-s3/sync:
+      #     from: ./docs/book/html/
+      #     to: s3://docs.vramework.io/
+  
+  documentation:
+    resource_class: small
+    docker:
+      - image: cimg/base:2022.10
+    working_directory: ~/vramework
+    steps:
+      - checkout
+      - run:
+          name: Build Rust Book
+          command: |
+            cd docs
+            mkdir bin
+            curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.25/mdbook-v0.4.25-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+            bin/mdbook build
+      - aws-s3/sync:
+          from: ./docs/book/
+          to: s3://docs.vramework.io/
+
+workflows:
+  version: 2
+  
+  develop:
+    jobs:
+      # - setup:
+      #     filters:
+      #       branches:
+      #         only: 
+      #           - develop
+
+      # - build-admin-web:
+      #     context: agreewe.io
+      #     requires:
+      #       - setup
+
+      - documentation:
+          context: vramework
+
+# VS Code Extension Version: 1.5.1
