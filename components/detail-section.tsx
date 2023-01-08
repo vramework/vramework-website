@@ -17,9 +17,6 @@ export const DetailSection: React.FunctionComponent<SectionDetails & { className
                     <div className="flex flex-col mt-4 md:ml-8">
                         <h5 className="mb-2 text-xl">{title}</h5>
                         <p className="text-gray-800">{description}</p>
-                        <span className="text-sm text-gray-400">
-                            <Link href={link}>Read more</Link>
-                        </span>
                     </div>
                 </li>
             })}

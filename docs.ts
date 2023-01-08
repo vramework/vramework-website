@@ -1,9 +1,7 @@
-// @ts-ignore
 import prism from 'remark-prism'
-import unified from 'unified'
+import { unified } from 'unified'
 import html from 'remark-html'
 import gfm from 'remark-gfm'
-// @ts-ignore
 import slug from 'remark-slug'
 import frontmatter from 'remark-frontmatter'
 import extract from 'remark-extract-frontmatter'
@@ -24,7 +22,7 @@ export interface Doc {
 
 export const getDoc = async (filename: string) => {
   const markdown = await readFile(`${__dirname}/../../../content/${filename}.md`, 'utf-8')
-  const result: any = await unified()
+  const result = await unified()
     .use(parser)
     .use(gfm)
     .use(slug)
@@ -57,7 +55,9 @@ export const getBlog = async (path: string) => {
     .use(frontmatter, ['yaml'])
     .use(extract, { yaml: parseYaml })
     .use(externalLinks, { protocols: ['http', 'https', 'mailto', 'tel'] })
-    .use(prism)
+    .use(prism, {
+      
+    })
     .use(html)
     .process(markdown)
 
