@@ -1,42 +1,48 @@
 ---
-sidebar_position: 4
-title: Permissions
-description: Creating permission guards
+sidebar_position: 5
+title: Errors
+description: Associating errors with HTTP codes
 ---
 
-Permissions are evaluated before each function execution and are conceptually similar to guards in NestJS.
+The final part of the puzzle is handling errors.
 
-A permission function operates similarly to an `APIFunction`, but it is expected to return a boolean indicating success or failure. An error can also be thrown, which results in an error code other than 403.
+By default, an error bubbles up to the request and is compared to the errors registered via the `addError` or `addErrors` functions. This process associates the error with a status code and a default custom message to send back if needed.
 
-**Note**: Since permissions are checked in parallel, the first error thrown will be used.
+### Registering Errors
 
-### Basic Permission Check
-
-A simple permission check involves verifying the session:
+Register errors with their corresponding status codes and messages using `addErrors`:
 
 ```typescript
-const isUser: APIPermission<unknown> = (_, _, session) => {
-  return session.isUser;
-}
+import { addErrors, EError } from '@vramework/core/src/errors'
 
-const isAdmin: APIPermission<unknown> = (_, _, session) => {
-  return session.isAdmin;
+export class AccessDeniedError extends EError { }
+export class NotFoundError extends EError { }
+export class BookLimitExceeded extends EError { }
+
+addErrors([
+  [AccessDeniedError, { status: 409, message: 'Access denied' }],
+  [NotFoundError, { status: 404, message: 'Resource not found' }],
+  [BookLimitExceeded, { status: 400, message: 'Book limit exceeded' }],
+])
+```
+
+### Error Handling and Custom Errors
+
+While it might seem straightforward to use the built-in `Error` function, issues with error handling across different workspaces have been observed. To address this, Vramework extends the `Error` class. Each error thrown also has an associated `errorId`, which aids in tracing and debugging.
+
+Here is how the custom `EError` class is defined:
+
+```typescript
+export class EError extends Error {
+  constructor(message?: string, private options?: { errorId?: string }) {
+    super(message)
+    Object.setPrototypeOf(this, new.target.prototype)
+  }
+
+  public getErrorId(): string | undefined {
+    return this.options?.errorId
+  }
 }
 ```
 
-### Advanced Permission Check
-
-More complex permissions can be implemented as follows:
-
-```typescript
-const belowLimit: APIPermission<unknown> = async (services, _, session) => {
-  const booksTaken = await services.kysely
-    .selectFrom('user')
-    .join('books')
-    // Additional query logic
-    ...
-  return booksTaken < someLimit;
-}
-```
-
-**Note**: The data input determines whether a specific permission rule can be applied.
+This approach ensures consistency and provides additional context for error handling in Vramework.
