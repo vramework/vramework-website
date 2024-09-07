@@ -4,15 +4,13 @@ title: Getting Started
 description: How does it work?
 ---
 
-In this set of articles, you'll learn the **core fundamentals** of Vramework. To get familiar with the how Vramework works, and we'll build a basic CRUD application with features that cover a lot of ground at an introductory level.
+In this set of articles, you'll learn the **core fundamentals** of Vramework. To get familiar with how Vramework works, we'll build a basic CRUD application with features that cover a lot of ground at an introductory level.
 
 ## Prerequisites
 
 Please make sure that [Node.js](https://nodejs.org) (version >= 20) is installed on your operating system.
 
-For the duration of this guide, will be using `yarn` to install and manage our packages.
-
-We will also be relying on workspaces. This isn't a requirement, but provides alot of flexibility and help with how we structure our codebase. You can read about it [here](./why-workspaces)
+For the duration of this guide, we will be using `yarn` to install and manage our packages.
 
 ### Setup
 
@@ -24,7 +22,7 @@ cd project
 npm install
 ```
 
-The `project-name` directory will be created, node modules and a few other boilerplate files will be installed, and a few different folders will be created.
+The `project` directory will be created, node modules and a few other boilerplate files will be installed, and several different folders will be created:
 
 ```bash
 src/
@@ -40,18 +38,18 @@ src/
 
 Here's a brief overview of those core files:
 
-|                          |                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `main.ts`      | The entry point                                          |
-| `config.ts` | The config to be use by the server                                                                               |
-| `services.ts`          | A function that creates all the expected services required                                                                          |
-| `services/kysely.ts`         | Our database driver                                                         |
-| `services/email-service.ts`         | A simple email service.                                                                               |
-| `functions/hello-world.ts`                | A hello world function |
-| `functions/email-function.ts`                | Functions related to emails |
-| `functions/email-function.spec.ts`                | The unit tests for the controller |
+| **File**                    | **Description**                                                                                             |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------|
+| `main.ts`                   | The entry point                                                                                           |
+| `config.ts`                 | The configuration used by the server                                                                      |
+| `services.ts`               | A function that creates all the expected services required                                                 |
+| `services/kysely.ts`        | Our database driver                                                                                         |
+| `services/email-service.ts` | A simple email service                                                                                    |
+| `functions/hello-world.ts`  | A hello world function                                                                                     |
+| `functions/email-function.ts` | Functions related to emails                                                                              |
+| `functions/email-function.spec.ts` | The unit tests for the email functions                                                                |
 
-The `main.ts` includes an async function, which will start our application.
+The `main.ts` file includes an async function, which will start our application.
 
 ```typescript
 import { VrameworkExpress } from '@vramework/vramework-express'
@@ -66,7 +64,7 @@ async function main(): Promise<void> {
     const appServer = new VrameworkExpress(config, services, routes as any)
     appServer.init().then(async () => await appServer.start())
     process.removeAllListeners('SIGINT').on('SIGINT', async () => {
-      services.logger.info('stopping server')
+      services.logger.info('Stopping server')
       await appServer.stop()
       process.exit(0)
     })
@@ -83,7 +81,7 @@ main()
 
 Once the installation process is complete, you can run the following command at your OS command prompt to start the application listening for inbound HTTP requests:
 
-To run the server, run:
+To run the server, use:
 
 ```bash
 cd server
@@ -92,7 +90,7 @@ yarn start
 
 This command starts the app with the HTTP server listening on the port defined in the `src/config.ts` file. Once the application is running, open your browser and navigate to `http://localhost:3000/`. You should see the `Hello World!` message.
 
-To watch for changes in your files, you can run the following command to start the application:
+To watch for changes in your files, you can run the following command to start the application in development mode:
 
 ```bash
 yarn start:dev
