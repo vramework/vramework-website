@@ -4,13 +4,13 @@ title: Services
 description: How services work
 ---
 
-The first thing we need to do in vramework is setup our services.
+The first step in Vramework is setting up the services.
 
-Services in vramework are a fundemental way for the functions to access any form of state outside of them. 
+Services in Vramework are a fundamental way for functions to access any form of state outside of them.
 
-There isn't any special about a service, other than optionally requiring an initialization and destruction endpoint.
+There is nothing particularly special about a service, other than optionally requiring an initialization and destruction endpoint.
 
-For example, here's a service endpoint for sending out emails via the SendGrid service. Notice how it doesn't require any vramework concepts or libraries.
+For example, here is a service endpoint for sending out emails via the SendGrid service. Note that it does not rely on any Vramework-specific concepts or libraries.
 
 ```typescript
 import sgMail from '@sendgrid/mail'
@@ -25,14 +25,14 @@ export class SendGrid {
   }
 
   public async sendWelcomeEmail(to: string) {
-    return await this.sendEmail(to, SendGridTemplate.WELCOME_EMAIL) 
+    return await this.sendEmail(to, SendGridTemplate.WELCOME_EMAIL)
   }
 
-  private async sendEmail (to: string, templateId: SendGridTemplate, dynamicTemplateData?: Record<string, string | number>) {
+  private async sendEmail(to: string, templateId: SendGridTemplate, dynamicTemplateData?: Record<string, string | number>) {
     try {
       await sgMail.send({
         from: 'no-reply@your-domain.com',
-        to, 
+        to,
         templateId,
         dynamicTemplateData
       })
@@ -45,39 +45,39 @@ export class SendGrid {
 
 ## Services Theory
 
-Vramework is build around what I like to think is a combination of a dependency lookup and dependency injection.
+Vramework is built around a combination of dependency lookup and dependency injection.
 
-There are two different types of services in vramework:
+There are two types of services in Vramework:
 
-## Singleton Service
+### Singleton Service
 
-A singleton service is created once for the entire server and it's lifetime starts when the server starts / is destroyed when the server shutsdown.
+A singleton service is created once for the entire server. Its lifetime begins when the server starts and ends when the server shuts down.
 
-Example core services could be:
-    - **Session Management**: A service used to validate user sessions
-    - **Database**: To create your ORM / database pool connection
-    - **Email provider**: To send email templates out
+Example core services include:
 
-## Session Service
+- **Session Management**: A service used to validate user sessions
+- **Database**: To create an ORM/database pool connection
+- **Email Provider**: To send email templates
 
-A session service is created on demand for each API call. This means it's lifetime is called the actual call itself, the service is aware of the user session, and once the call concludes it is destroyed.
+### Session Service
 
-Example session services are:
-    - **HeaderService**: Access to the request information (like the headers or body payload if binary)
-    - **Database Client** A database client that automatically runs everything in a transaction (which could enable features like auto auditing).
-    - **TemporaryFileService** Creating a temporary folder which gets deleted once the call is complete
+A session service is created on demand for each API call. Its lifetime is tied to the duration of the call itself. The service is aware of the user session, and is destroyed once the call concludes.
 
-A session service can optionally implement the `SessionService` interface which is a single function `closeSession` to destroy the service on completion.
+Example session services include:
 
-**Important**: SessionServices should always be lazy loaded / created on demand. This means whilst we do create the class itself and provide it with session context, it shouldn't do anything until it is called. This is to prevent us from having to pay to create services that are never used.
+- **HeaderService**: Provides access to request information (such as headers or binary payloads)
+- **Database Client**: A database client that performs transactions (which can enable features like auto-auditing)
+- **TemporaryFileService**: Creates a temporary folder that is deleted once the call is complete
 
-## Creating your services
+A session service can optionally implement the `SessionService` interface, which includes a single function, `closeSession`, to destroy the service upon completion.
 
-You'll notice a bit of a trend in the documentation, which is vramework really doesn't provide that much ***magic***. This also applies to how we create our services.
+**Important**: Session services should always be lazy-loaded or created on demand. This means that while the class itself is created and provided with session context, it should not perform any operations until it is called. This approach prevents any unrequired work being done.
 
-It's rather a single function that returns an object with all our services, as well as a factory function that we can call to create our session services.
+## Creating Services
 
-First we'll define our types
+Vramework does not incorporate extensive "magic" in service creation. Instead, it relies on straightforward functions that return an object with all services, along with a factory function for creating session services.
+
+First, define the types:
 
 ```typescript title="api.ts"
 export type Config = CoreConfig & {
@@ -100,9 +100,7 @@ export type Services = SingletonServices & {
 }
 ```
 
-And then we create our services to fill produce those objects.
-
-This file may look a bit daunting at first, if it helps it's the single place where all your services are tied together and the only file you need for vramework to know how to put things together.
+Then, create the services to populate these objects. This file consolidates all services and is the primary configuration file for Vramework.
 
 ```typescript title="services.ts"
 // This will be explained in a following document
@@ -124,8 +122,8 @@ export const setupServices = async (config: Config): Promise<SingletonServices> 
 
   const promises: Array<Promise<void>> = []
 
-  // Create a secret service that retrieves secrets using env variable
-  const secrets = new LocalSecrets(config, logger)
+  // Create a secret service that retrieves secrets using environment variables
+  const secrets = new LocalSecretService(config, logger)
 
   // Create a connection to the database
   const { kysely } = new KyselyDB(config.sql, await secrets.getPostgresCredentials())
@@ -138,10 +136,10 @@ export const setupServices = async (config: Config): Promise<SingletonServices> 
   )
   promises.push(jwt.init())
 
-  // Create a sengrid connection
+  // Create a SendGrid connection
   const email = new SendGrid(await secrets.getSecret(config.secrets.sendGridAPIKey))
 
-  // Create a sessions service, which is a wrapper around APIs to check if a user has a valid session or not
+  // Create a session service, which checks if a user has a valid session
   const sessionService = new VrameworkSessionService(jwt, {})
 
   await Promise.all(promises)
@@ -160,16 +158,16 @@ export const setupServices = async (config: Config): Promise<SingletonServices> 
     return {
       ...singletonServices,
       httpRequest: new HTTPRequestService(httpRequest)
-    } as never as Services
+    } as Services
   }
 
-  return { ...singletonServices, createSessionServices } as never as SingletonServices
+  return { ...singletonServices, createSessionServices }
 }
 ```
 
-## Dependecy Lookup vs Dependency Injection
+## Dependency Lookup vs Dependency Injection
 
-The difference I see between dependency injection and lookup is that services in vramework are not scoped to each module. This means if you want to send some emails via sendGrid and others via ses you'll need to specify which one is being used where.
+In Vramework, services are not scoped to each module. This means that if multiple email providers are used (e.g., SendGrid and SES), it is necessary to specify which provider is being used in each context.
 
 For example:
 
@@ -181,11 +179,11 @@ const sendEmail = async (services, data, session) => {
 }
 ```
 
-The transition or mixture of one library to another could rather occur within the service itself, and removes the extra cognitive requirement on knowing what is used where. The service initializer can then decide how to proceed.
+The transition between different libraries can occur within the service itself, reducing the cognitive load of managing different providers. The service initializer can handle the specifics of how to proceed.
 
-By using interfaces for your services, you can switch out your actual provider within the `services.ts` file.
+Using interfaces for services allows for switching out providers within the `services.ts` file.
 
-Here's a comparison between dependency lookup and dependency injection by chatgbt. You can see how we don't really fall into one or the other, since the service object is injected into each function, and only session services are created on demand.
+Here is a comparison between dependency lookup and dependency injection:
 
 | **Aspect**               | **Dependency Lookup**                                             | **Dependency Injection**                                         |
 |--------------------------|------------------------------------------------------------------|------------------------------------------------------------------|
@@ -198,16 +196,16 @@ Here's a comparison between dependency lookup and dependency injection by chatgb
 
 ## Advanced
 
-One large benefit of having services injected/lookups is that we don't always need to run things against our cloud provider or online/third party services. Alot of the times local is just fine. And that's a philosophy vramework really tries to keep at it's core.
+One significant benefit of using injected or looked-up services is that it is not always necessary to interact with cloud providers or online/third-party services. Often, local alternatives suffice. This philosophy is central to Vramework.
 
-This file here is an example of how we can simply switch between our local and cloud (ideally not prod!) by setting NODE_ENV to production.
+An example shows how to switch between local and cloud services (not for production!) by setting `NODE_ENV` to production.
 
-How this is done is really up to you. You can either put the isProduction check inside of the `createServices` function, or inside of your service itself.
+The implementation approach is flexible. The `isProduction` check can be placed either inside the `createServices` function or within the service itself.
 
 ```typescript title="services.ts"
 const isProduction = process.env.NODE_ENV === 'production'
 let content: S3Content | LocalContent
-if (process.env.NODE_ENV === 'production' || process.env.PRODUCTION_SERVICES) {
+if (isProduction || process.env.PRODUCTION_SERVICES) {
   const keypairId = await secrets.getSecret(config.secrets.cloudfrontContentId)
   const privateKeyString = await secrets.getSecret(config.secrets.cloudfrontContentPrivateKey)
   content = new S3Content(config.content, logger, { keypairId, privateKeyString })
@@ -216,4 +214,4 @@ if (process.env.NODE_ENV === 'production' || process.env.PRODUCTION_SERVICES) {
 }
 ```
 
-Or if we want to stub out our services for your unit tests, you could have a single `createServicesStubs` file, that would mock out all your interfaces using something like sinonjs or jest. Or provide a service for those who like to program their mini test frameworks (something I have seen pretty often in various industries).
+Alternatively, for unit tests, a `createServicesStubs` file can be used to mock all interfaces using tools like SinonJS or Jest. This approach also accommodates those who prefer to develop their own testing frameworks.
