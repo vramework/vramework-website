@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Services
-description: TODO
+description: How services work
 ---
 
 The first thing we need to do in vramework is setup our services.

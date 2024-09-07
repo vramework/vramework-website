@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
+title: Getting Started
+description: How does it work?
 ---
-
-# First steps
 
 In this set of articles, you'll learn the **core fundamentals** of Vramework. To get familiar with the how Vramework works, and we'll build a basic CRUD application with features that cover a lot of ground at an introductory level.
 
@@ -12,21 +12,21 @@ Please make sure that [Node.js](https://nodejs.org) (version >= 20) is installed
 
 For the duration of this guide, will be using `yarn` to install and manage our packages.
 
-We will also be relying on workspaces. This isn't a requirement, but provides alot of flexibility and help with how we structure our codebase. You can read about it [here](./why-workspaces) 
+We will also be relying on workspaces. This isn't a requirement, but provides alot of flexibility and help with how we structure our codebase. You can read about it [here](./why-workspaces)
 
-#### Setup
+### Setup
 
 We first need to install the starter project using **Git**:
 
 ```bash
-$ git clone https://github.com/vramework/vramework-starter.git project
-$ cd project
-$ npm install
+git clone https://github.com/vramework/vramework-starter.git project
+cd project
+npm install
 ```
 
 The `project-name` directory will be created, node modules and a few other boilerplate files will be installed, and a few different folders will be created.
 
-```
+```bash
 src/
     main.ts
     config.ts
@@ -86,8 +86,8 @@ Once the installation process is complete, you can run the following command at 
 To run the server, run:
 
 ```bash
-$ cd server
-$ yarn start
+cd server
+yarn start
 ```
 
 This command starts the app with the HTTP server listening on the port defined in the `src/config.ts` file. Once the application is running, open your browser and navigate to `http://localhost:3000/`. You should see the `Hello World!` message.
@@ -95,7 +95,7 @@ This command starts the app with the HTTP server listening on the port defined i
 To watch for changes in your files, you can run the following command to start the application:
 
 ```bash
-$ yarn start:dev
+yarn start:dev
 ```
 
 This command will watch your files, automatically recompiling and reloading the server.

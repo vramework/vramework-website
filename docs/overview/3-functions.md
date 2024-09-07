@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Functions
-description: TODO
+description: How functions work
 ---
 
 Functions provide a specific interface that vramework can call into.

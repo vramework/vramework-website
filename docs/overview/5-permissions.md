@@ -1,6 +1,7 @@
 ---
 sidebar_position: 4
 title: Permissions
+description: Creating permission guards
 ---
 
 Permissions are run before each function, and are similar to the idea of guards in nestJS.

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: API Routes
-description: TODO
+description: Mapping HTTP calls to functions
 ---
 
 Ultimately, our end goal is for the following workflow to occur:

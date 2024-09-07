@@ -1,6 +1,7 @@
 ---
 sidebar_position: 5
 title: Errors
+description: Associating errors with HTTP codes
 ---
 
 The final part of the puzzle is how we handle errors.
