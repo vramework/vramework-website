@@ -1,15 +1,32 @@
-// tailwind.config.js
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
-    theme: {
-        extend: {},
-        fontFamily: {
-            'sans': ['Roboto', 'sans-serif'],
-            'serif': ['Roboto', 'serif'],
-        }
+  corePlugins: {
+    preflight: false,
+    container: false,
+  },
+  darkMode: ["class", '[data-theme="dark"]'],
+  content: ["./src/**/*.{jsx,tsx,html}"],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['"Inter"', ...fontFamily.sans],
+        jakarta: ['"Plus Jakarta Sans"', ...fontFamily.sans],
+        mono: ['"Fira Code"', ...fontFamily.mono],
+      },
+      borderRadius: {
+        sm: "4px",
+      },
+      screens: {
+        sm: "0px",
+        lg: "997px",
+      },
+      colors: {
+        primary: '#5c6ac4',
+        secondary: '#ecc94b',
+      },
     },
-    variants: {
-        extend: {},
-    },
-    plugins: [],
-}
+  },
+  plugins: [],
+};
