@@ -43,7 +43,7 @@ export class SendGrid {
 }
 ```
 
-# Services Theory
+## Services Theory
 
 Vramework is build around what I like to think is a combination of a dependency lookup and dependency injection.
 

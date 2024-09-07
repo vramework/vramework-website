@@ -6,7 +6,7 @@ sidebar_position: 1
 
 In this set of articles, you'll learn the **core fundamentals** of Vramework. To get familiar with the how Vramework works, and we'll build a basic CRUD application with features that cover a lot of ground at an introductory level.
 
-#### Prerequisites
+## Prerequisites
 
 Please make sure that [Node.js](https://nodejs.org) (version >= 20) is installed on your operating system.
 
