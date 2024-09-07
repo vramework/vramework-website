@@ -4,37 +4,39 @@ title: Permissions
 description: Creating permission guards
 ---
 
-Permissions are run before each function, and are similar to the idea of guards in nestJS.
+Permissions are evaluated before each function execution and are conceptually similar to guards in NestJS.
 
-A permission function is identical to the APIFunction, except it is expected to return a boolean to indicate whether it succeeded or not.
+A permission function operates similarly to an `APIFunction`, but it is expected to return a boolean indicating success or failure. An error can also be thrown, which results in an error code other than 403.
 
-You can also throw an error instead, which will result in an error code other than a 403
+**Note**: Since permissions are checked in parallel, the first error thrown will be used.
 
-**Note**: Since permissions are checked in parralel, the first error thrown will be used
+### Basic Permission Check
 
-Looking at the examples we have in the example project:
-
-Simplest check is against session:
+A simple permission check involves verifying the session:
 
 ```typescript
-const const isUser: APIPermission<unknown> = (_, _, session) => {
-  return session.isUser
+const isUser: APIPermission<unknown> = (_, _, session) => {
+  return session.isUser;
 }
 
-const const isAdmin: APIPermission<unknown> = (_, _, session) => {
-  return session.isUser
+const isAdmin: APIPermission<unknown> = (_, _, session) => {
+  return session.isAdmin;
 }
 ```
 
-But you can also do more advanced permissions:
+### Advanced Permission Check
+
+More complex permissions can be implemented as follows:
 
 ```typescript
-const const belowLimit: APIPermission<unknown> = (services, _, session) => {
+const belowLimit: APIPermission<unknown> = async (services, _, session) => {
   const booksTaken = await services.kysely
     .selectFrom('user')
     .join('books')
+    // Additional query logic
     ...
+  return booksTaken < someLimit;
 }
 ```
 
-***Note that the data input here determines if the permission rulecan be used***
+**Note**: The data input determines whether a specific permission rule can be applied.

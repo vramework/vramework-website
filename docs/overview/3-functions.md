@@ -4,29 +4,29 @@ title: Functions
 description: How functions work
 ---
 
-Functions provide a specific interface that vramework can call into.
+Functions provide a specific interface that Vramework can call into.
 
-It can take an argument, return an object, interact with services, or throw an error.
+Functions can take arguments, return objects, interact with services, or throw errors.
 
 ## Function Approach
 
-I tend to think of APIFunctions as a service layer, since it is completely HTTP agnostic already, and state is often stored in a database or cache layer. So I tend to put my logic in there directly.
+In Vramework, functions are often considered as a service layer, as they are HTTP-agnostic and typically interact with a database or cache layer. Logic is commonly placed directly within these functions.
 
 ```typescript
 export interface Book {
-    bookId: string
-    title: string
+  bookId: string
+  title: string
 }
 
 export type JustBookId = Pick<Book, 'bookId'>
 
 /**
- * services: The Services we created
+ * services: The Services created
  * data: The input data, in this case JustBookId
  * returns: An object that matches the Book interface
  * throws: BookNotFoundError
  */
-const getBook: APIFunction<JustBookId, Book> = (services, data) => {
+const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
   return await services.database
     .selectFrom('book')
     .selectAll()
@@ -37,53 +37,53 @@ const getBook: APIFunction<JustBookId, Book> = (services, data) => {
 
 ## Service Approach
 
-You can also structure things differently and use a controller / service approach similar to nestJS if desired. The APIFunction in this case isn't really required, and can be directly put inside of the APIRoute (next page).
+An alternative approach involves using a controller/service pattern similar to NestJS. In this case, the `APIFunction` is not strictly required and the logic can be directly placed within the `APIRoute` (discussed in the next section).
 
 ```typescript
 export interface Book {
-    bookId: string
-    title: string
+  bookId: string
+  title: string
 }
 
 export type JustBookId = Pick<Book, 'bookId'>
 
 export class BookService {
-    public getBook (bookdId: string): Promise<Book> {
-      return await services.database
-        .selectFrom('book')
-        .selectAll()
-        .where('bookId', '=', data.bookId)
-        .executeTakeFirstOrThrow()
-    }
+  public async getBook(bookId: string): Promise<Book> {
+    return await services.database
+      .selectFrom('book')
+      .selectAll()
+      .where('bookId', '=', bookId)
+      .executeTakeFirstOrThrow()
+  }
 }
 
 /**
- * services: The Services we created
+ * services: The Services created
  * data: The input data, in this case JustBookId
  * returns: An object that matches the Book interface
  * throws: BookNotFoundError
  */
-const getBook: APIFunction<JustBookId, Book> = (services, data) => {
+const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
   return await services.books.getBook(data.bookId)
 }
 ```
 
 ## Errors
 
-We will discuss more in depth how errors work shortly. For now, we just need to know that as long as we can what the constructor of an error is we can map it to the correct error code in the future.
+A detailed discussion on how errors work will follow. For now, it is important to know that the constructor of an error can be mapped to the appropriate error code in the future.
 
 ## HTTP Access
 
-In order to access HTTP elements, such as the request object, or setting anything on the response, you would need to create (or use once one lands in core) a HTTP service that provides you extra information.
+To access HTTP elements, such as the request object or setting attributes on the response, it is necessary to create (or use once available in core) an HTTP service that provides this information.
 
-A few of the reasons behind this is so that we can keep the abstraction layer (to support different deployment strategies and libraries), easily stub them out, have clearer API names.
+This approach helps maintain an abstraction layer to support different deployment strategies and libraries, facilitates easier stubbing, and provides clearer API names.
 
-## Function interfaces
+## Function Interfaces
 
 ```typescript
 export type APIFunction<In, Out, RequiredServices = Services> = (services: RequiredServices, data: In, session: UserSession) => Promise<Out>
 
-export type APIFunctionSessionless<In, Out, RequiredServices = Services> = (services: RequiredServices, data: In, session?: UserSession | undefined) => Promise<Out>
+export type APIFunctionSessionless<In, Out, RequiredServices = Services> = (services: RequiredServices, data: In, session?: UserSession) => Promise<Out>
 ```
 
-Next up, how we do actually wire this up to an actual HTTP call.
+The next topic will cover how these functions are wired up to actual HTTP calls.

@@ -4,99 +4,89 @@ title: API Routes
 description: Mapping HTTP calls to functions
 ---
 
-Ultimately, our end goal is for the following workflow to occur:
+The objective is to achieve the following workflow:
 
-* listen to a HTTP call on a certain route (post | get | head | patch)
-* deny if a session is missing but required
-* get the information desired to pass to the function
-* validate the information is what's expected
-* deny if permissions are invalid
-* return the response if succesful
-* return an error and error code if not
+* Listen for an HTTP call on a specified route (POST, GET, HEAD, PATCH).
+* Deny the request if a session is required but missing.
+* Extract the necessary information to pass to the function.
+* Validate that the information meets expectations.
+* Deny the request if permissions are invalid.
+* Return the response if successful.
+* Return an error and error code if not.
 
-For that, we use APIRoutes. An API route is an config object that provides the instructions for what should occur when a route is triggered:
+To accomplish this, `APIRoutes` are used. An API route is a configuration object that specifies the behavior when a route is triggered:
 
 ```typescript
 export const routes: APIRoutes = [{
-    // The TYPE of HTTP Message
-    type: 'get',
-    // The HTTP Route (supports query and path params)
-    route: 'v1/book',
-    // The function to execute. You can also inline it if you want
-    func: getBook,
-    // Whether a user session is required
-    requiresSession: true,
-    // The JSON schema to generate from typescript and validate against
-    input: 'JustBookId',
-    // Used to generate docs, optional
-    docs: {
-        query: Pick<JustBookId, 'id'>,
-        body: Pick<JustBookId, 'id'>,
-        path: Pick<JustBookId, 'id'>,
-        output: 'Book',
-    },
-    // A set of permissions to check against, at least one has to be valid
-    permissions: {
-        // Either a single permission
-        isEmployee,
-        // Or multiple
-        userWithinLimits: [belowLimit, isUser]
-    }
+  // The type of HTTP message
+  type: 'get',
+  // The HTTP route (supports query and path parameters)
+  route: 'v1/book',
+  // The function to execute. Inline functions are also supported
+  func: getBook,
+  // Whether a user session is required
+  requiresSession: true,
+  // The JSON schema to validate input against
+  input: 'JustBookId',
+  // Used to generate documentation, optional
+  docs: {
+    query: Pick<JustBookId, 'bookId'>,
+    body: Pick<JustBookId, 'bookId'>,
+    path: Pick<JustBookId, 'bookId'>,
+    output: 'Book',
+  },
+  // A set of permissions to check against; at least one must be valid
+  permissions: {
+    // Either a single permission
+    isEmployee,
+    // Or multiple permissions
+    userWithinLimits: [belowLimit, isUser]
+  }
 }]
 ```
 
-## Data
+## Data Handling
 
-The big question is usually how we know where the data is coming from. Whether it's from the query / path or body.
+The source of the data—whether from the query, path, or body—can be ambiguous. Vramework merges the data from these sources and will throw an error if conflicts arise.
 
-And the answer to that is, we don't really.
-
-Vramework merges the three together, and will throw an error if the data is present in more than one place but conflicts.
-
-So for example, if this is our path:
+For example, given the following path:
 
 ```typescript
 `/v1/book/:bookId`
 ```
 
-and this is our http call:
+And the HTTP call:
 
 ```typescript
 httpPost(`/v1/book/abc?bookId=abc`, {
-    bookId: abc
+    bookId: 'abc'
 })
 ```
 
-It will pass. However if any of the three are not the same, it will throw an error.
+This will pass if the data is consistent across all sources. However, if there are discrepancies, an error will be thrown.
 
-### Approach comparion
+### Approach Comparison
 
-This table shows some pros and cons of using the same names variables in API for different purposes.
-
-Vramework takes the stance that all variables should be unique. If the need arises, we could add an escape hatch to skip validation on specific routes and retrieve the values via the httpService instead.
+The following table outlines the pros and cons of using the same variable names in APIs for different purposes. Vramework emphasizes unique variable names to avoid conflicts. If necessary, an escape hatch could be added to bypass validation on specific routes and retrieve values via the HTTP service instead.
 
 | **Approach**                         | **Pros**                                                                 | **Cons**                                                                    |
 |--------------------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| **1. Explicit Source Selection**     | - Clear and unambiguous.                                                 | - Requires more code to handle each data source explicitly.                 |
+| **1. Explicit Source Selection**     | - Clear and unambiguous.                                                 | - Requires additional code to handle each data source explicitly.          |
 |                                      | - Reduces chances of accidental conflicts.                               | - Can be tedious if many parameters are shared across sources.              |
-|                                                         | - Ideal for creating documentation.                                           |                                                                             |
-| **2. Establish Priority Rules**      | - Allows flexibility without extra code for each source.                  | - Implicit decisions can cause unexpected behavior if priorities are unclear. |
+|                                      | - Ideal for creating documentation.                                       |                                                                             |
+| **2. Establish Priority Rules**      | - Allows flexibility without extra code for each source.                | - Implicit decisions can cause unexpected behavior if priorities are unclear. |
 |                                      | - Convenient for simple, non-conflicting cases.                          | - Harder to debug when conflicts arise due to hidden logic.                 |
-|                                      | - Less code to maintain for small-scale applications.                    |    |
-| **3. Fail Fast for Conflicting Data**| - Forces consistency and prevents hidden bugs.                           | - Can result in extra error handling code.                                  |
-|                                      | - Ensures that ambiguous situations are addressed upfront.               | - May frustrate users if they need to provide values consistently across all sources. |
+|                                      | - Less code to maintain for small-scale applications.                    |                                                                             |
+| **3. Fail Fast for Conflicting Data**| - Enforces consistency and prevents hidden bugs.                         | - Can result in additional error-handling code.                              |
+|                                      | - Ensures ambiguous situations are addressed upfront.                    | - May frustrate users if they must provide values consistently across all sources. |
 |                                      | - Guarantees data integrity by flagging conflicting inputs.              | - Adds complexity when handling frequent conflicts.                         |
 
-## How do we automatically generate api docs?
+## Automatic API Documentation Generation
 
-This is the main issue I'm currently facing. I want to avoid a build step, but generating a swagger file (which can then be transformed to anythign else) is a pretty high priority. If you have an idea, please feel free to raise [on github issue](./).
+Generating API documentation without a build step remains a challenge. Generating a Swagger file, which can be transformed into various formats, is a high priority. Suggestions and contributions are welcome and can be raised [on GitHub](./).
 
-## Wait, isn't this verbose / non-scaleable?
+## Scalability and Verbosity
 
-I agree this might be the case for quite a few projects. For the products that adopted it so far, it worked fine.
+Although this approach may seem verbose or non-scalable for some projects, it has worked effectively for the products that have adopted it. Exploring TypeScript features to streamline route definitions, similar to Express or NestJS, is a potential improvement.
 
-It would be nice to work some typescript magic to have common aspects for all routes themselves, similar to express on a route level / nestJS on a controller level.
-
-However right now the benefit of this approach is we have very strict typescript validation on all data / apiLayers. An request without a session will not be able to call an APIFunction that requires one for example, and will fail on compilation. I'm sure theres a way this could work, but I'm not sure it's worth the time unless there's a bit more adoption.
-
-There are also some other things we can improve using typescript, like inferring the schemaName (needed to generate schemas to validate).
+The current approach provides strict TypeScript validation across all data and API layers. For example, a request without a session cannot call an `APIFunction` that requires one, resulting in a compilation error. Further enhancements could include inferring schema names and improving schema validation.

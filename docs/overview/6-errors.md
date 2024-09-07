@@ -1,40 +1,42 @@
 ---
-sidebar_position: 5
-title: Errors
-description: Associating errors with HTTP codes
+sidebar_position: 4
+title: Permissions
+description: Creating permission guards
 ---
 
-The final part of the puzzle is how we handle errors.
+Permissions are evaluated before each function execution and are conceptually similar to guards in NestJS.
 
-By default, an error is handled by bubbling up to the request itself and then being compared to the errors we register via the `addError` or `addErrors` function. This associates it with a status code and a default custom message to send back if needed.
+A permission function operates similarly to an `APIFunction`, but it is expected to return a boolean indicating success or failure. An error can also be thrown, which results in an error code other than 403.
 
-```typescript
-import { addErrors, EError } from '@vramework/core/src/errors'
+**Note**: Since permissions are checked in parallel, the first error thrown will be used.
 
-export class AccessDeniedError extends EError { }
-export class NotFoundError extends EError { }
-export class BookLimitExceeded extends EError { }
+### Basic Permission Check
 
-addErrors([
-  [AccessDeniedError, { status: 409, message: '' }],
-  [NotFoundError, { status: 404, message: '' }],
-  [BookLimitExceeded, { status: 404, message: '' }],
-])
-```
-
-Ideally, we could just compare this to the built-in `Error` function. However, I have encountered issues where they are not the same in workspaces (I would love to figure that out someday).
-
-Instead, we have decided to extend the `Error` method in Vramework. Vramework also associates an `errorId` with each error thrown, which is returned to the user and helps with tracing and debugging.
+A simple permission check involves verifying the session:
 
 ```typescript
-export class EError extends Error {
-  constructor(message?: string, private options?: { errorId?: string }) {
-    super(message)
-    Object.setPrototypeOf(this, new.target.prototype)
-  }
+const isUser: APIPermission<unknown> = (_, _, session) => {
+  return session.isUser;
+}
 
-  public getErrorId(): string | undefined {
-    return this.options?.errorId
-  }
+const isAdmin: APIPermission<unknown> = (_, _, session) => {
+  return session.isAdmin;
 }
 ```
+
+### Advanced Permission Check
+
+More complex permissions can be implemented as follows:
+
+```typescript
+const belowLimit: APIPermission<unknown> = async (services, _, session) => {
+  const booksTaken = await services.kysely
+    .selectFrom('user')
+    .join('books')
+    // Additional query logic
+    ...
+  return booksTaken < someLimit;
+}
+```
+
+**Note**: The data input determines whether a specific permission rule can be applied.
