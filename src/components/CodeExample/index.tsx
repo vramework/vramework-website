@@ -3,75 +3,42 @@ import CodeBlock from '@theme/CodeBlock';
 import Heading from '@theme/Heading';
 import Link from "@docusaurus/Link";
 
-const code = `import { APIFunction, APIPermission, APIRoutes } from "../api"
-import { NotFoundError } from "../errors"
-
-/**
- * The IN data type to validate against
- */
-interface SendGreetingCard {
-  toUserId: string
-  emailText: string
+const code = `
+interface Car {
+  id: string
+  licensePlate: string
+  color: string
 }
 
-/**
- * The OUT data type
- */
-interface SendGreetingCardResult {
-  message: string
+const updateCar: APIFunction<Car, void> = async (services: Services, { id, ...data }: Car, session: UserSession) => {
+    try {
+        await services.database
+            .updateTable('car')
+            .setValues({
+                ...car,
+                updatedBy: session.userId,
+            })
+            .where('id', '=', id)
+            .executeTakeFirstOrThrow()
+    } catch (e: any) {
+       // Could fail for other reasons, but we're only handling not found
+       throw new NotFoundError()
+    }
 }
 
-export const routes: APIRoutes = [route<SendGreetingCard, SendGreetingCardResult>({
-  // The TYPE of HTTP Message
-  type: 'post',
-  // The HTTP Route (supports query and path params)
-  route: 'v1/send-greeting-card',
-  // The JSON schema to generate from typescript and validate against.
-  // TODO: Get this to be generated from the typescript types
-  schema: 'SendGreetingCard',
-  // The function to execute
-  func: async (services, data, session) => {
-    const { database, email } = services
-    const { toUserId, emailText } = data
-    const { userId } = session
-
-    // This line can be any database driver
-    const [fromUser, toUser] = await Promise.all([
-        database.crudGet('user', ['email'], { userId }, new UserNotFoundError()),
-        database.crudGet('user', ['email'], { userId: toUserId }, new UserNotFoundError())
-    ])
-
-    // Assuming you have en email service hooked up!
-    await email.sendEmail({
-        template: 'getting',
-        from: fromUser.email,
-        to: toUser.email,
-        body: emailText
-    })
-
-    return {
-        message: 'Email sent!'
-    }
-  },
-  // A set of permissions to check against, at least one has to be valid
-  permissions: {
-    canSendCard: async (services, data, session) => {
-        const { emailsSent } = await services.database.crudGet<DB.User>(
-            'user', ['emailsSent'], { userId: session.userId }, new UserNotFoundError()
-        )
-        return emailsSent <= 100
-    },
-    isPaidMember: async (services, data, session) => {
-        return session.isPaidMember
-    }
-  })
-}]`
+const routes: [{
+    type: 'post',
+    route: '/card/:id',
+    schema: 'Car',
+    func: updateCar,
+}]
+`
 
 export default function CodeExample(): JSX.Element {
     return <div className="max-w-screen-lg mx-auto">
         <Heading as="h2" className="text-4xl text-center">Example Code</Heading>
         <p className="text-lg text-center font-medium">
-            A snippet of a simple API function that sends an email*
+            A simple crud operation
         </p>
         <div className="flex flex-col justify-center items-center">
             <p className="italic">

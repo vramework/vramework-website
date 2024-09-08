@@ -28,10 +28,11 @@ It's recommended to clone the project first to get started and is the method we 
 To install the TypeScript starter project with **Git**:
 
 ```bash
-$ git clone https://github.com/vramework/vramework-starter.git project
-$ cd project
-$ npm install
-$ npm run start
+git clone https://github.com/vramework/vramework-starter.git project
+cd project
+npm install
+npm run schema
+npm run start
 ```
 
 > info **Hint** If you'd like to clone the repository without the git history, you can use [degit](https://github.com/Rich-Harris/degit).

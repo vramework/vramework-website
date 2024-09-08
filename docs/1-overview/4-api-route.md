@@ -16,33 +16,28 @@ The objective is to achieve the following workflow:
 
 To accomplish this, `APIRoutes` are used. An API route is a configuration object that specifies the behavior when a route is triggered:
 
-```typescript
-export const routes: APIRoutes = [{
-  // The type of HTTP message
-  type: 'get',
-  // The HTTP route (supports query and path parameters)
-  route: 'v1/book',
-  // The function to execute. Inline functions are also supported
-  func: getBook,
-  // Whether a user session is required
-  requiresSession: true,
-  // The JSON schema to validate input against
-  input: 'JustBookId',
-  // Used to generate documentation, optional
-  docs: {
-    query: Pick<JustBookId, 'bookId'>,
-    body: Pick<JustBookId, 'bookId'>,
-    path: Pick<JustBookId, 'bookId'>,
-    output: 'Book',
-  },
-  // A set of permissions to check against; at least one must be valid
-  permissions: {
-    // Either a single permission
-    isEmployee,
-    // Or multiple permissions
-    userWithinLimits: [belowLimit, isUser]
-  }
-}]
+```typescript title="book.function.ts"
+import { type Book, type UpdateBook, type Books, CreateBook, JustBookId } from "./books.types";
+import { type APIRoutes, type APIRoute } from "./vramework-types";
+
+const getBook: APIRoute<CreateBook, Book> = {
+    type: 'get',
+    route: '/book/:id',
+    schema: 'JustBookId',
+    func: async (services, data) => await services.books.createBook(data),
+}
+
+const updateBook: APIRoute<UpdateBook, Book> = {
+    type: 'patch',
+    route: '/book/:id',
+    schema: 'UpdateBook',
+    func: async (services, { id, ...book }) => await services.books.updateBook(id, book),
+}
+
+export const routes: APIRoutes = [
+    getBook, 
+    updateBook, 
+]
 ```
 
 ## Data Handling
