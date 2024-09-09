@@ -69,17 +69,17 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Vramework.io',
+      title: 'Vramework',
       logo: {
-        alt: 'Vramework.io',
-        src: 'img/logo.svg',
+        alt: 'Vramework',
+        src: 'img/vramework.png',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docs',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Docs',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
