@@ -30,12 +30,18 @@ const config: Config = {
     locales: ['en'],
   },
 
-  plugins: [tailwindPlugin],
+  plugins: [
+    tailwindPlugin
+  ],
 
   presets: [
     [
       'classic',
       {
+        gtag: {
+          trackingID: 'GTM-PCLS7JQ6',
+          anonymizeIP: true,
+        },
         docs: {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.

@@ -22,10 +22,10 @@ const FeatureList: FeatureItem[] = features.features.map(({ title, description, 
 function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={cn('flex flex-col columns-4')}>
-      <div className="text-center">
-        <Svg className="w-[200px] h-[200px]" role="img" />
+      <div className="text-center flex items-center justify-center">
+        <Svg className="w-[200px] h-[200px] p-6" role="img" />
       </div>
-      <div className="text-center px-4">
+      <div className="px-4">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>
@@ -38,7 +38,7 @@ export default function HomepageFeatures(): JSX.Element {
     <section className="mx-auto w-full p-4 max-w-screen-lg">
       <Heading as='h2' className='text-center'>{features.title}</Heading>
       <p className='text-center text-lg'>{features.description}</p>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
         {FeatureList.map((props, idx) => (
           <Feature key={idx} {...props} />
         ))}

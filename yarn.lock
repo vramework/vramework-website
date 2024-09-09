@@ -1995,7 +1995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-google-gtag@npm:3.5.2":
+"@docusaurus/plugin-google-gtag@npm:3.5.2, @docusaurus/plugin-google-gtag@npm:^3.5.2":
   version: 3.5.2
   resolution: "@docusaurus/plugin-google-gtag@npm:3.5.2"
   dependencies:
@@ -11584,6 +11584,7 @@ __metadata:
   dependencies:
     "@docusaurus/core": 3.5.2
     "@docusaurus/module-type-aliases": 3.5.2
+    "@docusaurus/plugin-google-gtag": ^3.5.2
     "@docusaurus/preset-classic": 3.5.2
     "@docusaurus/tsconfig": 3.5.2
     "@docusaurus/types": 3.5.2
