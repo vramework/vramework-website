@@ -34,6 +34,7 @@ src/
   books.service.ts
   books.function.ts
   books.types.ts
+vramework.config.json
 ```
 
 Here's a brief overview of these core files:
@@ -44,8 +45,9 @@ Here's a brief overview of these core files:
 | `config.ts`                 | The configuration used by the server                                                                      |
 | `services.ts`               | A function that creates all the expected services required                                                 |
 | `book.service.ts` | A simple book service                                                                                     |
-| `books.function.ts`  | The glue between services and http calls   
+| `books.function.ts`  | The glue between services and http calls
 | `books.types.ts`  | The types we expect to use for this object                                                            |
+| `vramework.config.json`  | A bit of config needed by vramework to know where to look for routes and to save generated schemas                                                            |
 
 The `main.ts` file includes an asynchronous function that starts the application.
 
@@ -53,21 +55,10 @@ We'll explain what some of the non vanilla functionality is shortly!
 
 ```typescript
 import { getVrameworkConfig } from '@vramework/core/vramework-config'
-import { 
-  ExpressServer, 
-  ExpressHTTPRequestService, 
-  CreateExpressHTTPSessionServices
-} from '@vramework/deploy-express'
+import { ExpressServer } from '@vramework/deploy-express'
 
 import { config } from '../src/config'
-import { createSingletonServices } from '../src/services'
-
-export const createSessionServices: CreateExpressHTTPSessionServices = async (singletonServices, _session, { req, res }) => {
-  return {
-    ...singletonServices,
-    httpRequest: new ExpressHTTPRequestService(req, res)
-  }
-}
+import { createSessionServices, createSingletonServices } from '../src/services'
 
 async function main ({ configFile }: { configFile?: string }): Promise<void> {
   try {
@@ -81,12 +72,10 @@ async function main ({ configFile }: { configFile?: string }): Promise<void> {
       createSessionServices,
     )
 
-    appServer.init().then(async () => {
-        await appServer.start()
-    })
+    await appServer.init()
+    await appServer.start()
 
     process.removeAllListeners('SIGINT').on('SIGINT', async () => {
-        services.logger.info('stopping server')
       await appServer.stop()
       process.exit(0)
     })
@@ -97,8 +86,21 @@ async function main ({ configFile }: { configFile?: string }): Promise<void> {
 }
 
 main({
+  // This is an optional argument for the config file to use
   configFile: process.argv[2]
 })
+```
+
+### The config file
+
+The `vramework.config.json` file tells us where to look for routes and where to save our generated our schemas to validate calls against.
+
+```json
+{
+    "routeDirectories": ["./src"],
+    "schemaOutputDirectory": "./generated",
+    "tsconfig": "./tsconfig.json"
+}
 ```
 
 #### Running the Application
@@ -108,8 +110,10 @@ After completing the installation, run the following command in the OS command p
 To start the server, use:
 
 ```bash
-cd server
+# Generate all the required schemas, 
+# only needed when typescript interfaces change
 npm run schema
+# Run the server
 npm run dev
 ```
 
