@@ -33,24 +33,24 @@ export const features = {
         "description": "Provide the user session to each function invocation for context.",
         "icon": require("@site/static/img/undraw_docusaurus_mountain.svg").default
     }, {
-        "title": "Framework Agnostic",
-        "description": "Concentrate on features, without needing to learn new entire frameworks.",
+        "title": "Vanilla Typescript",
+        "description": "Less APIs and custom code, seperate your logic out with ease.",
         "icon": require("@site/static/img/undraw_docusaurus_mountain.svg").default
     }, {
         "title": "Service Lookups",
-        "description": "Each function call gets provided with both global services, as well as session services unique to each call",
+        "description": "Each function call gets provided with both global services, as well as session services unique to each call.",
         "icon": require("@site/static/img/undraw_docusaurus_mountain.svg").default
     }, {
         "title": "Validate schemas",
-        "description": "Validate all API calls via schemas, and discover all routes automatically.",
+        "description": "Validate all API calls via automatically generated schemas from typescript.",
         "icon": require("@site/static/img/undraw_docusaurus_mountain.svg").default
     }, {
-        "title": "Microservices, or not",
-        "description": "Run your code as microservices, or a single monolith. What's important is you can switch between them easily.",
+        "title": "To Microservices, or not to Microservice",
+        "description": "What's important is you can switch between them really easily.",
         "icon": require("@site/static/img/undraw_docusaurus_mountain.svg").default
     }, {
         "title": "Content management",
-        "description": "There's always a file that needs uploading, lets make it easy.",
+        "description": "There's always a file that needs to go up or down.",
         "icon": require("@site/static/img/undraw_docusaurus_mountain.svg").default
     }],
 }

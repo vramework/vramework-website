@@ -6,32 +6,45 @@ import Link from "@docusaurus/Link";
 const code = `
 interface Car {
   id: string
+  ownerId: string
   licensePlate: string
   color: string
 }
 
-const updateCar: APIFunction<Car, void> = async (services: Services, { id, ...data }: Car, session: UserSession) => {
-    try {
-        await services.database
-            .updateTable('car')
-            .setValues({
-                ...car,
-                updatedBy: session.userId,
-            })
-            .where('id', '=', id)
-            .executeTakeFirstOrThrow()
-    } catch (e: any) {
-       // Could fail for other reasons, but we're only handling not found
-       throw new NotFoundError()
+export type JustCarId = Pick<Car, 'id'>
+export type UpdateCar = JustCarId & RequireAtLeastOne<Omit<Car, 'id'>
+
+const updateCar: APIFunction<UpdateCar, void> = async (services, { id, ...data }, session) => {
+    await services.car.updateCar(id, data)
+    if (data.licensePlate) {
+        await services.email.sendCarUpdatedEmail(session.userEmail, id)
     }
 }
 
-const routes: [{
+const isCarOwner: APIPermission<JustCarId> = async (services, { id }, session) => {
+    const { carOwner } = await services.car.getCar(id)
+    return carOwner === session.userId
+}
+
+const updateCar: APIRoute<UpdateCar, void> = {
+    // Route type
     type: 'post',
+    // Route path
     route: '/card/:id',
+    // Typescript schema to validate each request against
     schema: 'Car',
+    // The function to run when the route is hit
     func: updateCar,
-}]
+    // Whether a session is required (optional, defaults to true)
+    requiredSession: true,
+    // Permissions required to run this route
+    permissions: {
+        isCarOwner,
+        isAdmin
+    } 
+}
+
+export const routes = [updateCar]
 `
 
 export default function CodeExample(): JSX.Element {
@@ -42,7 +55,7 @@ export default function CodeExample(): JSX.Element {
         </p>
         <div className="flex flex-col justify-center items-center">
             <p className="italic">
-                *There's a little bit more to it, take a look at  <Link
+                *There's a bit more to it, take a look at  <Link
                     to="/docs/intro">
                     the documentation
                 </Link> to see the full example.
