@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Docker deployment
+title: Docker
 ---
 
 **Note**: WIP

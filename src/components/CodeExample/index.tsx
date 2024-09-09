@@ -33,7 +33,7 @@ const updateCar: APIRoute<UpdateCar, void> = {
     // Route path
     route: '/car/:id',
     // Typescript schema to validate each request against
-    schema: 'Car',
+    schema: 'UpdateCar',
     // The function to run when the route is hit
     func: updateCar,
     // Whether a session is required (optional, defaults to true)

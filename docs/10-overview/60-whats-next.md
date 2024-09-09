@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 60
 title: Whats next?
 description: A brief overview on what else vramework can do
 ---

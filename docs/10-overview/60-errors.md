@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 60
 title: Errors
 description: Associating errors with HTTP codes
 ---

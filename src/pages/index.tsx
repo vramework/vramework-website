@@ -36,6 +36,11 @@ function HomepageHeader() {
   );
 }
 
+const Divider = () => {
+ const random = Math.floor(Math.random()*50) 
+ return <div className={`h-[1px] bg-gray-200 rounded my-2 mx-auto`} style={{ width: `${50 + random}%` }} />
+} 
+
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
@@ -43,18 +48,18 @@ export default function Home(): JSX.Element {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
-      <main className='flex flex-col gap-y-4'>
-        <p className='shadow-lg border border-solid border-gray-200 rounded p-8 text-center text-lg font-medium text-gray-700 max-w-screen-md mx-auto leading-relaxed'>
+      <main className='flex flex-col gap-y-8 px-4'>
+        <div className='shadow-lg border border-solid border-gray-200 rounded p-8 text-center text-lg font-medium text-gray-700 max-w-screen-md mx-auto leading-relaxed'>
           Write code agnostic to which server or protocol is running. 
-          <br/>
+          <Divider />
           Throw an error in your code and it's mapped to the correct HTTP status code.
-          <br/>
+          <Divider />
           Validate all your input directly via schemas generated from your function types.
-          <br/>
+          <Divider />
           Attach permissions logic to and/or different scenarios.
-          <br/>
+          <Divider />
           Deploy via serverless, express or even within nextJS (coming soon).
-        </p>
+        </div>
         {/* <HomepageHighlights /> */}
         <CodeExample />
         <HomepageFeatures />
