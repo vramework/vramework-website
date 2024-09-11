@@ -1,10 +1,9 @@
 ---
-sidebar_position: 3
-title: Functions
+sidebar_position: 3  
+title: Functions  
 ---
 
-We are pretty familiar with functions for the overview tutorial. The changes in this are:,
+The concept of functions was covered in the overview tutorial. The primary changes in this section are as follows:
 
-- the main.ts and vramework.config.json file moving up to the `backends/api/` folder
-
-- all the types are also imported from within the sdk directoy
+- The `main.ts` and `vramework.config.json` files have been moved to the `backends/api/` folder.
+- All types are now imported from the SDK directory.

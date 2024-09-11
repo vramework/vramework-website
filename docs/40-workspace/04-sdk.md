@@ -1,13 +1,13 @@
 ---
-sidebar_position: 3
-title: SDK
+sidebar_position: 3  
+title: SDK  
 ---
 
-The SDK directory contains all the types, routes and ideally the HTTP calls needed to interact with the server.
+The SDK directory contains all types, routes, and the necessary HTTP calls to interact with the server.
 
-Unfortunately this isn't auto-generated (yet) like in [tRPC](https://trpc.io/), however it does have the benefit of not requiring a third party library to work.
+Although it is not yet auto-generated (see [issue](https://github.com/vramework/vramework/issues/7)) like in [tRPC](https://trpc.io/), the current setup has the advantage of not relying on a third-party library.
 
-There are also a couple small helper functions, like injectIntoUrl to help use routes.
+Additionally, the SDK includes small helper functions such as `injectIntoUrl` to facilitate the use of routes.
 
 ```typescript
 export const updateUser = async (userId: string, data: Omit<UpdateUser, 'userId'>) => {

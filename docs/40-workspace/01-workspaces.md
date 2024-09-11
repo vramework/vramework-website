@@ -1,17 +1,21 @@
----
-sidebar_position: 3
-title: Workspaces
+Here’s the improved version of the documentation:
+
 ---
 
-Vramework was built with monolithic workspaces. Not because it needs to, but you can get quite a few benefits by seperating things into packages.
+sidebar_position: 3  
+title: Workspaces  
 
-To try and keep things simple, we'll be working directly on the workspace starter. We'll have the name *mindwave* as our application to avoid seeing example everywhere.
+---
+
+Vramework is built with monolithic workspaces, though separating components into packages can offer several advantages.
+
+To simplify the process, this documentation focuses on working with the workspace starter. The application will be named *mindwave* to avoid using example names.
 
 ```bash
 git clone git@github.com:vramework/workspace-starter.git
 ```
 
-You'll immediately notice the folder structure:
+Upon cloning, the following folder structure will be present:
 
 ```bash
 backends/
@@ -39,8 +43,6 @@ sql/
 package.json
 ```
 
-This is pretty much the same setup we had in our previous project, except we have split them into individual workspaces.
+This structure resembles previous project setups but is now organized into individual workspaces. The benefit of this approach is the ability to deploy multiple backends seamlessly while sharing types across the entire codebase. This allows each backend to focus on specific routes, whether used for microservices or for integrating functions into other services, such as Next.js.
 
-The reason this is more powerful is because we can now deploy multiple different backends easily, and most importantly we can share types throughout the entire code base.
-
-Within this section, we'll go through each package and explain how they work.
+This section provides an overview of each package and its functionality.

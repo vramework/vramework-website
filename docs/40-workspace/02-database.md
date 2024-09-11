@@ -1,32 +1,37 @@
+Here's the improved version of the documentation, ensuring it avoids first-person language:
+
 ---
-sidebar_position: 3
-title: SQL
+
+sidebar_position: 3  
+title: SQL  
+
 ---
 
-The root of everything most applications does is the database. This doesn't need to be true for everyone, but I like to think without ones data an application is usually just a shell.
+Databases are often the foundation of most applications. Although this may not apply universally, without data, an application is typically just a shell.
 
-There are multiple different types of databases, and the same database can use multiple different types of systems, such as an ORM, SQL builder or pure SQL.
+There are various types of databases, and a single database can use different systems such as ORMs, SQL builders, or pure SQL.
 
-My favourite driver so far is [Kysely](https://kysely.dev/). It's a powerful typescript enabled API that allows us to build SQL queries by typechecking against the database itself. 
+[Kysely](https://kysely.dev/) is a highly recommended TypeScript-enabled API that allows SQL queries to be built with type-checking directly against the database.
 
-*Note*: I know this isn't for everyone, but the docs must go on. Feel free to add requests for new databases (or writing your own) [here](https://github.com/vramework/vramework.io/issues/1).
+*Note*: While Kysely may not be suitable for everyone, the documentation will proceed accordingly. Requests for new databases or contributions can be made [here](https://github.com/vramework/vramework.io/issues/1).
 
-The first thing to do is create / migrate the database. We use [postgres-migrations](https://www.npmjs.com/package/postgres-migrations) for this, bit outdated but still works great.
+### Database Migration
 
-## Database Migration
+To create or migrate the database, the [postgres-migrations](https://www.npmjs.com/package/postgres-migrations) package is used. Although somewhat outdated, it remains effective.
 
-The database migration script provided gives us a small few benefits.
+The provided migration script offers a few key benefits:
 
-1) If running in production, it would get the postgres credentials from the AWS secrets (this lives within *userland*) and will then try to migrate it.
-2) If running locally, it would migrate the database locally.
+1. In production, it retrieves PostgreSQL credentials from AWS secrets (within *userland*) and proceeds with the migration.
+2. In local environments, it performs the migration on the local database.
 
-You can run this simply by running the migration script.
+The migration script can be run with the following command:
 
 ```bash
 yarn run db:migrate
 ```
 
-Which calls the following:
+This command triggers the following script:
+
 ```typescript title="scripts/db-migrate.ts"
 import pino from 'pino'
 import { Client } from 'pg'
@@ -63,15 +68,17 @@ export const migrateDB = async () => {
 migrateDB()
 ```
 
-## Database Types
+### Database Types
 
-Now that our database is running, we need to generate our types. [Kysely codegen](https://github.com/RobinBlomberg/kysely-codegen) is a great tool for this.
+Once the database is running, types need to be generated. [Kysely codegen](https://github.com/RobinBlomberg/kysely-codegen) is a useful tool for this.
 
-The types it produces are pretty specific to the kysely driver, so there's a cleanup script that allows us to turn it into more familiar Typescript so that we can easily use it for our schemas, frontend and backend code.
+The types generated are tailored to the Kysely driver. However, a cleanup script is available to transform them into more familiar TypeScript, making them usable across schemas, frontend, and backend code.
 
 ```bash
 yarn run kysely-pure
 ```
+
+The cleanup script looks like this:
 
 ```typescript title="scripts/kysely-pure.ts"
 import { readFile, writeFile } from "fs/promises"
@@ -91,7 +98,9 @@ const main = async () => {
 main()
 ```
 
-The last thing of note on the database side is to create the actual function. This could live in its own package, but it's a single file so we put it in `functions/database.service.ts`. This is a simple wrapper around kysely that just keeps database initializaiton seperate.
+### Database Service
+
+The database function is housed in `functions/database.service.ts`. This simple wrapper around Kysely ensures that database initialization is kept separate.
 
 ```typescript title="packages/functions/src/database.service.ts"
 import { CamelCasePlugin, Kysely, PostgresDialect } from 'kysely'
@@ -116,7 +125,9 @@ export class KyselyDB {
 }
 ```
 
-And finally, we can add it to the services to use in our functions/routes:
+### Using the Database
+
+To use the database in functions or routes, add it to the services as shown below:
 
 ```typescript
 export const getDatabaseConfig = async (
@@ -141,7 +152,7 @@ export const getDatabaseConfig = async (
     }
 }
 
-const createServices = () => {
+const createServices = async () => {
   const databaseConfig = await getDatabaseConfig(
     secrets, 
     config.secrets.postgresSecret, 
@@ -151,7 +162,7 @@ const createServices = () => {
 }
 ```
 
-Now, whenever we want to use the database in a function, we get full typescript support everywhere based directly on our database schema.
+With this setup, full TypeScript support is available throughout the codebase, based directly on the database schema.
 
 ```typescript
 await services.kysely
