@@ -3,11 +3,9 @@ sidebar_position: 3
 title: SDK
 ---
 
-**Note**: WIP
-
 The SDK directory contains all the types, routes and ideally the HTTP calls needed to interact with the server.
 
-Unfortunately this isn't auto-generated like in [tRPC](https://trpc.io/), however it does have the benefit of not requiring a third party library to work.
+Unfortunately this isn't auto-generated (yet) like in [tRPC](https://trpc.io/), however it does have the benefit of not requiring a third party library to work.
 
 There are also a couple small helper functions, like injectIntoUrl to help use routes.
 

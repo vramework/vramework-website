@@ -10,7 +10,7 @@ User sessions are crucial for managing **security**, **auditing**, and **metrics
 
 ### Session Service API
 
-The session service in Vramework follows a simple structure. It may evolve to handle more data from requests, like the origin, but currently, the session validation responsibility remains with the session provider function.
+The session service in Vramework follows a simple structure. It may evolve to handle more data from requests, like the origin, but currently, the session creation responsibility remains inside of the userland login/session related functions.
 
 ```typescript
 export interface SessionService<UserSession = CoreUserSession> {

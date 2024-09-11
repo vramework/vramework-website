@@ -3,11 +3,9 @@ sidebar_position: 3
 title: Workspaces
 ---
 
-**Note**: WIP
-
 Vramework was built with monolithic workspaces. Not because it needs to, but you can get quite a few benefits by seperating things into packages.
 
-To try and keep things simple, we'll be working directly on the workspace starter. We'll have the name *mindwave* as our application to avoid seeing example everywhere. 
+To try and keep things simple, we'll be working directly on the workspace starter. We'll have the name *mindwave* as our application to avoid seeing example everywhere.
 
 ```bash
 git clone git@github.com:vramework/workspace-starter.git
