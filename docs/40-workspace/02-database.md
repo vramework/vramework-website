@@ -102,7 +102,7 @@ main()
 
 The database function is housed in `functions/database.service.ts`. This simple wrapper around Kysely ensures that database initialization is kept separate.
 
-```typescript title="packages/functions/src/database.service.ts"
+```typescript title="packages/functions/src/kysely.service.ts"
 import { CamelCasePlugin, Kysely, PostgresDialect } from 'kysely'
 import { DB } from 'kysely-codegen'
 import { Pool } from 'pg'
@@ -129,7 +129,7 @@ export class KyselyDB {
 
 To use the database in functions or routes, add it to the services as shown below:
 
-```typescript
+```typescript file="packages/functions/src/kysely.services.ts"
 export const getDatabaseConfig = async (
   secrets: SecretService, 
   postgresSecret: string, 

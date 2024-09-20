@@ -10,7 +10,7 @@ Cross-origin resource sharing (CORS) is a mechanism that allows resources to be 
 
 ### Express
 
-Under the hood, Vramework uses the Express cors to process cors commands.
+Under the hood, Vramework uses the package cors to process cors commands.
 
 To enable CORS in express:
 
@@ -22,6 +22,6 @@ await server.init()
 
 The enableCors() method takes an optional configuration object argument. The available properties of this object are described in the official CORS documentation. Another way is to pass a callback function that lets you define the configuration object asynchronously based on the request.
 
-### Lambda
+### Fastify
 
-This should be configured via [Lambda Config](https://docs.aws.amazon.com/lambda/latest/api/API_Cors.html).
+TODO

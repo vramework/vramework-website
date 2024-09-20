@@ -22,14 +22,14 @@ import { type Book, type UpdateBook, CreateBook, JustBookId } from "./books.type
 import { type APIRoutes, type APIRoute } from "./vramework-types";
 
 const getBook: APIRoute<CreateBook, Book> = {
-    type: 'get',
+    method: 'get',
     route: '/book/:id',
     schema: 'JustBookId',
     func: async (services, data) => await services.books.createBook(data),
 };
 
 const updateBook: APIRoute<UpdateBook, Book> = {
-    type: 'patch',
+    method: 'patch',
     route: '/book/:id',
     schema: 'UpdateBook',
     func: async (services, { id, ...book }) => await services.books.updateBook(id, book),

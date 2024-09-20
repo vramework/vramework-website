@@ -106,12 +106,12 @@ export class CatsService {
 
 // Controller
 export const routes: APIRoutes = [{
-  type: 'post',
+  method: 'post',
   route: 'v1/cats',
   func: (services, data) => services.cats.findAll(data),
   schema: 'CreateCat'
 }, {
-  type: 'get',
+  method: 'get',
   route: 'v1/cats',
   // Normally we don't inline functions but it would make it more minimal.
   func: (services, data) => services.cats.findAll(data),

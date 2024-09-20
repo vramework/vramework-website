@@ -68,9 +68,9 @@ To access HTTP-related elements (such as request or response objects), an HTTP s
 Vramework declares function interfaces within its core types to ensure that all `APIFunctions` have the correct typing.
 
 ```typescript title="vramework-types"
-export type APIFunction<In, Out, RequiredServices = Services> = (services: RequiredServices, data: In, session: UserSession) => Promise<Out>;
+export type APIFunctionSessionless<In, Out, RequiredServices = Services> = CoreAPIFunction<In, Out, RequiredServices, UserSession>
 
-export type APIFunctionSessionless<In, Out, RequiredServices = Services> = (services: RequiredServices, data: In, session?: UserSession | undefined) => Promise<Out>;
+export type APIFunction<In, Out, RequiredServices = Services> = CoreAPIFunction<In, Out, RequiredServices, UserSession>
 ```
 
 ## Conclusion

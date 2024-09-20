@@ -55,30 +55,24 @@ We'll explain what some of the non vanilla functionality is shortly!
 
 ```typescript
 import { getVrameworkConfig } from '@vramework/core/vramework-config'
-import { ExpressServer } from '@vramework/deploy-express'
+import { VrameworkExpressServer } from '@vramework/deploy-express'
 
 import { config } from '../src/config'
 import { createSessionServices, createSingletonServices } from '../src/services'
 
-async function main ({ configFile }: { configFile?: string }): Promise<void> {
+async function main({ configFile }: { configFile?: string }): Promise<void> {
   try {
     const vrameworkConfig = await getVrameworkConfig(configFile)
-    const services = await createSingletonServices(config)
-
-    const appServer = new ExpressServer(
+    const singletonServices = await createSingletonServices(config)
+    const expressServer = new VrameworkExpressServer(
       vrameworkConfig,
-      config, 
-      services,
-      createSessionServices,
+      config,
+      singletonServices,
+      createSessionServices
     )
-
-    await appServer.init()
-    await appServer.start()
-
-    process.removeAllListeners('SIGINT').on('SIGINT', async () => {
-      await appServer.stop()
-      process.exit(0)
-    })
+    expressServer.enableExitOnSigInt()
+    await expressServer.init()
+    await expressServer.start()
   } catch (e: any) {
     console.error(e.toString())
     process.exit(1)
@@ -86,8 +80,7 @@ async function main ({ configFile }: { configFile?: string }): Promise<void> {
 }
 
 main({
-  // This is an optional argument for the config file to use
-  configFile: process.argv[2]
+  configFile: process.argv[2],
 })
 ```
 

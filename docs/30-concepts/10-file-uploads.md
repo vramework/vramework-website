@@ -4,6 +4,8 @@ title: Content Uploads
 description: Managing file uploads and downloads
 ---
 
+--- TODO: Change to match latest
+
 ## Introduction
 
 Handling file uploads and downloads can be challenging, particularly when dealing with offline versus online or local versus cloud storage. Vramework simplifies this process with the `ContentService`.
@@ -48,13 +50,13 @@ export interface ContentService {
 To configure services for AWS and local storage, define the configuration as follows:
 
 ```typescript
-interface ContentConfig extends CoreContentConfig {
-  aws: S3ContentConfig;
-}
-
 export interface Config extends CoreConfig {
     ...,
-    content: ContentConfig;
+    content: {
+        ...depends on your content services...
+        local: LocalContentConfig,
+        aws: S3ContentConfig
+    };
 }
 
 // Example configuration
@@ -98,7 +100,7 @@ import { v4 as uuid } from 'uuid';
 import { APIFunction, APIFunctionSessionless, APIRoutes } from '../api';
 
 interface SignFileUpload {
-    type: string;
+    method: string;
     name: string;
     contentType: string;
 }
@@ -127,7 +129,7 @@ const generateKey = async (
         };
     }
 
-    throw `Unknown type: ${type} name: ${name}`;
+    throw `Unknown method: ${type} name: ${name}`;
 };
 
 /**
@@ -153,13 +155,13 @@ const getSignedContentUrls: APIFunctionSessionless<SignAssetKeys, string[]> = as
 
 export const routes: APIRoutes = [
     {
-        type: 'post',
+        method: 'post',
         route: '/v1/file/upload-url',
         func: getSignedUrl,
         schema: 'SignFileUpload',
     },
     {
-        type: 'post',
+        method: 'post',
         route: '/v1/file/download-url',
         func: getSignedContentUrls,
         schema: 'SignAssetKeys',

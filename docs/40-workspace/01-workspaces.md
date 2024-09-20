@@ -1,15 +1,15 @@
-Here’s the improved version of the documentation:
-
 ---
-
 sidebar_position: 3  
 title: Workspaces  
-
 ---
 
-Vramework is built with monolithic workspaces, though separating components into packages can offer several advantages.
+Separating components into packages within a repo can offer several advantages, such as:
 
-To simplify the process, this documentation focuses on working with the workspace starter. The application will be named *mindwave* to avoid using example names.
+1. Clear seperation of concerns
+2. Supporting different deployment strategies
+3. Reducing the pain and effort of private npm repo management without losing any of the benefits
+
+To simplify the process, this documentation focuses on working with the [workspace starter](https://github.com/vramework/workspace-starter). The workspace name is *todos*.
 
 ```bash
 git clone git@github.com:vramework/workspace-starter.git
@@ -20,24 +20,41 @@ Upon cloning, the following folder structure will be present:
 ```bash
 backends/
     express/
-        mindwave.ts
-        mindwave-start.ts
+        bin/
+            express-start.ts
+            express.ts
         vramework.config.json
         package.json
+    fastify/
+        ...
+    uws/
+        ...
 apps/
-    cli/
-        main.ts
-        package.json
+    next-app/
+        ...
+    next-page/
+        ...
 packages/
     functions/
-        database.service.ts
-        books.function.ts
+        src/
+            todo/
+                todo.functions.ts
+                todo.routes.ts
+            user/
+                user.functions.ts
+                user.routes.ts
+        api.ts
         services.ts
         config.ts
         package.json
+    services/
+        src/
+           kysely.ts
+           pino.ts
     sdk/
-        books.type.ts
-        books.api.ts
+        types/
+            todo.types.ts
+            user.types.ts
 sql/
     0001-initial.sql
 package.json

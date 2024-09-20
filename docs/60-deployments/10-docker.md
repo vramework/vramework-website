@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3  
+sidebar_position: 1 
 title: Docker  
 ---
 
@@ -22,16 +22,19 @@ ENV NODE_ENV=production
 
 COPY .yarnrc.yml .yarnrc.yml
 COPY .yarn/install-state.gz .yarn/install-state.gz
-COPY yarn.lock yarn.lock
 
 COPY package.json package.json
-COPY backends/ backends/
-COPY packages/ packages/
+COPY yarn.lock yarn.lock
+
+COPY backends/express/ backends/express/
+COPY packages/functions/ packages/functions/
 
 RUN corepack enable
 RUN cd backends/api && yarn workspaces focus --production
 
-CMD ["yarn", "prod:server"]
+WORKDIR backends/express
+
+CMD ["yarn", "start"]
 ```
 
 This Dockerfile ensures the server is deployed with a production-focused Yarn setup.

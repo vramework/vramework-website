@@ -29,7 +29,7 @@ const isCarOwner: APIPermission<JustCarId> = async (services, { id }, session) =
 
 const updateCar: APIRoute<UpdateCar, void> = {
     // Route type
-    type: 'post',
+    method: 'post',
     // Route path
     route: '/car/:id',
     // Typescript schema to validate each request against

@@ -11,19 +11,19 @@ Vramework is almost driven entirely by **Types**. This ensures type safety acros
 In this example project, without a database connection, all types are defined from scratch. Here's an example:
 
 ```typescript
-import { RequireAtLeastOne } from "@vramework/core/types";
+import { RequireAtLeastOne } from "@vramework/core/types"
 
 export interface Book {
-    id: number;
-    title: string;
-    author: string;
-    year: number;
+    id: number
+    title: string
+    author: string
+    year: number
 }
 
-export type Books = Book[];
-export type JustBookId = Pick<Book, 'id'>;
-export type CreateBook = Omit<Book, 'id'>;
-export type UpdateBook = JustBookId & RequireAtLeastOne<CreateBook>;
+export type Books = Book[]
+export type JustBookId = Pick<Book, 'id'>
+export type CreateBook = Omit<Book, 'id'>
+export type UpdateBook = JustBookId & RequireAtLeastOne<CreateBook>
 ```
 
 By referencing these types in the APIs, it’s clear what data to expect. This ensures consistency and reduces the risk of runtime errors.
@@ -57,4 +57,4 @@ export type UpdateBook = JustBookId & RequireAtLeastOne<CreateBook>;
 
 This method reduces manual overhead and ensures that both the database and application types are always in sync.
 
-For more details, refer to the advanced [database and types](../advanced/database-and-types/) documentation.
+For more details, refer to the advanced [database and types](../concepts/database-and-types/) documentation.

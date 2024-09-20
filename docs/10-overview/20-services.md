@@ -94,14 +94,15 @@ These services are created once when the server starts and remain active until t
 
 These are created for each API call and exist only for the duration of that call. They can interact with user sessions, request and response objects, and more.
 
-Examples include:
+The core services are:
 
-- **HTTPRequestService**: Access request data (like headers)
-- **HTTPResponseService**: Modify the response (like setting cookies)
+- **VrameworkRequest**: Access request data (like headers)
+- **VrameworkResponse**: Modify the response (like setting cookies)
+
+Custom examples include:
+
 - **Database Client**: Handles database transactions
 - **TemporaryFileService**: Manages temporary files that are automatically deleted when the session ends
-
-> **Important**: Session services should only be initialized when first used (lazy loaded) to avoid unnecessary resource consumption.
 
 ## How to Create Services
 
