@@ -4,7 +4,9 @@ title: Content Uploads
 description: Managing file uploads and downloads
 ---
 
---- TODO: Change to match latest
+:::note
+This is not up to date
+:::
 
 ## Introduction
 

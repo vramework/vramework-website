@@ -4,4 +4,6 @@ title: Logging
 description: How logging works in vramework
 ---
 
-TODO
+:::note
+This page is still a work in progress
+:::

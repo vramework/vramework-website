@@ -4,4 +4,6 @@ title: Cookies
 description: How to use cookies in vramework
 ---
 
-TODO
+:::note
+This page is still a work in progress (see security for now).
+:::
