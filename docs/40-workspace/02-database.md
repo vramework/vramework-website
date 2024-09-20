@@ -1,10 +1,6 @@
-Here's the improved version of the documentation, ensuring it avoids first-person language:
-
 ---
-
 sidebar_position: 3  
 title: SQL  
-
 ---
 
 Databases are often the foundation of most applications. Although this may not apply universally, without data, an application is typically just a shell.
