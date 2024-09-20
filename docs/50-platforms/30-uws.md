@@ -8,7 +8,9 @@ description: Using Vramework with uWS
 
 To use Vramework with uWS, you need to create an instance of the `VrameworkUWSServer`.
 
-**Note**: The setup process for Express, uWS, and Fastify is identical, except for using different constructors.
+:::note
+The setup process for Express, uWS, and Fastify is identical, except for using different constructors.
+:::
 
 ## Setup
 

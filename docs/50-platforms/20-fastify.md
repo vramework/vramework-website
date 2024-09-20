@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: uWS
+title: Fastify
 description: Using Vramework with Fastify
 ---
 
@@ -8,7 +8,9 @@ description: Using Vramework with Fastify
 
 To use Vramework with Fastify, you need to create an instance of the `VrameworkFastifyServer`.
 
-**Note**: The setup process for Express, uWS, and Fastify is identical, except for using different constructors.
+:::note
+The setup process for Express, uWS, and Fastify is identical, except for using different constructors.
+:::
 
 ## Setup
 

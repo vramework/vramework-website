@@ -45,10 +45,10 @@ export const features = {
         "description": "Validate all API calls via automatically generated schemas from typescript. No more manual validation required.",
         "icon": require("@site/static/img/schema.svg").default
     }, {
-        "title": "Microservices (or not)",
-        "description": "Pick and choose how you want to split your code for deployment and scalability. What's important is you can switch between them really easily.",
+        "title": "Platform agnostic (or not)",
+        "description": "Pick which server you want to deploy with. What's important is you can switch between them really easily.",
         "icon": require("@site/static/img/cloud-computing.svg").default
-    }, {
+    }/*, {
         "title": "Content management",
         "description": "There's always a file that needs to go up or down.",
         "icon": require("@site/static/img/file.svg").default
@@ -56,5 +56,5 @@ export const features = {
         "title": "Error handling",
         "description": "Map the errors in your code directly to HTTP status codes.",
         "icon": require("@site/static/img/error.svg").default
-    }],
+    }*/],
 }

@@ -1,8 +1,8 @@
 {
-  "label": "Deployment",
+  "label": "Platforms",
   "position": 50,
   "link": {
     "type": "generated-index",
-    "description": "How to deploy vramework"
+    "description": "How to use vramework with different platforms"
   }
 }

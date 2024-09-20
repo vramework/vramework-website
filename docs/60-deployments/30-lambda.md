@@ -11,4 +11,7 @@ Be mindful that a large number of services or routes could potentially slow down
 
 Using Webpack to create a roll-up of all the code is a recommended approach to eliminate unnecessary `node_modules` and reduce overall package size.
 
-[**Note**: This is a work in progress.](https://github.com/vramework/vramework.io/issues/2)
+:::note
+This page is still a [WIP](https://github.com/vramework/vramework.io/issues/2)
+ 🚧
+:::

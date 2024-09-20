@@ -8,7 +8,9 @@ description: Using Vramework with NextJS App Router
 
 Deploying Vramework with NextJS allows for code separation benefits without running a separate server, while also leveraging NextJS Server-Side Rendering (SSR) capabilities.
 
-**Note:** The App Router is still in development, with some APIs having an `_unstable` prefix. As a result, certain features like caching may not function as intended yet.
+:::warning
+The App Router is still in development, with some APIs having an `_unstable` prefix. As a result, certain features like caching may not function as intended yet.
+:::
 
 ## Key Aspects
 

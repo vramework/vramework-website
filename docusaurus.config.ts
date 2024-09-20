@@ -19,7 +19,7 @@ const config: Config = {
   organizationName: 'vramework', // Usually your GitHub org/user name.
   projectName: 'vramework.io', // Usually your repo name.
 
-  onBrokenLinks: 'ignore',
+  // onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set

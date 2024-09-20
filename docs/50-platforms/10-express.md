@@ -8,7 +8,9 @@ description: Using Vramework with Express
 
 To use Vramework with express, you need to create an instance of the `VrameworkExpressServer`.
 
-**Note**: The setup process for Express, uWS, and Fastify is identical, except for using different constructors.
+:::note
+The setup process for Express, uWS, and Fastify is identical, except for using different constructors.
+:::
 
 ## Setup
 

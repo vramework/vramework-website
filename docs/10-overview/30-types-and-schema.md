@@ -57,4 +57,4 @@ export type UpdateBook = JustBookId & RequireAtLeastOne<CreateBook>;
 
 This method reduces manual overhead and ensures that both the database and application types are always in sync.
 
-For more details, refer to the advanced [database and types](../concepts/database-and-types/) documentation.
+For more details, refer to the advanced [workspace guide](/docs/workspace/database) documentation.

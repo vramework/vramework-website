@@ -8,9 +8,9 @@ Vramework is a lightweight framework for building efficient, scalable [Node.js](
 
 It's a few hundred lines of code that removes the concept of HTTP from your logic and allows you to focus on a writing pure functions instead.
 
-The core concept behind vramework is about creating a thin layer between your HTTP server and your application logic, which means it can use any server that implements the [contract](/how-to/contract). This allows us to use different server libraries and deployment methods, such as [Express](https://expressjs.com/) (the default), [uWS](https://github.com/uNetworking/uWebSockets/), or even serverless calls like lambda without having to change any of our actual logic.
+The core concept behind vramework is about creating a thin layer between your HTTP server and your application logic, which means it can use any server that implements the contract. This allows us to use different server libraries and deployment methods, such as [Express](https://expressjs.com/) (the default), [uWS](https://github.com/uNetworking/uWebSockets/), or even serverless calls like lambda without having to change any of our actual logic.
 
-Similar to nestJS, vramework can expose the actual server itself if you want to add custom code. However it's recommended instead to use a custom [Session Services](./docs/session-services) to access or manipulate the data.
+Similar to nestJS, vramework can expose the actual server itself if you want to add custom code. However it's recommended instead to use a custom [Session Services](/docs/security/user-sessions) to access or manipulate the data.
 
 #### Philosophy
 
@@ -35,4 +35,6 @@ npm run schema
 npm run start
 ```
 
-> info **Hint** If you'd like to clone the repository without the git history, you can use [degit](https://github.com/Rich-Harris/degit).
+:::tip
+If you'd like to clone the repository without the git history, you can use [degit](https://github.com/Rich-Harris/degit).
+:::

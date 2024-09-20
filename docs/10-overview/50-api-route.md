@@ -75,7 +75,7 @@ Vramework takes a strict approach to prevent conflicts between different data so
 
 ## API Documentation Generation
 
-One of Vramework’s goals is to support automatic generation of API documentation, such as Swagger files. Although this is a work in progress, contributions to the project are encouraged. Any suggestions can be submitted via [GitHub](./).
+One of Vramework’s goals is to support automatic generation of API documentation, such as Swagger files. Although this is a work in progress, contributions to the project are encouraged. Any suggestions can be submitted via [GitHub](https://github.com/vramework/vramework).
 
 ## Scalability and Verbosity
 

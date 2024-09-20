@@ -56,9 +56,9 @@ export default function Home(): JSX.Element {
           <Divider />
           Validate all your input directly via schemas generated from your function types.
           <Divider />
-          Attach permissions logic to and/or different scenarios.
+          Attach permissions logic to AND/OR different scenarios.
           <Divider />
-          Deploy via serverless, express or even within nextJS (coming soon).
+          Deploy via serverless, [express](/docs/platforms/express) or even within [nextJS](/docs/platforms/nextjs-pages).
         </div>
         {/* <HomepageHighlights /> */}
         <CodeExample />
