@@ -42,7 +42,7 @@ const Divider = () => {
 export default function Home(): JSX.Element {
   return (
     <Layout
-      title="Vramework - Making HTTP servers fun again"
+      title="Vramework - A different type of HTTP server"
       description="A minimal framework for building HTTP* servers in Node.js">
       <HomepageHeader />
       <main className='flex flex-col gap-y-8 px-4'>
