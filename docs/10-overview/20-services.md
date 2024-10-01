@@ -111,7 +111,7 @@ Creating services in Vramework is a straightforward process, relying on basic fu
 Here’s an example of how to set up custom types and services:
 
 ```typescript
-import { CoreConfig, CoreSingletonServices, CoreUserSession } from '@vramework/core/types';
+import { CoreConfig, CoreSingletonServices, CoreUserSession } from '@vramework/core';
 import { BookService } from './book.service';
 
 /**

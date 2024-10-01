@@ -24,4 +24,12 @@ The enableCors() method takes an optional configuration object argument. The ava
 
 ### Fastify
 
-TODO
+:::note
+This has not yet been implemented
+:::
+
+### uWS
+
+:::note
+This has not yet been implemented
+:::

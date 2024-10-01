@@ -27,25 +27,21 @@ const isCarOwner: APIPermission<JustCarId> = async (services, { id }, session) =
     return carOwner === session.userId
 }
 
-const updateCar: APIRoute<UpdateCar, void> = {
+addRoute({
     // Route type
     method: 'post',
     // Route path
     route: '/car/:id',
-    // Typescript schema to validate each request against
-    schema: 'UpdateCar',
     // The function to run when the route is hit
     func: updateCar,
     // Whether a session is required (optional, defaults to true)
-    requiredSession: true,
+    auth: true,
     // Permissions required to run this route, only one needs to pass
     permissions: {
         isCarOwner,
         isAdmin
     } 
-}
-
-export const routes = [updateCar]
+})
 `
 
 export default function CodeExample(): JSX.Element {

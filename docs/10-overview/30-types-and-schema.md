@@ -11,7 +11,7 @@ Vramework is almost driven entirely by **Types**. This ensures type safety acros
 In this example project, without a database connection, all types are defined from scratch. Here's an example:
 
 ```typescript
-import { RequireAtLeastOne } from "@vramework/core/types"
+import { RequireAtLeastOne } from "@vramework/core"
 
 export interface Book {
     id: number

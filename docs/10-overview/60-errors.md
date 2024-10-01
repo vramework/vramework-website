@@ -13,7 +13,7 @@ In Vramework, errors are associated with specific HTTP status codes and messages
 To map custom errors to HTTP codes, use the `addErrors` function:
 
 ```typescript
-import { addErrors, EError } from '@vramework/core/src/errors';
+import { addErrors, EError } from '@vramework/core';
 
 export class NotFoundError extends EError { }
 export class BookLimitExceeded extends EError { }

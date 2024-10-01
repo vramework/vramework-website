@@ -18,28 +18,27 @@ API routes in Vramework serve as the entry points for handling HTTP requests. Wh
 An API route is a configuration object that defines the behavior for a specific HTTP request. Here is an example that demonstrates setting up routes for fetching and updating a book:
 
 ```typescript title="book.function.ts"
-import { type Book, type UpdateBook, CreateBook, JustBookId } from "./books.types";
-import { type APIRoutes, type APIRoute } from "./vramework-types";
+import { type UpdateBook, type CreateBook } from "./books.types";
+import { type APIRoute } from "./vramework-types";
 
-const getBook: APIRoute<CreateBook, Book> = {
+addRoute({
     method: 'get',
     route: '/book/:id',
-    schema: 'JustBookId',
-    func: async (services, data) => await services.books.createBook(data),
-};
+    func: async (services: Services, data: JustBookId) => await services.books.createBook(data),
+})
 
-const updateBook: APIRoute<UpdateBook, Book> = {
+addRoute({
     method: 'patch',
     route: '/book/:id',
-    schema: 'UpdateBook',
-    func: async (services, { id, ...book }) => await services.books.updateBook(id, book),
-};
-
-export const routes: APIRoutes = [
-    getBook, 
-    updateBook, 
-];
+    func: async (services: Services, { id, ...book }: UpdateBook) => await services.books.updateBook(id, book),
+})
 ```
+
+## Validation
+
+Vramework automatically ensures that any parameters used in the paths are inside of the data object. If they are missing it would throw an error.
+
+It also automatically extracts the input type and creates a schema to validate against. This will be run using `ajv` whenever the route is called.
 
 ## Data Handling
 

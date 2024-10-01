@@ -92,6 +92,7 @@ The `vramework.config.json` file tells us where to look for routes and where to 
 {
     "routeDirectories": ["./src"],
     "schemaOutputDirectory": "./generated",
+    "routesOutputFile": "./generated/routes.ts",
     "tsconfig": "./tsconfig.json"
 }
 ```
@@ -103,8 +104,9 @@ After completing the installation, run the following command in the OS command p
 To start the server, use:
 
 ```bash
-# Generate all the required schemas, 
-# only needed when typescript interfaces change
+# Generate all the required routes and schemas 
+# only needed when typescript or routes change
+npm run routes
 npm run schema
 # Run the server
 npm run dev

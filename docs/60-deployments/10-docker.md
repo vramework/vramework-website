@@ -8,7 +8,7 @@ To deploy the server, Docker provides the easiest and most efficient solution.
 To build the Docker image, use the following command:
 
 ```bash
-docker build . -f Dockerfile.api -t mindwave:latest
+docker build . -f Dockerfile.api -t todos:latest
 ```
 
 The Dockerfile is configured to use [Yarn](https://yarnpkg.com/).
