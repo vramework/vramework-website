@@ -3,13 +3,14 @@ import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import CodeExample from '@site/src/components/CodeExample';
 import Heading from '@theme/Heading';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 function HomepageHeader() {
   return (
     <header className="flex py-24 px-4">
       <div className="max-w-screen-lg mx-auto w-full">
         <div className='flex flex-col items-center'>
-          <img className="max-w-[200px] w-full" src='/img/vramework.png' />
+          <img className="max-w-[200px] w-full" src={useBaseUrl('/img/vramework.png')} />
           <Heading as="h1" className="text-5xl text-center leading-snug">
             A different type of HTTP server
           </Heading>
