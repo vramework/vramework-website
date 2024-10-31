@@ -9,15 +9,15 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://vramework.github.io',
+  url: 'https://vramework.dev',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/vramework-website/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'vramework', // Usually your GitHub org/user name.
-  projectName: 'vramework', // Usually your repo name.
+  projectName: 'vramework-website', // Usually your repo name.
 
   // onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
