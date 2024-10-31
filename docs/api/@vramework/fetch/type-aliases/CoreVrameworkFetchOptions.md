@@ -28,4 +28,4 @@ optional transformDate: boolean;
 
 ## Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:22](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L22)
+[packages/fetch/src/core-vramework-fetch.ts:22](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/fetch/src/core-vramework-fetch.ts#L22)

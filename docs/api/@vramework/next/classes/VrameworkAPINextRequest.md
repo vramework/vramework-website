@@ -33,7 +33,7 @@ The Next.js API request object to be wrapped.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-request.ts:14](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-request.ts#L14)
+[packages/servers/next/src/vramework-api-next-request.ts:14](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-request.ts#L14)
 
 ## Methods
 
@@ -57,7 +57,7 @@ The parsed body of the request if it is JSON, or the raw body otherwise.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-request.ts:23](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-request.ts#L23)
+[packages/servers/next/src/vramework-api-next-request.ts:23](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-request.ts#L23)
 
 ***
 
@@ -87,7 +87,7 @@ The value of the specified header, or `undefined` if not found.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-request.ts:37](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-request.ts#L37)
+[packages/servers/next/src/vramework-api-next-request.ts:37](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-request.ts#L37)
 
 ***
 
@@ -107,7 +107,7 @@ An object containing all headers.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-request.ts:55](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-request.ts#L55)
+[packages/servers/next/src/vramework-api-next-request.ts:55](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-request.ts#L55)
 
 ***
 
@@ -131,4 +131,4 @@ An object containing the query parameters.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-request.ts:46](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-request.ts#L46)
+[packages/servers/next/src/vramework-api-next-request.ts:46](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-request.ts#L46)

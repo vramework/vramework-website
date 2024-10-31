@@ -12,4 +12,4 @@ Utility type that ensures at least one key in the given type `T` is required.
 
 ## Defined in
 
-[packages/core/src/types/core.types.ts:31](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L31)
+[packages/core/src/types/core.types.ts:31](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L31)

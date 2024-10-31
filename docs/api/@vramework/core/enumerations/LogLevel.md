@@ -10,7 +10,7 @@ critical: 5;
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:7](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L7)
+[packages/core/src/services/logger.ts:7](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/services/logger.ts#L7)
 
 ***
 
@@ -22,7 +22,7 @@ debug: 1;
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:3](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L3)
+[packages/core/src/services/logger.ts:3](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/services/logger.ts#L3)
 
 ***
 
@@ -34,7 +34,7 @@ error: 4;
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:6](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L6)
+[packages/core/src/services/logger.ts:6](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/services/logger.ts#L6)
 
 ***
 
@@ -46,7 +46,7 @@ info: 2;
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:4](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L4)
+[packages/core/src/services/logger.ts:4](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/services/logger.ts#L4)
 
 ***
 
@@ -58,7 +58,7 @@ trace: 0;
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:2](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L2)
+[packages/core/src/services/logger.ts:2](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/services/logger.ts#L2)
 
 ***
 
@@ -70,4 +70,4 @@ warn: 3;
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:5](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L5)
+[packages/core/src/services/logger.ts:5](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/services/logger.ts#L5)

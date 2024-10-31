@@ -37,7 +37,7 @@ Function to create session services for each request.
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:29](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L29)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:29](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L29)
 
 ## Properties
 
@@ -51,7 +51,7 @@ The uWebSockets app instance
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:18](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L18)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:18](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L18)
 
 ## Methods
 
@@ -79,7 +79,7 @@ Method not implemented.
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:41](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L41)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:41](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L41)
 
 ***
 
@@ -97,7 +97,7 @@ Enables the server to exit gracefully when a SIGINT signal is received.
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:105](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L105)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:105](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L105)
 
 ***
 
@@ -115,7 +115,7 @@ Initializes the server by setting up health check and request handling routes.
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:48](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L48)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:48](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L48)
 
 ***
 
@@ -135,7 +135,7 @@ A promise that resolves when the server has started.
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:71](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L71)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:71](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L71)
 
 ***
 
@@ -159,4 +159,4 @@ An error if the server was not correctly started.
 
 #### Defined in
 
-[packages/servers/uws/uws-server/src/vramework-uws-server.ts:89](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L89)
+[packages/servers/uws/uws-server/src/vramework-uws-server.ts:89](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/uws/uws-server/src/vramework-uws-server.ts#L89)

@@ -33,7 +33,7 @@ The Next.js request object to be wrapped.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next-request.ts:14](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next-request.ts#L14)
+[packages/servers/next/src/vramework-next-request.ts:14](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next-request.ts#L14)
 
 ## Methods
 
@@ -59,7 +59,7 @@ An error indicating that the body is not available.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next-request.ts:47](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next-request.ts#L47)
+[packages/servers/next/src/vramework-next-request.ts:47](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next-request.ts#L47)
 
 ***
 
@@ -83,7 +83,7 @@ An object containing the cookies.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next-request.ts:23](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next-request.ts#L23)
+[packages/servers/next/src/vramework-next-request.ts:23](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next-request.ts#L23)
 
 ***
 
@@ -113,4 +113,4 @@ The value of the specified header, or `undefined` if not found.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next-request.ts:38](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next-request.ts#L38)
+[packages/servers/next/src/vramework-next-request.ts:38](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next-request.ts#L38)

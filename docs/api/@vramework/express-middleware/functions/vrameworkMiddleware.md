@@ -31,4 +31,4 @@ The configuration options for the middleware.
 
 ## Defined in
 
-[packages/servers/express/express-middleware/src/vramework-express-middleware.ts:35](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-middleware/src/vramework-express-middleware.ts#L35)
+[packages/servers/express/express-middleware/src/vramework-express-middleware.ts:35](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/express/express-middleware/src/vramework-express-middleware.ts#L35)

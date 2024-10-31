@@ -33,7 +33,7 @@ The Next.js API response object to be wrapped.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:16](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L16)
+[packages/servers/next/src/vramework-api-next-response.ts:16](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L16)
 
 ## Properties
 
@@ -47,7 +47,7 @@ The Next.js API response object to be wrapped.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:16](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L16)
+[packages/servers/next/src/vramework-api-next-response.ts:16](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L16)
 
 ## Methods
 
@@ -75,7 +75,7 @@ The name of the cookie to clear.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:55](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L55)
+[packages/servers/next/src/vramework-api-next-response.ts:55](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L55)
 
 ***
 
@@ -114,7 +114,7 @@ Options for setting the cookie.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:46](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L46)
+[packages/servers/next/src/vramework-api-next-response.ts:46](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L46)
 
 ***
 
@@ -146,7 +146,7 @@ The value of the header.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:35](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L35)
+[packages/servers/next/src/vramework-api-next-response.ts:35](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L35)
 
 ***
 
@@ -174,7 +174,7 @@ The JSON body to set.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:77](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L77)
+[packages/servers/next/src/vramework-api-next-response.ts:77](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L77)
 
 ***
 
@@ -206,7 +206,7 @@ The HTTP status code for the redirect. Defaults to 307.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:68](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L68)
+[packages/servers/next/src/vramework-api-next-response.ts:68](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L68)
 
 ***
 
@@ -234,7 +234,7 @@ The body to set, which can be JSON, a string, or a buffer.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:86](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L86)
+[packages/servers/next/src/vramework-api-next-response.ts:86](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L86)
 
 ***
 
@@ -262,4 +262,4 @@ The HTTP status code to set.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-api-next-response.ts:25](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-api-next-response.ts#L25)
+[packages/servers/next/src/vramework-api-next-response.ts:25](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-api-next-response.ts#L25)

@@ -32,4 +32,4 @@ Optional configuration options for the fetch request, excluding the body.
 
 ## Defined in
 
-[packages/fetch/src/vramework-fetch.ts:10](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/vramework-fetch.ts#L10)
+[packages/fetch/src/vramework-fetch.ts:10](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/fetch/src/vramework-fetch.ts#L10)

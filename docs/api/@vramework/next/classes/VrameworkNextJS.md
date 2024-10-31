@@ -36,7 +36,7 @@ A function that creates session-specific services for each request.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next.ts:42](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next.ts#L42)
+[packages/servers/next/src/vramework-next.ts:42](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next.ts#L42)
 
 ## Methods
 
@@ -79,7 +79,7 @@ A promise that resolves to the response data.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next.ts:58](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next.ts#L58)
+[packages/servers/next/src/vramework-next.ts:58](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next.ts#L58)
 
 ***
 
@@ -125,7 +125,7 @@ The HTTP method for the request.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next.ts:143](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next.ts#L143)
+[packages/servers/next/src/vramework-next.ts:143](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next.ts#L143)
 
 ***
 
@@ -178,7 +178,7 @@ A promise that resolves to the response data.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next.ts:113](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next.ts#L113)
+[packages/servers/next/src/vramework-next.ts:113](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next.ts#L113)
 
 ***
 
@@ -221,4 +221,4 @@ A promise that resolves to the response data.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-next.ts:84](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-next.ts#L84)
+[packages/servers/next/src/vramework-next.ts:84](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-next.ts#L84)

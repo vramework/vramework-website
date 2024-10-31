@@ -22,4 +22,4 @@ A logger for logging information.
 
 ## Defined in
 
-[packages/core/src/schema.ts:74](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/schema.ts#L74)
+[packages/core/src/schema.ts:74](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/schema.ts#L74)

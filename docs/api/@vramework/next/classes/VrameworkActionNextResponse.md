@@ -27,7 +27,7 @@ Constructs a new instance of the `VrameworkActionNextResponse` class.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-response.ts:13](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-response.ts#L13)
+[packages/servers/next/src/vramework-action-next-response.ts:13](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-response.ts#L13)
 
 ## Methods
 
@@ -55,7 +55,7 @@ The name of the cookie to clear.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-response.ts:62](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-response.ts#L62)
+[packages/servers/next/src/vramework-action-next-response.ts:62](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-response.ts#L62)
 
 ***
 
@@ -94,7 +94,7 @@ Options for setting the cookie.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-response.ts:48](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-response.ts#L48)
+[packages/servers/next/src/vramework-action-next-response.ts:48](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-response.ts#L48)
 
 ***
 
@@ -120,7 +120,7 @@ This method is currently a placeholder and should be implemented as needed.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-response.ts:31](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-response.ts#L31)
+[packages/servers/next/src/vramework-action-next-response.ts:31](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-response.ts#L31)
 
 ***
 
@@ -146,7 +146,7 @@ This method is currently a placeholder and should be implemented as needed.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-response.ts:39](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-response.ts#L39)
+[packages/servers/next/src/vramework-action-next-response.ts:39](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-response.ts#L39)
 
 ***
 
@@ -172,4 +172,4 @@ This method is currently a placeholder and should be implemented as needed.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-response.ts:23](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-response.ts#L23)
+[packages/servers/next/src/vramework-action-next-response.ts:23](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-response.ts#L23)

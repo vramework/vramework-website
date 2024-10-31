@@ -33,7 +33,7 @@ The request body to be wrapped and converted to a plain object.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-request.ts:16](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-request.ts#L16)
+[packages/servers/next/src/vramework-action-next-request.ts:16](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-request.ts#L16)
 
 ## Methods
 
@@ -57,7 +57,7 @@ The body of the request.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-request.ts:53](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-request.ts#L53)
+[packages/servers/next/src/vramework-action-next-request.ts:53](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-request.ts#L53)
 
 ***
 
@@ -81,7 +81,7 @@ An object containing the cookies.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-request.ts:27](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-request.ts#L27)
+[packages/servers/next/src/vramework-action-next-request.ts:27](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-request.ts#L27)
 
 ***
 
@@ -111,4 +111,4 @@ The value of the specified header, or `undefined` if not found.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-action-next-request.ts:44](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-action-next-request.ts#L44)
+[packages/servers/next/src/vramework-action-next-request.ts:44](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/servers/next/src/vramework-action-next-request.ts#L44)

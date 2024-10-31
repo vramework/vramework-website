@@ -14,7 +14,7 @@ The log level for the application.
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:40](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L40)
+[packages/core/src/types/core.types.ts:40](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L40)
 
 ***
 
@@ -28,7 +28,7 @@ The maximum compute time allowed, in milliseconds (optional).
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:42](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L42)
+[packages/core/src/types/core.types.ts:42](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L42)
 
 ***
 
@@ -42,4 +42,4 @@ Secrets used by the application (optional).
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:44](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L44)
+[packages/core/src/types/core.types.ts:44](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L44)

@@ -14,7 +14,7 @@ The core configuration for the application.
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:80](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L80)
+[packages/core/src/types/core.types.ts:80](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L80)
 
 ***
 
@@ -28,7 +28,7 @@ The logger used by the application.
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:82](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L82)
+[packages/core/src/types/core.types.ts:82](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L82)
 
 ***
 
@@ -42,7 +42,7 @@ The permission service used for authorization (optional).
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:78](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L78)
+[packages/core/src/types/core.types.ts:78](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L78)
 
 ***
 
@@ -56,4 +56,4 @@ The session service used by the application (optional).
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:76](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L76)
+[packages/core/src/types/core.types.ts:76](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/types/core.types.ts#L76)

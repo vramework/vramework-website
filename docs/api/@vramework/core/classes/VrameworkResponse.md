@@ -36,7 +36,7 @@ The name of the cookie to clear.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:60](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L60)
+[packages/core/src/vramework-response.ts:60](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L60)
 
 ***
 
@@ -55,7 +55,7 @@ a status without a body or response.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:77](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L77)
+[packages/core/src/vramework-response.ts:77](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L77)
 
 ***
 
@@ -90,7 +90,7 @@ Options for cookie serialization.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:52](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L52)
+[packages/core/src/vramework-response.ts:52](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L52)
 
 ***
 
@@ -118,7 +118,7 @@ The value of the header, which can be a string, boolean, or an array of strings.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:32](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L32)
+[packages/core/src/vramework-response.ts:32](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L32)
 
 ***
 
@@ -142,7 +142,7 @@ An object containing header names and values.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:40](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L40)
+[packages/core/src/vramework-response.ts:40](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L40)
 
 ***
 
@@ -166,7 +166,7 @@ The JSON body to set.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:19](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L19)
+[packages/core/src/vramework-response.ts:19](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L19)
 
 ***
 
@@ -194,7 +194,7 @@ The HTTP status code for the redirect.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:69](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L69)
+[packages/core/src/vramework-response.ts:69](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L69)
 
 ***
 
@@ -218,7 +218,7 @@ The response content, which can be a string or a Buffer.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:25](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L25)
+[packages/core/src/vramework-response.ts:25](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L25)
 
 ***
 
@@ -242,4 +242,4 @@ The HTTP status code to set.
 
 #### Defined in
 
-[packages/core/src/vramework-response.ts:13](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/vramework-response.ts#L13)
+[packages/core/src/vramework-response.ts:13](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/vramework-response.ts#L13)

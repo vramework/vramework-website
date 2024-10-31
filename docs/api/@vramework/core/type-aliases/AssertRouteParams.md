@@ -12,4 +12,4 @@ type AssertRouteParams<In, Route>: ExtractRouteParams<Route> extends keyof In ? 
 
 ## Defined in
 
-[packages/core/src/route-runner.ts:29](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/route-runner.ts#L29)
+[packages/core/src/route-runner.ts:30](https://github.com/vramework/vramework/blob/effbb4c429219b23928f1b1f0fcdb2fd3899355c/packages/core/src/route-runner.ts#L30)
