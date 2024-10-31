@@ -44,7 +44,7 @@ A promise that resolves to the decoded payload.
 
 #### Defined in
 
-[packages/core/src/services/jwt-service.ts:23](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/jwt-service.ts#L23)
+[packages/core/src/services/jwt-service.ts:23](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/jwt-service.ts#L23)
 
 ***
 
@@ -74,7 +74,7 @@ A promise that resolves to the decoded user session.
 
 #### Defined in
 
-[packages/core/src/services/jwt-service.ts:35](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/jwt-service.ts#L35)
+[packages/core/src/services/jwt-service.ts:35](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/jwt-service.ts#L35)
 
 ***
 
@@ -108,4 +108,4 @@ A promise that resolves to the encoded JWT.
 
 #### Defined in
 
-[packages/core/src/services/jwt-service.ts:14](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/jwt-service.ts#L14)
+[packages/core/src/services/jwt-service.ts:14](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/jwt-service.ts#L14)

@@ -14,7 +14,7 @@ This module provides a collection of classes for handling requests and responses
 - [VrameworkActionNextResponse](classes/VrameworkActionNextResponse.md)
 - [VrameworkAPINextRequest](classes/VrameworkAPINextRequest.md)
 - [VrameworkAPINextResponse](classes/VrameworkAPINextResponse.md)
+- [VrameworkNextJS](classes/VrameworkNextJS.md)
 - [VrameworkNextRequest](classes/VrameworkNextRequest.md)
 - [VrameworkSSRNextRequest](classes/VrameworkSSRNextRequest.md)
 - [VrameworkSSRNextResponse](classes/VrameworkSSRNextResponse.md)
-- [VrameworkUWSServer](classes/VrameworkUWSServer.md)

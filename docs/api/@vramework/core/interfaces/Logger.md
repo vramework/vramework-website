@@ -28,7 +28,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:43](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger.ts#L43)
+[packages/core/src/services/logger.ts:43](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L43)
 
 ***
 
@@ -42,7 +42,7 @@ Logs an error message.
 
 #### Parameters
 
-• **messageOrObj**: `string` \| `Record`\<`string`, `any`\> \| `Error`
+• **messageOrObj**: `string` \| `Error` \| `Record`\<`string`, `any`\>
 
 The message, object, or error to log.
 
@@ -56,7 +56,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:33](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger.ts#L33)
+[packages/core/src/services/logger.ts:33](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L33)
 
 ***
 
@@ -84,7 +84,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:19](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger.ts#L19)
+[packages/core/src/services/logger.ts:19](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L19)
 
 ***
 
@@ -108,7 +108,7 @@ The logging level to set.
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:56](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger.ts#L56)
+[packages/core/src/services/logger.ts:56](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L56)
 
 ***
 
@@ -136,7 +136,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:50](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger.ts#L50)
+[packages/core/src/services/logger.ts:50](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L50)
 
 ***
 
@@ -164,4 +164,4 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger.ts:26](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger.ts#L26)
+[packages/core/src/services/logger.ts:26](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger.ts#L26)

@@ -48,7 +48,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:36](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L36)
+[packages/core/src/services/logger-console.ts:36](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L36)
 
 ***
 
@@ -62,7 +62,7 @@ Logs an error message.
 
 #### Parameters
 
-• **messageOrObj**: `string` \| `Record`\<`string`, `any`\> \| `Error`
+• **messageOrObj**: `string` \| `Error` \| `Record`\<`string`, `any`\>
 
 The message, object, or error to log.
 
@@ -80,7 +80,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:69](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L69)
+[packages/core/src/services/logger-console.ts:69](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L69)
 
 ***
 
@@ -112,7 +112,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:47](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L47)
+[packages/core/src/services/logger-console.ts:47](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L47)
 
 ***
 
@@ -147,7 +147,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:91](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L91)
+[packages/core/src/services/logger-console.ts:91](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L91)
 
 ***
 
@@ -175,7 +175,7 @@ The logging level to set.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:16](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L16)
+[packages/core/src/services/logger-console.ts:16](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L16)
 
 ***
 
@@ -207,7 +207,7 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:25](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L25)
+[packages/core/src/services/logger-console.ts:25](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L25)
 
 ***
 
@@ -239,4 +239,4 @@ Additional metadata to log.
 
 #### Defined in
 
-[packages/core/src/services/logger-console.ts:58](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/logger-console.ts#L58)
+[packages/core/src/services/logger-console.ts:58](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/logger-console.ts#L58)

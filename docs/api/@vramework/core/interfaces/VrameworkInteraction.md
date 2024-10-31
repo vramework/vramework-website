@@ -1,5 +1,7 @@
 # Interface: VrameworkInteraction
 
+Represents an interaction within Vramework, including a request and response.
+
 ## Properties
 
 ### request
@@ -10,7 +12,7 @@ request: VrameworkRequest<any>;
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:48](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L48)
+[packages/core/src/types/core.types.ts:89](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L89)
 
 ***
 
@@ -22,4 +24,4 @@ response: VrameworkResponse;
 
 #### Defined in
 
-[packages/core/src/types/core.types.ts:49](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L49)
+[packages/core/src/types/core.types.ts:90](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L90)

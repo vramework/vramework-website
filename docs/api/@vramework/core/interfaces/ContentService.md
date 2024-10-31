@@ -30,7 +30,7 @@ A promise that resolves to a boolean indicating success.
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:53](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L53)
+[packages/core/src/services/content-service.ts:53](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L53)
 
 ***
 
@@ -57,7 +57,7 @@ A promise that resolves to a boolean indicating success.
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:37](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L37)
+[packages/core/src/services/content-service.ts:37](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L37)
 
 ***
 
@@ -100,7 +100,7 @@ uploadUrl: string;
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:26](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L26)
+[packages/core/src/services/content-service.ts:26](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L26)
 
 ***
 
@@ -126,7 +126,7 @@ A promise that resolves to a buffer containing the file data.
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:60](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L60)
+[packages/core/src/services/content-service.ts:60](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L60)
 
 ***
 
@@ -152,7 +152,7 @@ A promise that resolves to the signed content key URL.
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:10](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L10)
+[packages/core/src/services/content-service.ts:10](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L10)
 
 ***
 
@@ -178,7 +178,7 @@ A promise that resolves to the signed URL.
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:17](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L17)
+[packages/core/src/services/content-service.ts:17](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L17)
 
 ***
 
@@ -208,4 +208,4 @@ A promise that resolves to a boolean indicating success.
 
 #### Defined in
 
-[packages/core/src/services/content-service.ts:45](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/content-service.ts#L45)
+[packages/core/src/services/content-service.ts:45](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/content-service.ts#L45)

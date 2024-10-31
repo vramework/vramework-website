@@ -25,7 +25,7 @@ new VrameworkExpressServer(
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:28](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L28)
+[packages/servers/express/express-server/src/vramework-express-server.ts:28](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L28)
 
 ## Properties
 
@@ -37,7 +37,7 @@ app: Express;
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:25](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L25)
+[packages/servers/express/express-server/src/vramework-express-server.ts:25](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L25)
 
 ## Methods
 
@@ -57,7 +57,7 @@ enableCors(options): void
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:63](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L63)
+[packages/servers/express/express-server/src/vramework-express-server.ts:63](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L63)
 
 ***
 
@@ -73,7 +73,7 @@ enableExitOnSigInt(): Promise<void>
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:107](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L107)
+[packages/servers/express/express-server/src/vramework-express-server.ts:107](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L107)
 
 ***
 
@@ -95,7 +95,7 @@ enableStaticAssets(assetsUrl, contentDirectory): void
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:67](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L67)
+[packages/servers/express/express-server/src/vramework-express-server.ts:67](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L67)
 
 ***
 
@@ -111,7 +111,7 @@ init(): Promise<void>
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:71](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L71)
+[packages/servers/express/express-server/src/vramework-express-server.ts:71](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L71)
 
 ***
 
@@ -127,7 +127,7 @@ start(): Promise<void>
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:81](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L81)
+[packages/servers/express/express-server/src/vramework-express-server.ts:81](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L81)
 
 ***
 
@@ -143,4 +143,4 @@ stop(): Promise<void>
 
 #### Defined in
 
-[packages/servers/express/express-server/src/vramework-express-server.ts:96](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/express/express-server/src/vramework-express-server.ts#L96)
+[packages/servers/express/express-server/src/vramework-express-server.ts:96](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/express/express-server/src/vramework-express-server.ts#L96)

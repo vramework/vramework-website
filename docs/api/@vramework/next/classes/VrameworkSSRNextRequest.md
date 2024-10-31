@@ -37,7 +37,7 @@ The request body.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-request.ts:15](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-request.ts#L15)
+[packages/servers/next/src/vramework-ssr-next-request.ts:15](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-request.ts#L15)
 
 ## Methods
 
@@ -61,7 +61,7 @@ The request body.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-request.ts:53](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-request.ts#L53)
+[packages/servers/next/src/vramework-ssr-next-request.ts:53](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-request.ts#L53)
 
 ***
 
@@ -85,7 +85,7 @@ An object containing the cookies.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-request.ts:29](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-request.ts#L29)
+[packages/servers/next/src/vramework-ssr-next-request.ts:29](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-request.ts#L29)
 
 ***
 
@@ -119,4 +119,4 @@ An error if the header value is an array, as array values are not yet supported.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-request.ts:40](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-request.ts#L40)
+[packages/servers/next/src/vramework-ssr-next-request.ts:40](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-request.ts#L40)

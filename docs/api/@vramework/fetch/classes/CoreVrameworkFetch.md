@@ -26,7 +26,7 @@ Optional configuration for the fetch utility.
 
 #### Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:41](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/fetch/src/core-vramework-fetch.ts#L41)
+[packages/fetch/src/core-vramework-fetch.ts:41](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L41)
 
 ## Methods
 
@@ -72,7 +72,7 @@ Additional options for the request.
 
 #### Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:99](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/fetch/src/core-vramework-fetch.ts#L99)
+[packages/fetch/src/core-vramework-fetch.ts:99](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L99)
 
 ***
 
@@ -114,7 +114,7 @@ Additional options for the request.
 
 #### Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:127](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/fetch/src/core-vramework-fetch.ts#L127)
+[packages/fetch/src/core-vramework-fetch.ts:127](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L127)
 
 ***
 
@@ -138,7 +138,7 @@ The API key to be used for authorization.
 
 #### Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:85](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/fetch/src/core-vramework-fetch.ts#L85)
+[packages/fetch/src/core-vramework-fetch.ts:85](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L85)
 
 ***
 
@@ -162,7 +162,7 @@ The JWT to be used for authorization.
 
 #### Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:76](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/fetch/src/core-vramework-fetch.ts#L76)
+[packages/fetch/src/core-vramework-fetch.ts:76](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L76)
 
 ***
 
@@ -186,4 +186,4 @@ The server URL to be set.
 
 #### Defined in
 
-[packages/fetch/src/core-vramework-fetch.ts:67](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/fetch/src/core-vramework-fetch.ts#L67)
+[packages/fetch/src/core-vramework-fetch.ts:67](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/fetch/src/core-vramework-fetch.ts#L67)

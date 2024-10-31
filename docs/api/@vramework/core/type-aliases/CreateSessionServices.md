@@ -4,6 +4,8 @@
 type CreateSessionServices<SingletonServices, UserSession, Services>: (services, interaction, session) => Promise<Omit<Services, keyof SingletonServices | keyof VrameworkInteraction>>;
 ```
 
+Defines a function type for creating session-specific services, excluding certain services from the core services.
+
 ## Type Parameters
 
 • **SingletonServices** *extends* [`CoreSingletonServices`](../interfaces/CoreSingletonServices.md)
@@ -26,4 +28,4 @@ type CreateSessionServices<SingletonServices, UserSession, Services>: (services,
 
 ## Defined in
 
-[packages/core/src/types/core.types.ts:60](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L60)
+[packages/core/src/types/core.types.ts:106](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L106)

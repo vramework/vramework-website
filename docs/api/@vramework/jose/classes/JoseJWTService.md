@@ -36,7 +36,7 @@ An optional logger for logging information.
 
 #### Defined in
 
-[packages/services/jose/src/jose-jwt-service.ts:28](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/services/jose/src/jose-jwt-service.ts#L28)
+[packages/services/jose/src/jose-jwt-service.ts:28](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/services/jose/src/jose-jwt-service.ts#L28)
 
 ## Methods
 
@@ -70,7 +70,7 @@ A promise that resolves to the decoded payload.
 
 #### Defined in
 
-[packages/services/jose/src/jose-jwt-service.ts:76](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/services/jose/src/jose-jwt-service.ts#L76)
+[packages/services/jose/src/jose-jwt-service.ts:76](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/services/jose/src/jose-jwt-service.ts#L76)
 
 ***
 
@@ -104,7 +104,7 @@ If the session is not provided.
 
 #### Defined in
 
-[packages/services/jose/src/jose-jwt-service.ts:97](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/services/jose/src/jose-jwt-service.ts#L97)
+[packages/services/jose/src/jose-jwt-service.ts:97](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/services/jose/src/jose-jwt-service.ts#L97)
 
 ***
 
@@ -142,7 +142,7 @@ A promise that resolves to the encoded JWT.
 
 #### Defined in
 
-[packages/services/jose/src/jose-jwt-service.ts:57](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/services/jose/src/jose-jwt-service.ts#L57)
+[packages/services/jose/src/jose-jwt-service.ts:57](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/services/jose/src/jose-jwt-service.ts#L57)
 
 ***
 
@@ -160,7 +160,7 @@ Initializes the service by retrieving and setting the secrets.
 
 #### Defined in
 
-[packages/services/jose/src/jose-jwt-service.ts:36](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/services/jose/src/jose-jwt-service.ts#L36)
+[packages/services/jose/src/jose-jwt-service.ts:36](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/services/jose/src/jose-jwt-service.ts#L36)
 
 ***
 
@@ -186,4 +186,4 @@ A promise that resolves if the token is valid.
 
 #### Defined in
 
-[packages/services/jose/src/jose-jwt-service.ts:86](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/services/jose/src/jose-jwt-service.ts#L86)
+[packages/services/jose/src/jose-jwt-service.ts:86](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/services/jose/src/jose-jwt-service.ts#L86)

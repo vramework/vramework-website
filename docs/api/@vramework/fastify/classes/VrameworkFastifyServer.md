@@ -37,7 +37,7 @@ Function to create session services for each request.
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:26](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L26)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:26](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L26)
 
 ## Properties
 
@@ -51,7 +51,7 @@ The Fastify app instance
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:17](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L17)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:17](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L17)
 
 ## Methods
 
@@ -79,7 +79,7 @@ Method not implemented.
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:38](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L38)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:38](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L38)
 
 ***
 
@@ -97,7 +97,7 @@ Enables the server to exit gracefully when a SIGINT signal is received.
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:86](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L86)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:86](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L86)
 
 ***
 
@@ -115,7 +115,7 @@ Initializes the server by setting up health check and registering the Vramework 
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:45](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L45)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:45](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L45)
 
 ***
 
@@ -133,7 +133,7 @@ Starts the server and begins listening on the configured hostname and port.
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:64](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L64)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:64](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L64)
 
 ***
 
@@ -151,4 +151,4 @@ Stops the server and closes all connections.
 
 #### Defined in
 
-[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:77](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L77)
+[packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts:77](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-server/src/vramework-fastify-server.ts#L77)

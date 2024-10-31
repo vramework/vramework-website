@@ -1,5 +1,7 @@
 # Interface: CoreSingletonServices
 
+Interface for core singleton services provided by Vramework.
+
 ## Properties
 
 ### config
@@ -8,9 +10,11 @@
 config: CoreConfig;
 ```
 
+The core configuration for the application.
+
 #### Defined in
 
-[packages/core/src/types/core.types.ts:43](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L43)
+[packages/core/src/types/core.types.ts:80](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L80)
 
 ***
 
@@ -20,9 +24,11 @@ config: CoreConfig;
 logger: Logger;
 ```
 
+The logger used by the application.
+
 #### Defined in
 
-[packages/core/src/types/core.types.ts:44](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L44)
+[packages/core/src/types/core.types.ts:82](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L82)
 
 ***
 
@@ -32,9 +38,11 @@ logger: Logger;
 optional permissionService: PermissionService;
 ```
 
+The permission service used for authorization (optional).
+
 #### Defined in
 
-[packages/core/src/types/core.types.ts:42](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L42)
+[packages/core/src/types/core.types.ts:78](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L78)
 
 ***
 
@@ -44,6 +52,8 @@ optional permissionService: PermissionService;
 optional sessionService: SessionService<CoreUserSession>;
 ```
 
+The session service used by the application (optional).
+
 #### Defined in
 
-[packages/core/src/types/core.types.ts:41](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/types/core.types.ts#L41)
+[packages/core/src/types/core.types.ts:76](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/types/core.types.ts#L76)

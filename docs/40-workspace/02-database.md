@@ -9,7 +9,7 @@ There are various types of databases, and a single database can use different sy
 
 [Kysely](https://kysely.dev/) is a highly recommended TypeScript-enabled API that allows SQL queries to be built with type-checking directly against the database.
 
-*Note*: While Kysely may not be suitable for everyone, the documentation will proceed accordingly. Requests for new databases or contributions can be made [here](https://github.com/vramework/vramework.io/issues/1).
+*Note*: While Kysely may not be suitable for everyone, the documentation will proceed accordingly. Requests for new databases or contributions can be made [here](https://github.com/vramework/vramework-website/issues/1).
 
 ### Database Migration
 

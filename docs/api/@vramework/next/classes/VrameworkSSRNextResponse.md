@@ -33,7 +33,7 @@ The HTTP response object to be wrapped.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-response.ts:14](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-response.ts#L14)
+[packages/servers/next/src/vramework-ssr-next-response.ts:14](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-response.ts#L14)
 
 ## Properties
 
@@ -47,7 +47,7 @@ The HTTP response object to be wrapped.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-response.ts:14](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-response.ts#L14)
+[packages/servers/next/src/vramework-ssr-next-response.ts:14](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-response.ts#L14)
 
 ## Methods
 
@@ -73,7 +73,7 @@ This method is currently a placeholder and should be implemented as needed.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-response.ts:32](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-response.ts#L32)
+[packages/servers/next/src/vramework-ssr-next-response.ts:32](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-response.ts#L32)
 
 ***
 
@@ -99,7 +99,7 @@ This method is currently a placeholder and should be implemented as needed.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-response.ts:40](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-response.ts#L40)
+[packages/servers/next/src/vramework-ssr-next-response.ts:40](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-response.ts#L40)
 
 ***
 
@@ -125,4 +125,4 @@ This method is currently a placeholder and should be implemented as needed.
 
 #### Defined in
 
-[packages/servers/next/src/vramework-ssr-next-response.ts:24](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/next/src/vramework-ssr-next-response.ts#L24)
+[packages/servers/next/src/vramework-ssr-next-response.ts:24](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/next/src/vramework-ssr-next-response.ts#L24)

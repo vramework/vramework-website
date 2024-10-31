@@ -9,10 +9,10 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://vramework.io',
+  url: 'https://vramework.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/vramework.io/',
+  baseUrl: '/vramework-website/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -43,6 +43,7 @@ const config: Config = {
           "vramework/**/index.ts",
         ],
         "entryPointStrategy": "expand",
+        "skipErrorChecking": true,
         "compilerOptions": {
           "skipLibCheck": true,
           "noImplicitAny": false,
@@ -140,7 +141,7 @@ const config: Config = {
           position: 'left' 
         },
         {
-          href: 'https://github.com/vramework/vramework.io',
+          href: 'https://github.com/vramework/vramework',
           label: 'GitHub',
           position: 'right',
         },

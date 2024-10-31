@@ -48,7 +48,7 @@ Options for configuring the session service.
 
 #### Defined in
 
-[packages/core/src/services/vramework-session-service.ts:22](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/vramework-session-service.ts#L22)
+[packages/core/src/services/vramework-session-service.ts:22](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/vramework-session-service.ts#L22)
 
 ## Methods
 
@@ -93,4 +93,4 @@ A promise that resolves to the user session, or `undefined` if no session is fou
 
 #### Defined in
 
-[packages/core/src/services/vramework-session-service.ts:83](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/core/src/services/vramework-session-service.ts#L83)
+[packages/core/src/services/vramework-session-service.ts:83](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/core/src/services/vramework-session-service.ts#L83)

@@ -16,4 +16,4 @@ function default(instance, opts): Promise<void>
 
 ## Defined in
 
-[packages/servers/fastify/fastify-plugin/src/vramework-fastify-plugin.ts:71](https://github.com/vramework/vramework/blob/d6bdd98863fc2395b074502b5cd67b069031d73f/packages/servers/fastify/fastify-plugin/src/vramework-fastify-plugin.ts#L71)
+[packages/servers/fastify/fastify-plugin/src/vramework-fastify-plugin.ts:71](https://github.com/vramework/vramework/blob/725723db2d3435e2df2b809e6609ff26f8be368c/packages/servers/fastify/fastify-plugin/src/vramework-fastify-plugin.ts#L71)
