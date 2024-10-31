@@ -12,10 +12,10 @@ function HomepageHeader() {
         <div className='flex flex-col items-center'>
           <img className="max-w-[200px] w-full" src={useBaseUrl('/img/vramework.png')} />
           <Heading as="h1" className="text-5xl text-center leading-snug">
-            A different type of HTTP server
+            A different approach to nodejs backend code
           </Heading>
           <p className="text-lg text-center font-medium">
-            A minimal framework for building HTTP servers in Node.js
+            A minimal framework for building HTTP functions in Node.js
           </p>
           <div className="flex flex-row gap-2 justify-center">
             <Link
