@@ -12,10 +12,8 @@ User sessions are crucial for managing **security**, **auditing**, and **metrics
 
 The session service in Vramework follows a simple structure. It may evolve to handle more data from requests, like the origin, but currently, the session creation responsibility remains inside of the userland login/session related functions.
 
-```typescript
-export interface SessionService<UserSession = CoreUserSession> {
-    getUserSession: (credentialsRequired: boolean, headers: Record<string, string>) => Promise<UserSession | undefined>;
-}
+```typescript reference title="Session Service Interface"
+https://raw.githubusercontent.com/vramework/vramework/blob/master/packages/core/src/services/session-service.ts
 ```
 
 If a session service is registered within the singleton services, Vramework will automatically use it to validate the user session.
@@ -62,7 +60,7 @@ const jwtService = new JWTService<UserSession>(async () => [
   }
 ]);
 
-const vrameworkSessionService = new VrameworkSessionService(
+const vrameworkSessionService = new VrameworkSessionService<UserSession>(
   jwtService,
   {
     getSessionForAPIKey: async (apiKey: string) => {
@@ -71,6 +69,13 @@ const vrameworkSessionService = new VrameworkSessionService(
       }
     },
     transformSession: async (session: any) => {
+      // Presudo code to demonstrate how you can 
+      // augment the session if needed
+      const dateOfBirth = await database
+        .select('dateOfBirth')
+        .from('user')
+        .where('userId', '=', session.userId)
+
       return {
         ...session,
         privateSessionData: {

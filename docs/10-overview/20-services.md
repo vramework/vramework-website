@@ -12,70 +12,12 @@ Most services are simple in nature, only requiring optional initialization and c
 
 ### Example: Book Management Service
 
-Here's an example service that manages a collection of books. Notice that it doesn't depend on any Vramework-specific features or libraries, making it straightforward and easy to use.
+Here's an example service that manages a collection of books. Notice that it doesn't depend on any vramework features other than the Error, making it straightforward and easy to use.
 
 It also demonstrates how to handle errors using `NotFoundError`. This error type is recognized by Vramework and automatically mapped to an appropriate message.
 
-```typescript
-import { Book, Books, CreateBook } from "./books.types";
-import { NotFoundError } from "@vramework/core/errors"
-
-/**
- * Service for managing books with basic CRUD operations.
- */
-export class BookService {
-    private books: Book[] = [];
-    private nextId: number = 1;
-
-    /**
-     * Creates a new book and adds it to the collection.
-     */
-    createBook(book: CreateBook): Book {
-        const newBook: Book = { id: this.nextId++, ...book };
-        this.books.push(newBook);
-        return newBook;
-    }
-
-    /**
-     * Retrieves a book by its unique ID.
-     * Throws a `NotFoundError` if the book isn't found.
-     */
-    getBook(id: number): Book {
-      const book = this.books.find(book => book.id === id);
-      if (!book) {
-        throw new NotFoundError(`Book with ID ${id} not found`);
-      }
-      return book;
-    }
-
-    /**
-     * Retrieves the list of all books.
-     */
-    getBooks(): Books {
-      return this.books;
-    }
-
-    /**
-     * Updates a book's details.
-     */
-    updateBook(id: number, updatedInfo: Partial<Omit<Book, 'id'>>): Book {
-      const book = this.getBook(id);
-      Object.assign(book, updatedInfo);
-      return book;
-    }
-
-    /**
-     * Deletes a book by its ID.
-     */
-    deleteBook(id: number): boolean {
-      const index = this.books.findIndex(book => book.id === id);
-      if (index !== -1) {
-          this.books.splice(index, 1);
-          return true;
-      }
-      return false;
-    }
-}
+```typescript reference title="Book Server"
+https://raw.githubusercontent.com/vramework/express-middleware-starter/blob/master/src/book.service.ts
 ```
 
 ## Types of Services
@@ -86,9 +28,14 @@ Vramework offers two main types of services:
 
 These services are created once when the server starts and remain active until the server shuts down. Singleton services are ideal for managing global resources, like:
 
-- **Session Management**: Validates user sessions
-- **Database Connection**: Manages database connections
-- **Email Provider**: Sends emails (like verification emails or notifications)
+- **Session Management**: Retrieves and validates user sessions.
+- **Book Service**: The book service we just saw earlier.
+- **Database Connection**: Manages database connections, such as a Pool.
+- **Email Provider**: Sends emails.
+
+:::info
+Different function calls can use the same instance, so ***do not*** save any state specific to the function call. That's where session services come in handy!
+:::
 
 ### Session Services
 
@@ -101,73 +48,38 @@ The core services are:
 
 Custom examples include:
 
-- **Database Client**: Handles database transactions
+- **Database Client**: If the singleton service is a pool, the session service could be a client, which can provide benefits such as running everything in a single transaction if desired or automatically auditing tables.
 - **TemporaryFileService**: Manages temporary files that are automatically deleted when the session ends
 
 ## How to Create Services
 
 Creating services in Vramework is a straightforward process, relying on basic functions to return services, along with a factory to generate session services.
 
-Here’s an example of how to set up custom types and services:
+First you'll need your application types. These are types that extend the vramework ones and are passed as parameters to your functions.
 
-```typescript
-import { CoreConfig, CoreSingletonServices, CoreUserSession } from '@vramework/core';
-import { BookService } from './book.service';
+:::info
+Note how this uses a declaration file `.d.ts`. This enforces us to avoid putting anything concrete in this file.
+:::
 
-/**
- * Custom config for services.
- */
-export interface Config extends CoreConfig {}
-
-/**
- * All custom singleton services.
- */
-export type SingletonServices = CoreSingletonServices & {
-  books: BookService;
-};
-
-/**
- * Custom session services.
- */
-export interface Services extends CoreHTTPServices {}
-
-/**
- * Custom user session definition.
- */
-export interface UserSession extends CoreUserSession {}
+```typescript reference title="Application Types"
+https://raw.githubusercontent.com/vramework/express-middleware-starter/blob/master/types/application-types.d.ts
 ```
 
 Now, let's create the services:
 
-```typescript
-import { ConsoleLogger } from '@vramework/core/services/logger';
-import { Config, SingletonServices } from './api';
-import { BookService } from './book.service';
-
-export const createSingletonServices = async (config: Config): Promise<SingletonServices> => {
-  const logger = new ConsoleLogger();
-
-  if (config.logLevel) {
-    logger.setLevel(config.logLevel);
-  }
-
-  return {
-    config,
-    logger,
-    books: new BookService(),
-  };
-};
-
-export const createSessionServices = (services: Services, session: UserSession) => {
-  return {
-    ...services
-  }
-}
+```typescript reference title="Application Types"
+https://raw.githubusercontent.com/vramework/express-middleware-starter/blob/master/src/services.ts
 ```
 
 ## Dependency Lookup vs. Dependency Injection
 
-Vramework supports both **dependency lookup** and **dependency injection** for service management.
+Vramework supports **dependency lookup** for service management.
+
+The reasoning behind this is primarily to keep things simple. By having a single entry point to create our services we can manage how they are created.
+
+:::info
+The disadvantage to this approach is that it's harder for to tree shake our dependencies when selecting routes. This is something that requires more investigation, and may mean we ultimately go down the route of dependency injection.
+:::
 
 | **Aspect**               | **Dependency Lookup**                                             | **Dependency Injection**                                         |
 |--------------------------|------------------------------------------------------------------|------------------------------------------------------------------|

@@ -8,31 +8,19 @@ description: Mapping HTTP calls to functions
 
 API routes in Vramework serve as the entry points for handling HTTP requests. When a request is made, an API route listens on the specified path and processes the request by calling a function. The process involves:
 
-- Validating the session (if required)
-- Extracting and validating request data
-- Handling permissions
-- Returning a success response or an error code
+- **Validating the session (if required)**
+- **Extracting and validating request data**
+- **Handling permissions**
+- **Returning a success response or an error code**
 
 ## Defining API Routes
 
 An API route is a configuration object that defines the behavior for a specific HTTP request. Here is an example that demonstrates setting up routes for fetching and updating a book:
 
-```typescript title="book.function.ts"
-import { type UpdateBook, type CreateBook } from "./books.types";
-import { type APIRoute } from "./vramework-types";
-
-addRoute({
-    method: 'get',
-    route: '/book/:id',
-    func: async (services: Services, data: JustBookId) => await services.books.createBook(data),
-})
-
-addRoute({
-    method: 'patch',
-    route: '/book/:id',
-    func: async (services: Services, { id, ...book }: UpdateBook) => await services.books.updateBook(id, book),
-})
+```typescript reference title="book.function.ts"
+https://raw.githubusercontent.com/vramework/express-middleware-starter/blob/master/src/books.function.ts
 ```
+
 
 ## Validation
 

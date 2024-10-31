@@ -17,7 +17,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'vramework', // Usually your GitHub org/user name.
-  projectName: 'vramework.io', // Usually your repo name.
+  projectName: 'vramework', // Usually your repo name.
 
   // onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
@@ -31,7 +31,36 @@ const config: Config = {
   },
 
   plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        readme: "none",
+        useCodeBlocks: true,
+        categorizeByGroup: false,
+        cleanOutputDir: true, 
+        tsconfig: "vramework/tsconfig.json",
+        "entryPoints": [
+          "vramework/**/index.ts",
+        ],
+        "entryPointStrategy": "expand",
+        "compilerOptions": {
+          "skipLibCheck": true,
+          "noImplicitAny": false,
+          "resolveJsonModule": true
+        },
+        "exclude": [
+          "**/node_modules/**/*",
+          "**/dist/**/*",
+          "**/*.spec.ts",
+          "**/*.d.ts"
+        ],
+      },
+    ],
     tailwindPlugin
+  ],
+
+  themes: [
+    '@saucelabs/theme-github-codeblock'
   ],
 
   presets: [
@@ -48,6 +77,12 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            remarkPlugins: [
+              [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+            ],
+        },
+        pages: {
+          remarkPlugins: [require('@docusaurus/remark-plugin-npm2yarn')],
         },
         blog: {
           showReadingTime: true,
@@ -63,6 +98,12 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
+          remarkPlugins: [
+            [
+              require('@docusaurus/remark-plugin-npm2yarn'),
+              {converters: ['pnpm']},
+            ],
+          ],
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -87,7 +128,17 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        {
+          to: 'docs/api/',
+          activeBasePath: 'docs',
+          label: 'API',
+          position: 'left',
+        },
+        { 
+          to: '/blog', 
+          label: 'Blog', 
+          position: 'left' 
+        },
         {
           href: 'https://github.com/vramework/vramework.io',
           label: 'GitHub',
@@ -99,23 +150,23 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Learn',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Introduction',
               to: '/docs/intro',
             },
           ],
         },
-        // {
-        //   title: 'Community',
-        //   items: [
-        //     {
-        //       label: 'Discord',
-        //       href: 'https://discordapp.com/invite/docusaurus',
-        //     },
-        //   ],
-        // },
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/vramework',
+            },
+          ],
+        },
         {
           title: 'More',
           items: [
@@ -125,7 +176,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/vramework/vramework',
             },
           ],
         },

@@ -8,36 +8,51 @@ This set of articles covers the **core fundamentals** of Vramework. To understan
 
 ## Prerequisites
 
-Ensure that [Node.js](https://nodejs.org) (version >= 20) is installed on the operating system.
-
-Throughout this guide, `npm` will be used to install and manage packages.
+Ensure that [Node.js](https://nodejs.org) (version >= 18) is installed on the operating system.
 
 ### Setup
 
 Begin by installing the starter project using **Git**:
 
-```bash
-git clone https://github.com/vramework/express-starter.git project
+```bash npm2yarn
+# Clone the project
+git clone https://github.com/vramework/express-middleware-starter.git project
+# Enter the directory
 cd project
+# Setup dependencies
 npm install
+# Run vramework cli
+npx @vramework/cli
 ```
 
-The `project` directory will be created. Node modules and other boilerplate files will be installed, and a files will be created:
+The `project` directory will be created, node modules will be installed, and vramework files will be created:
 
-```bash
+```bash title="Project structure"
+.vramework/
+  vramework-schemas/
+    schemas/
+      CreateBook.schema.json
+      JustBookId.schema.json
+    register.ts
+  vramework-bootstrap.ts
+  vramework-routes-map.d.ts
+  vramework-routes.ts
+  vramework-types.d.ts
 bin/
   main.ts
 src/
   config.ts
   services.ts
-  vramework-types.ts
   books.service.ts
   books.function.ts
-  books.types.ts
+types/
+  books.types.d.ts
 vramework.config.json
 ```
 
-Here's a brief overview of these core files:
+#### Core Files
+
+Here's a brief overview of there core files:
 
 | **File**                    | **Description**                                                                                             |
 |-----------------------------|-------------------------------------------------------------------------------------------------------------|
@@ -46,80 +61,38 @@ Here's a brief overview of these core files:
 | `services.ts`               | A function that creates all the expected services required                                                 |
 | `book.service.ts` | A simple book service                                                                                     |
 | `books.function.ts`  | The glue between services and http calls
-| `books.types.ts`  | The types we expect to use for this object                                                            |
-| `vramework.config.json`  | A bit of config needed by vramework to know where to look for routes and to save generated schemas                                                            |
+| `vramework.config.json`  | The config used by the vramework CLI tool      
 
-The `main.ts` file includes an asynchronous function that starts the application.
+#### Generated Files
 
-We'll explain what some of the non vanilla functionality is shortly!
+:::info
+The two files we use are `vramework-bootstrap.ts` and `vramework-types.d.ts`. The rest are generated in order to either help provide autocompletion / type checks or for runtime purposes.
+:::
 
-```typescript
-import { getVrameworkConfig } from '@vramework/core/vramework-config'
-import { VrameworkExpressServer } from '@vramework/deploy-express'
 
-import { config } from '../src/config'
-import { createSessionServices, createSingletonServices } from '../src/services'
-
-async function main({ configFile }: { configFile?: string }): Promise<void> {
-  try {
-    const vrameworkConfig = await getVrameworkConfig(configFile)
-    const singletonServices = await createSingletonServices(config)
-    const expressServer = new VrameworkExpressServer(
-      vrameworkConfig,
-      config,
-      singletonServices,
-      createSessionServices
-    )
-    expressServer.enableExitOnSigInt()
-    await expressServer.init()
-    await expressServer.start()
-  } catch (e: any) {
-    console.error(e.toString())
-    process.exit(1)
-  }
-}
-
-main({
-  configFile: process.argv[2],
-})
-```
+| **File**                    | **Description**                                                                                             |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------|
+| `vramework-schemas/`                   | The directory that contains all the schemas we'll validate calls against                                                                                     |
+| `vramework-schemas/register.ts`                 | Imports all the schemas and adds them to vramework                                                              |
+| `vramework-bootstrap.ts`               | Imports the required files into our runtime                                                 |
+| `vramework-routes.ts` | Imports all the files with routes in them                                                          |
+| `vramework-types.d.ts`  | Provides types to be used in the application                                                       |
 
 ### The config file
 
-The `vramework.config.json` file tells us where to look for routes and where to save our generated our schemas to validate calls against.
+The `vramework.config.json` file is used to drive the vramework CLI tool.
 
-```json
-{
-    "routeDirectories": ["./src"],
-    "schemaOutputDirectory": "./generated",
-    "routesOutputFile": "./generated/routes.ts",
-    "tsconfig": "./tsconfig.json"
-}
+:::info
+The vramework CLI tool is used to:
+- Index all your API routes.
+- Generate the route schemas.
+- Create typescript declaration files to aid developers.
+
+For more info you can checkout the CLI documentation.
+
+:::
+
+```json reference 
+https://raw.githubusercontent.com/vramework/express-middleware-starter/blob/master/vramework.config.json
 ```
 
-#### Running the Application
-
-After completing the installation, run the following command in the OS command prompt to start the application and listen for inbound HTTP requests:
-
-To start the server, use:
-
-```bash
-# Generate all the required routes and schemas 
-# only needed when typescript or routes change
-npm run routes
-npm run schema
-# Run the server
-npm run dev
-```
-
-The first command creates schemas for all of your HTTP endpoints, so that we can ensure the data is valid before our actual endpoints recieve them. This will be discussed in more depth further on.
-
-This command starts the app with the HTTP server listening on the port defined in the `src/config.ts` file. Once the application is running, open a browser and navigate to `http://localhost:4002/health-check` to see the health check working.
-
-To monitor file changes and start the application in development mode, use:
-
-```bash
-npm run dev
-```
-
-This command will watch for file changes, automatically recompiling and reloading the server.

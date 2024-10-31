@@ -10,20 +10,8 @@ Vramework is almost driven entirely by **Types**. This ensures type safety acros
 
 In this example project, without a database connection, all types are defined from scratch. Here's an example:
 
-```typescript
-import { RequireAtLeastOne } from "@vramework/core"
-
-export interface Book {
-    id: number
-    title: string
-    author: string
-    year: number
-}
-
-export type Books = Book[]
-export type JustBookId = Pick<Book, 'id'>
-export type CreateBook = Omit<Book, 'id'>
-export type UpdateBook = JustBookId & RequireAtLeastOne<CreateBook>
+```typescript reference title="Book Types"
+https://raw.githubusercontent.com/vramework/express-middleware-starter/blob/master/types/books.types.d.ts
 ```
 
 By referencing these types in the APIs, it’s clear what data to expect. This ensures consistency and reduces the risk of runtime errors.
@@ -32,21 +20,21 @@ By referencing these types in the APIs, it’s clear what data to expect. This e
 
 One of the key benefits of using types is that JSON schemas can be automatically generated to validate incoming data. This means that API endpoints can validate data before processing, ensuring that invalid data doesn't cause unexpected behavior.
 
-To generate these schemas, use the CLI tool:
+The schemas are automatically created when running the default vramework command. However you can also specifically only update the schemas by running:
 
-```bash
+```bash npm2yarn
 npx @vramework/cli schema
 ```
 
 ## Advanced Approach: Database-Driven Types
 
-While defining schemas manually works for small projects, maintaining them alongside a database can become cumbersome. If a field is removed or modified in the database, types defined manually in TypeScript may not reflect those changes until runtime.
+While defining schemas manually works for small projects, maintaining them alongside a database can become cumbersome. If a field is removed or modified in the database, types defined manually in TypeScript may not reflect those changes resulting in runtime errors.
 
 To address this, the recommended approach is to generate types directly from the database. This provides a more dynamic and error-proof system by ensuring the types always align with the current state of the database.
 
 Here’s a quick example:
 
-```typescript
+```typescript title="Database Types" 
 import DB from 'kysely';
 
 export type Books = DB.Book[];

@@ -2,11 +2,8 @@
 sidebar_position: 10
 title: Content Uploads
 description: Managing file uploads and downloads
+draft: true
 ---
-
-:::note
-This is not up to date
-:::
 
 ## Introduction
 

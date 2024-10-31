@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "TYPEDOC_WATCH=true docusaurus start",
+    "build": "TYPEDOC_WATCH=false docusaurus build",
     "swizzle": "docusaurus swizzle",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
@@ -17,7 +17,9 @@
     "@docusaurus/core": "3.5.2",
     "@docusaurus/plugin-google-gtag": "^3.5.2",
     "@docusaurus/preset-classic": "3.5.2",
+    "@docusaurus/remark-plugin-npm2yarn": "^3.5.2",
     "@mdx-js/react": "^3.0.0",
+    "@saucelabs/theme-github-codeblock": "^0.3.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
@@ -28,8 +30,11 @@
     "@docusaurus/tsconfig": "3.5.2",
     "@docusaurus/types": "3.5.2",
     "autoprefixer": "^10.4.20",
+    "docusaurus-plugin-typedoc": "^1.0.5",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.10",
+    "typedoc": "^0.26.10",
+    "typedoc-plugin-markdown": "^4.2.9",
     "typescript": "~5.5.2"
   },
   "browserslist": {

@@ -10,8 +10,9 @@ Permissions in Vramework are evaluated before each function execution, similar t
 
 A permission function operates much like an `APIFunction`, but it returns a boolean to indicate whether the user has access. If an error is thrown, the process results in an error code other than 403. 
 
-### Note:
+:::info
 Since permissions are checked in parallel, only the first error thrown will be used to block access.
+:::
 
 ## Basic Permission Check
 
@@ -50,10 +51,8 @@ In this case, the permission is based on the number of books a user has checked 
 
 Vramework also offers a **Permission Service** for application-wide permission checks. This is useful for enforcing higher-order permission rules, similar to route guards in NestJS or Express.
 
-```typescript
-export interface PermissionService {
-    verifyRouteAccess(apiRoute: CoreAPIRoute<unknown, unknown>, session?: CoreUserSession): Promise<void>;
-}
+```typescript reference title="Session Service Interface"
+https://raw.githubusercontent.com/vramework/vramework/blob/master/packages/core/src/services/permission-service.ts
 ```
 
 ### Example Implementation
@@ -61,18 +60,18 @@ export interface PermissionService {
 The following example demonstrates a permission service that restricts access to all routes containing `/admin` to users with admin privileges:
 
 ```typescript
-class CustomPermissionService implements PermissionService {
+class AdminPermissionService implements PermissionService {
   public verifyRouteAccess(apiRoute, session) {
     if (apiRoute.route.includes('/admin')) {
       if (session.isAdmin !== true) {
-        throw new AccessDeniedError();
+        throw new ForbiddenError();
       }
     }
   }
 }
 ```
 
-In this implementation, any route that includes `/admin` requires the session to indicate the user is an admin. If not, an `AccessDeniedError` is thrown, preventing access to the route.
+In this implementation, any route that includes `/admin` requires the session to indicate the user is an admin. If not, an `ForbiddenError` is thrown, preventing access to the route.
 
 ## Conclusion
 

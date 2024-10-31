@@ -8,10 +8,10 @@ description: How functions work
 
 Functions in Vramework serve as a core interface for the application. They manage logic, interact with services, and handle data processing. Functions are highly flexible and can:
 
-- Accept arguments
-- Return objects
-- Interact with services
-- Handle errors
+- **Accept arguments**
+- **Return objects**
+- **Interact with services**
+- **Throw errors**
 
 ## Function-Centric Approach
 
@@ -20,12 +20,6 @@ In Vramework, functions often act as a service layer, interacting with databases
 Here’s an example of a simple function that retrieves a book:
 
 ```typescript
-/**
- * services: The available services
- * data: The input data, in this case, JustBookId
- * returns: A Book object
- * throws: BookNotFoundError
- */
 const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
   return await services.database
     .selectFrom('book')
@@ -40,12 +34,6 @@ const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
 The `express-starter` examples use a service-driven approach, similar to frameworks like NestJS. In this case, functions interact directly with services to perform specific actions.
 
 ```typescript
-/**
- * services: The available services
- * data: The input data, in this case, JustBookId
- * returns: A Book object
- * throws: BookNotFoundError
- */
 const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
   return await services.books.getBook(data.id);
 };
@@ -53,25 +41,15 @@ const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
 
 ## Error Handling
 
-A more detailed explanation of error handling will be covered later. For now, it's important to note that errors can be structured to map to specific error codes.
+A more detailed explanation of error handling will be covered [here](./errors). For now, it's important to note that errors can be structured to map to specific error codes.
 
 ## HTTP Access in Functions
 
-To access HTTP-related elements (such as request or response objects), an HTTP service can be created. This service abstracts HTTP details, allowing for:
+To access HTTP-related elements (such as request or response objects), a HTTP service is created. This service abstracts HTTP details, allowing for:
 
 - Easier testing through stubbing
-- Flexibility across different deployment strategies
+- Flexibility across different deployment frameworks and servers
 - Clearer and more manageable API interfaces
-
-## Function Interfaces
-
-Vramework declares function interfaces within its core types to ensure that all `APIFunctions` have the correct typing.
-
-```typescript title="vramework-types"
-export type APIFunctionSessionless<In, Out, RequiredServices = Services> = CoreAPIFunction<In, Out, RequiredServices, UserSession>
-
-export type APIFunction<In, Out, RequiredServices = Services> = CoreAPIFunction<In, Out, RequiredServices, UserSession>
-```
 
 ## Conclusion
 

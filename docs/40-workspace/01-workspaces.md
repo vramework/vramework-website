@@ -21,9 +21,7 @@ Upon cloning, the following folder structure will be present:
 backends/
     express/
         bin/
-            express-start.ts
-            express.ts
-        vramework.config.json
+            start.ts
         package.json
     fastify/
         ...

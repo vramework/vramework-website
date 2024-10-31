@@ -11,3 +11,4 @@ The SDK directory would normally contain all types, routes, and the necessary HT
 
 Although it is not yet auto-generated (see [issue](https://github.com/vramework/vramework/issues/7)) like in [tRPC](https://trpc.io/), the current setup has the advantage of not relying on a third-party library.
 
+
