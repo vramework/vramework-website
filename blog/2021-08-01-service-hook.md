@@ -5,6 +5,8 @@ description: A dive into the use-service-hook to tie state management directly t
 
 Today I want to share a design that I have been using for maintaining state in react since the emergence of hooks.
 
+<!-- truncate -->
+
 There have been quite a few posts lately around how redux is a bit too complex for a lot of current applications. The current solution usually seems to recommend using `Context` or the `useReducer` hook provided by the reactJS library.
 
 Before I begin, I'm not great at content writing, so if you find any mistakes feel free to fix them in a PR or let me know so I can improve going forward. Thanks!

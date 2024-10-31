@@ -8,6 +8,8 @@ Before I begin, today is 20220222 as an ISO date. I had to blog something!
 
 This article aims to explain why I went with writing Vramework instead of using nestJS. It's mostly for my sanity; since I just took a few months off of development and after returning wondered why I decided to create my own solution 😅.
 
+<!-- truncate -->
+
 So the nestJS philosophy verbatim is:
 
 In recent years, thanks to Node.js, JavaScript has become the "lingua franca" of the web for both front and backend applications. This has given rise to awesome projects like Angular, React and Vue, which improve developer productivity and enable the creation of fast, testable, and extensible frontend applications. However, while plenty of superb libraries, helpers, and tools exist for Node (and server-side JavaScript), none of them effectively solve the main problem of - Architecture.

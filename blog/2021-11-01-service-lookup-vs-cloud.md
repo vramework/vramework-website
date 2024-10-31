@@ -6,6 +6,8 @@ image: cloud-service
 
 So I got some great feedback on hackernews on a couple of things and wanted to write a bit more of an opinion piece.
 
+<!-- truncate -->
+
 First, some commenters informed me that the term `service injection` is incorrect -  it should be `service lookup`. I will be updating the docs on the site accordingly!
 
 So the first thing I need to clarify is that all functions receive a `service lookup` object that contains a list of all the different services you can use. Usually, the services include message queues, database, cache, and a selection of other things.

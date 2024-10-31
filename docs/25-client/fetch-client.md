@@ -8,7 +8,7 @@ description: Vramework Fetch
 
 You can interact with vramework using a thin wrapper around fetch that does type validation.
 
-![Vramework Client](./fetch.gif)
+![Vramework Client](/img/fetch.gif)
 
 ### Creating the client
 

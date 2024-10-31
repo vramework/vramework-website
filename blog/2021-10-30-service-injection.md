@@ -6,6 +6,8 @@ image: service.svg
 
 Quick intro, Vramework is a thin wrapper ontop of express / serverless / any request-response mechanism that hides away all the boiler plate. The goal is for a user to be able to be able to add an endpoint, with schemas, permissions and session management without actually having to do any boiler plate.
 
+<!-- truncate -->
+
 But as much as pure/immutable functional programming is amazing (give something in, gives you something back, never changing) it's hard to use in some cases (like database connections or integration with content management systems).
 
 And there's also the issue around testing, cloud development and local development. Sometimes it's just easier to use interfaces with quick API access.
