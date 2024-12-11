@@ -1,26 +1,44 @@
 ---
 sidebar_position: 1
 title: Introduction
-description: TODO
+description: Vramework Introduction
 ---
 
-Vramework is a lightweight typescript focused framework for keeping your backend code decoupled from the http server it's using. 
+# Vramework: A Function-First Approach for TypeScript Backend Development
 
-The main concept behind vramework is to provide a thin layer between your HTTP server and your application logic, which means it can use any server that implements the contract. 
+Introducing **Vramework**, a lightweight, TypeScript-centric framework designed around a function-first philosophy. Vramework keeps your backend code effortlessly decoupled from the underlying server or runtime, empowering you to build versatile and maintainable applications.
 
-What this means is you can interact and deploy all your HTTP endpoints directly via your prefered server, whether that's directly within **nextJS**, via **express, fastify, or uWS** or through serverless methods like **lambda** or **azure functions**.
+## The Function-First Vision
 
-#### TODO: Insert tabs here
+Vramework allows all your endpoints to be defined as Functions. These functions are then mapped to routes, cron jobs, websocket messages and other runtimes. 
 
-The production dependency itself is a few hundred lines of code that removes the concept of HTTP from your logic and allows you to focus on a writing pure functions instead.
+This function-first design ensures your code can be used both via servers and serverless equally, removing the pain points of seperation normally brought by trying to use both or switching between them within a single codebase.
 
-#### Philosophy
+Deploy your endpoints or functionality using [Next.js](https://nextjs.org), [Express](https://expressjs.com), [Fastify](https://www.fastify.io), [uWS](https://github.com/uNetworking/uWebSockets.js), or serverless platforms like [AWS Lambda](https://aws.amazon.com/lambda), [Azure Functions](https://azure.microsoft.com/en-us/products/functions/), and [Cloudflare Workers](https://workers.cloudflare.com). Vramework’s flexibility ensures you’re not tied to a specific framework or runtime, allowing you to choose the best fit for your project’s needs.
 
-Vramework tries to really do a handful of things well and get out of your way. Other more powerful frameworks like [NestJS](https://docs.nestjs.com/) and [tRPC](https://trpc.io/) exist with more bells and whistles. However ultimately require you to learn a whole new framework, APIs and libraries. Vramework takes a very different approach, which is to hide away the concept of coding in HTTP, and instead just use out of the box Typescript and classes to get thing done. All while still adhering the incredible toolbox that is the Typescript ecosystem to verify type correctness during both build-time (typechecks) and run time (schema validation).
+## Why Choose Vramework?
 
+Vramework is built on the principles of simplicity and minimalism. Unlike more comprehensive frameworks such as NestJS or tRPC, which often require adopting their ecosystems and learning new APIs, Vramework stays unobtrusive. It prioritizes TypeScript-native development, letting you concentrate on what truly matters—building your application.
 
-In a nutshell, if you know know how to to write **typescript interfaces**, **functions** and **vanilla unit tests** you'll get most of the way there.
+With Vramework, there's no need to navigate complex abstractions for HTTP, WebSocket, or scheduling. Instead, you write pure functions that are versatile across different use cases. Leveraging TypeScript’s robust ecosystem, Vramework provides both build-time type checks and runtime schema validation, ensuring your code is reliable and maintainable.
 
+If you’re comfortable writing TypeScript interfaces, functions, and unit tests, you’re already well-equipped to get started with Vramework.
+
+## Key Features
+
+- **Lightweight TypeScript-Based WebSocket and Fetch Clients:** Streamline real-time and network communications with ease.
+  
+- **Pure Function-Based Logic:** Maintain modular, testable, and portable backend code.
+  
+- **WebSocket Support:** Effortlessly manage real-time interactions through dedicated channels.
+  
+- **Scheduled Tasks:** Handle cron jobs and background tasks with minimal configuration.
+  
+- **Web-Compatible Streams and Queue Handling:** Upcoming features that will further enhance Vramework’s flexibility.
+  
+- **Minimal Production Dependencies:** Vramework relies on your chosen runtime to handle the heavy lifting, ensuring the framework remains lightweight and efficient.
+
+By decoupling your application logic from specific protocols or runtimes, Vramework allows you to focus on building scalable and maintainable solutions tailored to your deployment needs—whether that's serverless, containerized, or traditional server-hosted environments.
 
 #### Installation
 
@@ -30,9 +48,9 @@ It's recommended to clone the project first to get started and is the method we 
 
 There are a few different starter packages, depending on what you want to use it for:
 
-- [nextJS](./10-overview/10-getting-started.md)
-- [express middleware](./10-overview/10-getting-started.md)
-- [a workspace with all examples](./10-overview/10-getting-started.md)
+- [nextJS](./10-core/10-getting-started.md)
+- [express middleware](./10-core/10-getting-started.md)
+- [a workspace with all examples](./10-core/10-getting-started.md)
 
 To install the TypeScript starter project with **Git**:
 

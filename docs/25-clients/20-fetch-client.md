@@ -24,4 +24,11 @@ For example:
 https://raw.githubusercontent.com/vramework/workspace-starter/blob/master/apps/cli/vramework.config.json
 ```
 
+The example code seen above can be viewed here:
+
+```typescript reference title="fetch.ts"
+https://raw.githubusercontent.com/vramework/workspace-starter/blob/master/apps/cli/bin/fetch.ts
+```
+
+
 For additional functionality or feature requests, please submit an issue on the [Vramework repository](https://github.com/vramework/vramework).

@@ -1,6 +1,6 @@
 ---
-sidebar_position: 20
-title: Permissions
+sidebar_position: 30
+title: Permission Guards
 description: Creating permission guards
 ---
 
@@ -47,32 +47,10 @@ const belowLimit: APIPermission<unknown> = async (services, _, session) => {
 
 In this case, the permission is based on the number of books a user has checked out. This check requires interaction with a database, making it more dynamic.
 
-## Permission Service
+## Route based permissions
 
-Vramework also offers a **Permission Service** for application-wide permission checks. This is useful for enforcing higher-order permission rules, similar to route guards in NestJS or Express.
+You can also add route based permissions via the [http-permission-service](../22-http/30-http-permission-service.md) and the [channel-permission-service](../23-channels/30-channel-permission-service.md).
 
-```typescript reference title="Session Service Interface"
-https://raw.githubusercontent.com/vramework/vramework/blob/master/packages/core/src/services/permission-service.ts
-```
-
-### Example Implementation
-
-The following example demonstrates a permission service that restricts access to all routes containing `/admin` to users with admin privileges:
-
-```typescript
-class AdminPermissionService implements PermissionService {
-  public verifyRouteAccess(apiRoute, session) {
-    if (apiRoute.route.includes('/admin')) {
-      if (session.isAdmin !== true) {
-        throw new ForbiddenError();
-      }
-    }
-  }
-}
-```
-
-In this implementation, any route that includes `/admin` requires the session to indicate the user is an admin. If not, an `ForbiddenError` is thrown, preventing access to the route.
-
-## Conclusion
+## Summary
 
 Vramework's permission system provides flexibility, allowing permissions to be checked at both the function and route levels. By combining simple and advanced checks, it ensures that only authorized users can access sensitive parts of an application.

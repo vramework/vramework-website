@@ -5,7 +5,7 @@ import tailwindPlugin from "./plugins/tailwind-config.cjs";
 
 const config: Config = {
   title: 'Vramework',
-  tagline: 'Pure HTTP Functions for node.js',
+  tagline: 'The Typescript Function Backend',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

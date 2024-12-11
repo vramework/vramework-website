@@ -12,10 +12,10 @@ function HomepageHeader() {
         <div className='flex flex-col items-center'>
           <img className="max-w-[200px] w-full" src={useBaseUrl('/img/vramework.png')} />
           <Heading as="h1" className="text-5xl text-center leading-snug">
-            A different approach to nodejs backend code
+            A Function first framework designed around Typescript
           </Heading>
           <p className="text-lg text-center font-medium">
-            A minimal framework for building HTTP functions in Node.js
+            A minimal framework for building HTTP, Scheduled and Websocket functions in Typescript
           </p>
           <div className="flex flex-row gap-2 justify-center">
             <Link
@@ -43,8 +43,8 @@ const Divider = () => {
 export default function Home(): JSX.Element {
   return (
     <Layout
-      title="Vramework - A different type of HTTP server"
-      description="A minimal framework for building HTTP* servers in Node.js">
+      title="Vramework - A Function first framework for Node.js"
+      description="A minimal framework for building Function driven services in Node.js">
       <HomepageHeader />
       <main className='flex flex-col gap-y-8 px-4'>
         <div className='shadow-lg border border-solid border-gray-200 rounded p-8 text-center text-lg font-medium text-gray-700 max-w-screen-md mx-auto leading-relaxed'>

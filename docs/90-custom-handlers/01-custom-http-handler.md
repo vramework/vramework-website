@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-title: Writing your own handler
+title: Writing your own HTTP handler
 ---
 
 You can integrate Vramework into most nextJS HTTP servers in three steps.

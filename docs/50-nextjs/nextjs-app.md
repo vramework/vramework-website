@@ -7,7 +7,7 @@ description: Using Vramework with NextJS App Router
 # Using Vramework with NextJS App Router
 
 :::info
-The nextJS app router currently supports nextJS version 14, as version 15 has breaking changes when it comes to headers.
+The nextJS app router currently supports nextJS version 15, as version 15 introducted breaking changes when it comes to headers.
 :::
 
 :::warning

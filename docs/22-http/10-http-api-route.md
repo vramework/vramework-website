@@ -1,12 +1,12 @@
 ---
-sidebar_position: 50 
-title: API Routes  
+sidebar_position: 10 
+title: HTTP API Routes  
 description: Mapping HTTP calls to functions  
 ---
 
-## Introduction to API Routes
+## Introduction to HTTP API Routes
 
-API routes in Vramework serve as the entry points for handling HTTP requests. When a request is made, an API route listens on the specified path and processes the request by calling a function. The process involves:
+HTTP API routes in Vramework serve as the entry points for handling HTTP requests. When a request is made, an HTTP API route listens on the specified path and processes the request by calling a function. The process involves:
 
 - **Validating the session (if required)**
 - **Extracting and validating request data**
@@ -70,6 +70,6 @@ While the current approach may seem verbose, it has proven effective for managin
 
 For example, a request without a session cannot invoke an `APIFunction` that requires one. This is enforced by the type system, preventing issues at compile time.
 
-## Conclusion
+## Summary
 
 API routes in Vramework map HTTP requests to functions, providing a structured, consistent approach to request handling. This method guarantees data validation, error handling, and session management, ensuring that requests are handled securely and efficiently. In future iterations, improvements to scalability, schema inference, and documentation generation will be explored.

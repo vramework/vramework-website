@@ -51,6 +51,6 @@ To access HTTP-related elements (such as request or response objects), a HTTP se
 - Flexibility across different deployment frameworks and servers
 - Clearer and more manageable API interfaces
 
-## Conclusion
+## Summary
 
 Functions in Vramework provide a consistent and flexible way to manage services, data, and HTTP requests. The next section will explain how these functions are connected to actual HTTP routes, offering developers a seamless experience.

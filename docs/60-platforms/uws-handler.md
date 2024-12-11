@@ -9,18 +9,30 @@ description: Using Vramework with uWS
 Vramework can be / is best used within uws as a handler.
 
 ```typescript title="uWS Handler"
-import { vrameworkHandler } from '@vramework/uws-handler'
+import { vrameworkHTTPHandler, vrameworkWebsocketHandler } from '@vramework/uws-handler'
 
 import { createSingletonServices, createSessionServices } from 'path/to/vramework-bootstrap.ts'
 
-// The fastify server setup goes here...
+// The uws server setup goes here...
 
 const singletonServices = await createSingletonServices()
-app.any('/*', vrameworkHandler({
-   logRoutes: true,
-   singletonServices,
-   createSessionServices,
-}))
+this.app.any(
+   '/*',
+   vrameworkHTTPHandler({
+      logRoutes: true,
+      singletonServices: this.singletonServices,
+      createSessionServices: this.createSessionServices,
+   })
+   )
+
+   this.app.ws(
+   '/*',
+   vrameworkWebsocketHandler({
+      logRoutes: true,
+      singletonServices: this.singletonServices,
+      createSessionServices: this.createSessionServices,
+   })
+)
 ```
 
 # Using VrameworkUWSServer

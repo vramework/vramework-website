@@ -1,5 +1,5 @@
 ---
-sidebar_position: 60
+sidebar_position: 20
 title: Express Middleware
 description: Running via express middleware 
 ---

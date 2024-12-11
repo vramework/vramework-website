@@ -54,6 +54,6 @@ const getBook: APIFunction<JustBookId, Book> = async (services, data) => {
 
 In this example, if the book is not found, a `NotFoundError` is thrown, which will result in a 404 response.
 
-## Conclusion
+## Summary
 
 The `EError` class ensures proper error handling, and by associating custom errors with HTTP codes using `addErrors`, you can provide clear and consistent responses to the client when issues arise.

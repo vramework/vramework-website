@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 20
 title: User Sessions
 description: Validating sessions
 ---
@@ -20,11 +20,11 @@ If a session service is registered within the singleton services, Vramework will
 
 ### Default Session Service
 
-The default implementation provided by Vramework is called `VrameworkSessionService`.
+The default implementation provided by Vramework is called `VrameworkHTTPSessionService`.
 
 ## Retrieving a Session
 
-The `VrameworkSessionService` attempts to retrieve a session using the following mechanisms, in this order:
+The `VrameworkHTTPSessionService` attempts to retrieve a session using the following mechanisms, in this order:
 
 ### 1. API Key in Header (`x-api-key`)
 
@@ -60,7 +60,7 @@ const jwtService = new JWTService<UserSession>(async () => [
   }
 ]);
 
-const vrameworkSessionService = new VrameworkSessionService<UserSession>(
+const vrameworkSessionService = new VrameworkHTTPSessionService<UserSession>(
   jwtService,
   {
     getSessionForAPIKey: async (apiKey: string) => {
