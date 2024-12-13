@@ -32,7 +32,7 @@ export const myScheduledTask: APIFunctionSessionless<void, void> = async (
 
 addScheduledTask({
     name: 'myScheduledTask',
-    schedule: '0 0 0 * * *',
+    schedule: '*/1 * * * *',
     func: myScheduledTask,
 })
 ```
