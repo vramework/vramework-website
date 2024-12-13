@@ -35,12 +35,15 @@ apps/
 packages/
     functions/
         src/
+            events/
+                events.functions.ts
+                events.channel.ts
             todo/
                 todo.functions.ts
-                todo.routes.ts
+                todo.http.ts
             user/
                 user.functions.ts
-                user.routes.ts
+                user.http.ts
         api.ts
         services.ts
         config.ts
