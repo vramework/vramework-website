@@ -219,21 +219,21 @@ function DeploymentOptionsSection() {
           <table className="table-auto w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="hidden md:visible border border-gray-300 px-4 py-2">Type</th>
+                <th className="hidden md:block border border-gray-300 px-4 py-2">Type</th>
                 <th className="border border-gray-300 px-4 py-2">Service</th>
                 <th className="border border-gray-300 px-4 py-2">HTTP</th>
                 <th className="border border-gray-300 px-4 py-2">WebSocket</th>
-                <th className="hidden md:visible border border-gray-300 px-4 py-2">Cron</th>
+                <th className="hidden md:block border border-gray-300 px-4 py-2">Cron</th>
               </tr>
             </thead>
             <tbody>
               {deploymentData.map((row, index) => (
                 <tr key={index} className="hover:bg-gray-50">
-                  <td className="hidden md:visible border border-gray-300 px-4 py-2 font-medium">{row.type}</td>
+                  <td className="hidden md:block border border-gray-300 px-4 py-2 font-medium">{row.type}</td>
                   <td className="border border-gray-300 px-4 py-2">{row.service}</td>
                   <td className="border border-gray-300 px-4 py-2">{row.http}</td>
                   <td className="border border-gray-300 px-4 py-2">{row.websocket}</td>
-                  <td className="hidden md:visible border border-gray-300 px-4 py-2">{row.cron}</td>
+                  <td className="hidden md:block border border-gray-300 px-4 py-2">{row.cron}</td>
                 </tr>
               ))}
             </tbody>
