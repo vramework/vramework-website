@@ -1,7 +1,7 @@
 # Type Alias: CreateSessionServices()\<SingletonServices, UserSession, Services\>
 
 ```ts
-type CreateSessionServices<SingletonServices, UserSession, Services>: (services, interaction, session) => Promise<Omit<Services, keyof SingletonServices | keyof VrameworkInteraction>>;
+type CreateSessionServices<SingletonServices, Services, UserSession>: (services, interaction, session) => Promise<Omit<Services, keyof SingletonServices | keyof VrameworkInteraction>>;
 ```
 
 Defines a function type for creating session-specific services, excluding certain services from the core services.

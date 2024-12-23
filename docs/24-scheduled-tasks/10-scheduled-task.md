@@ -19,7 +19,7 @@ The main steps remain the same:
 ### Creating and registering the function
 
 ```typescript
-import { APIFunctionSessionless } from '@todos/functions/.vramework/vramework-types.js'
+import { APIFunctionSessionless } from '@vramework-workspace-starter/functions/.vramework/vramework-types.js'
 import { addScheduledTask } from '@vramework/core/scheduler'
 
 export const myScheduledTask: APIFunctionSessionless<void, void> = async (
