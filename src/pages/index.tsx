@@ -279,7 +279,7 @@ function FAQSection() {
     <section className="py-16 bg-gray-50">
       <div className="max-w-screen-lg mx-auto">
         <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6 text-center">
-          Questions And Answers
+          Questions & Answers
         </Heading>
         <div className="px-6 space-y-6">
           {faqs.map((faq, index) => (
@@ -288,6 +288,47 @@ function FAQSection() {
               <p className="text-gray-600">{faq.answer}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CallToActionSection() {
+  return (
+    <section className="py-16 bg-white px-6">
+      <div className="max-w-screen-lg mx-auto text-center">
+        <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6">
+          Get Involved with Vramework
+        </Heading>
+        <p className="text-lg text-gray-600 font-medium mb-8">
+          Start building with Vramework, explore our insights, or join the community to help shape the future of function-driven frameworks.
+        </p>
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+          <Link
+            to="/docs/intro"
+            className="button button--primary button--lg"
+          >
+            Get Started
+          </Link>
+          <Link
+            to="/blog"
+            className="button button--secondary button--lg"
+          >
+            Read Our Blog
+          </Link>
+          <Link
+            to="https://github.com/vramework/vramework"
+            className="button button--outline button--lg"
+          >
+            Contribute on GitHub
+          </Link>
+          <Link
+            to="/get-in-touch"
+            className="button button--outline button--lg"
+          >
+            Get In Touch
+          </Link>
         </div>
       </div>
     </section>
@@ -305,6 +346,7 @@ export default function Home() {
         <CodeExamplesSection />
         <DeploymentOptionsSection />
         <FAQSection />
+        <CallToActionSection />
       </main>
     </Layout>
   );
