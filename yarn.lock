@@ -13225,6 +13225,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"usehooks-ts@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "usehooks-ts@npm:3.1.0"
+  dependencies:
+    lodash.debounce: ^4.0.8
+  peerDependencies:
+    react: ^16.8.0  || ^17 || ^18
+  checksum: 4f850c0c5ab408afa52fa2ea2c93c488cd7065c82679eb1fb62cba12ca4c57ff62d52375acc6738823421fe6579ce3adcea1e2dc345ce4f549c593d2e51455b3
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -13332,6 +13343,7 @@ __metadata:
     typedoc: ^0.26.10
     typedoc-plugin-markdown: ^4.2.9
     typescript: ~5.5.2
+    usehooks-ts: ^3.1.0
   languageName: unknown
   linkType: soft
 

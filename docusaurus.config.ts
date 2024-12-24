@@ -123,6 +123,11 @@ const config: Config = {
         src: 'img/vramework.png',
       },
       items: [
+        { 
+          to: '/getting-started', 
+          label: 'Getting Started', 
+          position: 'left' 
+        },
         {
           type: 'docSidebar',
           sidebarId: 'docs',

@@ -18,10 +18,6 @@ module.exports = {
       borderRadius: {
         sm: "4px",
       },
-      screens: {
-        sm: "0px",
-        lg: "997px",
-      },
       colors: {
         primary: '#5c6ac4',
         secondary: '#ecc94b',

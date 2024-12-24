@@ -10,13 +10,13 @@ export default function GetInTouch() {
     >
       <main className="flex flex-col items-center py-16 px-4 bg-gray-50">
         <div className="max-w-screen-md mx-auto text-center bg-white shadow p-8 rounded-lg">
-          <Heading as="h1" className="text-4xl font-bold text-gray-800 mb-4">
+          <Heading as="h1" className="text-4xl font-bold mb-4">
             Get in Touch
           </Heading>
-          <p className="text-lg text-gray-600 mb-6">
+          <p className="text-lg mb-6">
             Have questions, feedback, or want to collaborate? We'd love to hear from you!
           </p>
-          <div className="text-lg font-medium text-gray-800">
+          <div className="text-lg font-medium">
             <p>Email us directly:</p>
             <a
               href="mailto:yasser.fadl@vlandor.com"
@@ -25,7 +25,7 @@ export default function GetInTouch() {
               yasser.fadl@vlandor.com
             </a>
           </div>
-          <div className="text-lg font-medium text-gray-800 mt-6">
+          <div className="text-lg font-medium ex-text-gray-800 mt-6">
             <p>Or reach out via GitHub:</p>
             <a
               href="https://github.com/vramework/vramework"

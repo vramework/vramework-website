@@ -5,9 +5,9 @@ import Heading from '@theme/Heading';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import SyntaxHighlighter from "react-syntax-highlighter"
+import { Code } from '../components/Code';
 
-const code = {
+export const codeSamples = {
   http: {
     function: `// The Function
 import { APIFunction } from './vramework/types' 
@@ -16,6 +16,7 @@ const getTodo: APIFunction<{ todoId: string }, Todo> = async (
   data,
   userSession
 ) => {
+  // This method doesn't exist to make it easier to read
   return await getTodo(services.database, data.todoId)
 }`,
     wiring: `// The Wiring
@@ -41,7 +42,7 @@ addRoute({
     tags: ['todos']
   }
 })`
-},
+  },
   scheduledTask: {
     function: `// Scheduled Task Function
 const expireTodos: APIFunctionSessionless<void, void> = async (services) => {
@@ -160,18 +161,29 @@ const pitches = [{
 
 function HomepageHeader() {
   return (
-    <header className="flex flex-col items-center py-24 px-4 bg-gradient-to-b from-blue-50 to-white">
+    <header className="flex flex-col items-center py-24 px-4">
       <div className="max-w-screen-lg mx-auto w-full text-center">
         <img className="max-w-[150px] w-full mb-6" src={useBaseUrl('/img/vramework.png')} alt="Vramework logo" />
-        <Heading as="h1" className="text-5xl font-bold text-gray-800 leading-snug mb-4">
+        <Heading as="h1" className="text-5xl font-bold ex-text-gray-800 leading-snug mb-4">
           Vendor-Free Flexibility for Modern APIs
         </Heading>
-        <p className="text-2xl text-gray-600 font-medium max-w-2xl mx-auto">
+        <p className="text-2xl font-medium max-w-2xl mx-auto">
           A minimal TypeScript framework for building web APIs as functions, deployable serverless or locally with ease
         </p>
-        <div className="flex flex-col md:flex-row gap-4 justify-center mt-6">
-          <Link className="button button--primary button--lg" to="/docs/intro">Get Started</Link>
-          <Link className="button button--secondary button--lg" to="https://github.com/vramework/vramework">View on GitHub</Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+        <Link
+            to="/getting-started"
+            className="button button--primary button--lg"
+          >
+            Get Started
+          </Link>
+          <Link
+            to="/docs/intro"
+            className="button button--secondary button--lg"
+          >
+            Documentation
+          </Link>
+          <Link className="button button--outline button--lg" to="https://github.com/vramework/vramework">View on GitHub</Link>
         </div>
       </div>
     </header>
@@ -180,24 +192,24 @@ function HomepageHeader() {
 
 
 const PitchCard: React.FunctionComponent<{ title: string, content: string }> = ({ title, content }) => {
-  return <ol className="bg-white shadow p-6 rounded-lg">
-    <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
-    <p className="text-gray-600">{content}</p>
+  return <ol className="ex-bg-white shadow p-6 rounded-lg">
+    <h3 className="text-xl font-semibold ex-text-gray-800 mb-2">{title}</h3>
+    <p className="ex-text-gray-600">{content}</p>
   </ol>
 }
 
 function ThePitch() {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-12 container">
       <div className="max-w-screen-lg mx-auto text-center">
-        <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6">
+        <Heading as="h2" className="text-4xl font-semibold ex-text-gray-800 mb-6">
           The Pitch
         </Heading>
-        <p className="px-6 text-gray-600 text-2xl font-medium mb-8">
+        <p className="px-6 text-2xl font-medium mb-8">
           This isn't another server, but rather a normalization layer ontop of the many serverless and server frameworks available today.
           You define all your code as functions, and can switch between running them on different environments with ease.
         </p>
-        <ul className="px-8 grid gap-4 md:grid-cols-2 text-left text-lg text-gray-600 font-medium">
+        <ul className="px-8 grid gap-4 md:grid-cols-2 text-left text-lg font-medium">
           {pitches.map(p => <PitchCard title={p.title} content={p.content} />)}
         </ul>
       </div>
@@ -207,39 +219,39 @@ function ThePitch() {
 
 function DeploymentOptionsSection() {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="container">
       <div className="max-w-screen-lg mx-auto text-center">
-        <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6">
+        <Heading as="h2" className="text-4xl font-semibold ex-text-gray-800 mb-6">
           Supported Deployment Options
         </Heading>
-        <p className="text-lg text-gray-600 font-medium mb-8">
+        <p className="text-lg font-medium mb-8">
           The following are the deployment options currently supported by Vramework
         </p>
         <div className="inline-flex overflow-x-auto">
-          <table className="table-auto w-full border-collapse border border-gray-300">
+          <table className="table-auto w-full border-collapse border">
             <thead>
-              <tr className="bg-gray-100">
-                <th className="hidden md:block border border-gray-300 px-4 py-2">Type</th>
-                <th className="border border-gray-300 px-4 py-2">Service</th>
-                <th className="border border-gray-300 px-4 py-2">HTTP</th>
-                <th className="border border-gray-300 px-4 py-2">WebSocket</th>
-                <th className="hidden md:block border border-gray-300 px-4 py-2">Cron</th>
+              <tr className="">
+                <th className="hidden md:block border px-4 py-2">Type</th>
+                <th className="border px-4 py-2">Service</th>
+                <th className="border px-4 py-2">HTTP</th>
+                <th className="border px-4 py-2">WebSocket</th>
+                <th className="hidden md:block border px-4 py-2">Cron</th>
               </tr>
             </thead>
             <tbody>
               {deploymentData.map((row, index) => (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="hidden md:block border border-gray-300 px-4 py-2 font-medium">{row.type}</td>
-                  <td className="border border-gray-300 px-4 py-2">{row.service}</td>
-                  <td className="border border-gray-300 px-4 py-2">{row.http}</td>
-                  <td className="border border-gray-300 px-4 py-2">{row.websocket}</td>
-                  <td className="hidden md:block border border-gray-300 px-4 py-2">{row.cron}</td>
+                <tr key={index}>
+                  <td className="hidden md:block border px-4 py-2 font-medium">{row.type}</td>
+                  <td className="border px-4 py-2">{row.service}</td>
+                  <td className="border px-4 py-2">{row.http}</td>
+                  <td className="border px-4 py-2">{row.websocket}</td>
+                  <td className="hidden md:block border px-4 py-2">{row.cron}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-gray-600 mt-4">
+        <p className="text-sm mt-4">
           <strong>Legend:</strong> ✅ Supported | ⚠️ Beta Support | ❌ Not Supported
         </p>
       </div>
@@ -248,27 +260,31 @@ function DeploymentOptionsSection() {
 }
 
 function CodeExample({ wiring, func }) {
-  return <SyntaxHighlighter code={`${func}${'\n\n'}${wiring}`} language='typescript' className="bg-gray-100 p-4 rounded-lg" />
+  return <Code className="ex-bg-gray-100 p-4 rounded-lg">{`${func}${'\n\n'}${wiring}`}</Code>
+}
+
+export function CodeExamples() {
+  return <Tabs>
+    <TabItem value="http" label="HTTP" default>
+      <CodeExample wiring={codeSamples.http.wiring} func={codeSamples.http.function} />
+    </TabItem>
+    <TabItem value="cron" label="Scheduled">
+      <CodeExample wiring={codeSamples.scheduledTask.wiring} func={codeSamples.scheduledTask.function} />
+    </TabItem>
+    <TabItem value="websocket" label="WebSockets">
+      <CodeExample wiring={codeSamples.websocket.wiring} func={codeSamples.websocket.function} />
+    </TabItem>
+  </Tabs>
 }
 
 function CodeExamplesSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16">
       <div className="px-6 max-w-screen-lg mx-auto">
-        <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6 text-center">
+        <Heading as="h2" className="text-4xl font-semibold ex-text-gray-800 mb-6 text-center">
           Code Examples
         </Heading>
-        <Tabs>
-          <TabItem value="http" label="HTTP" default>
-            <CodeExample wiring={code.http.wiring} func={code.http.function} />
-          </TabItem>
-          <TabItem value="cron" label="Scheduled">
-          <CodeExample wiring={code.scheduledTask.wiring} func={code.scheduledTask.function} />
-          </TabItem>
-          <TabItem value="websocket" label="WebSockets">
-          <CodeExample wiring={code.websocket.wiring} func={code.websocket.function} />
-          </TabItem>
-        </Tabs>
+        <CodeExamples />
       </div>
     </section>
   );
@@ -276,16 +292,16 @@ function CodeExamplesSection() {
 
 function FAQSection() {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="container py-8">
       <div className="max-w-screen-lg mx-auto">
-        <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6 text-center">
+        <Heading as="h2" className="text-4xl font-semibold ex-text-gray-800 mb-6 text-center">
           Questions & Answers
         </Heading>
         <div className="px-6 space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white shadow p-6 rounded-lg">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">{faq.question}</h3>
-              <p className="text-gray-600">{faq.answer}</p>
+            <div key={index} className="shadow p-6 rounded-lg">
+              <h3 className="text-xl font-semibold ex-text-gray-800 mb-2">{faq.question}</h3>
+              <p className="ex-text-gray-600">{faq.answer}</p>
             </div>
           ))}
         </div>
@@ -296,20 +312,26 @@ function FAQSection() {
 
 function CallToActionSection() {
   return (
-    <section className="py-16 bg-white px-6">
+    <section className="py-16 container">
       <div className="max-w-screen-lg mx-auto text-center">
-        <Heading as="h2" className="text-4xl font-semibold text-gray-800 mb-6">
+        <Heading as="h2" className="text-4xl font-semibold ex-text-gray-800 mb-6">
           Get Involved with Vramework
         </Heading>
-        <p className="text-lg text-gray-600 font-medium mb-8">
+        <p className="text-lg font-medium mb-8">
           Start building with Vramework, explore our insights, or join the community to help shape the future of function-driven frameworks.
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Link
-            to="/docs/intro"
+            to="/getting-started"
             className="button button--primary button--lg"
           >
             Get Started
+          </Link>
+          <Link
+            to="/docs/intro"
+            className="button button--primary button--lg"
+          >
+            Docs
           </Link>
           <Link
             to="/blog"
@@ -319,7 +341,7 @@ function CallToActionSection() {
           </Link>
           <Link
             to="https://github.com/vramework/vramework"
-            className="button button--outline button--lg"
+            className="button button--secondary button--lg"
           >
             Contribute on GitHub
           </Link>
