@@ -1,9 +1,13 @@
 ---
-sidebar_position: 40
-title: Cloudflare Functions
+sidebar_position: 10
+title: AWS Lambda
 ---
 
-Deploying via Cloudflare Functions has not yet been implemented.
+The `@vramework/cloudflare` package is designed to map the workers to vramework. It supports websocket, HTTP and scheduled tasks.
 
-You can show interest or participate in the discussion for it [here](https://github.com/vramework/vramework/issues/48).
 
+:::info
+The documentation hasn't yet been updated. For now please refer to the starter-repo [here](https://github.com/vramework/workspace-starter/tree/master/backends/cloudflare)
+Join the discussion for it here [WIP](https://github.com/vramework/vramework.io/issues/48)
+ 🚧
+:::
