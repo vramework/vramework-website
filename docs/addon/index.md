@@ -42,9 +42,11 @@ Addons can include:
 - **Secrets and credentials** — schemas the consumer maps onto their own infrastructure
 - **Services** — singleton and wire services, built from the consumer's logger, variables and secrets
 - **Trigger sources** — event listeners the consumer wires to their own handlers
+- **Database tables** — DDL published with `pikku db export` and folded into the consumer's own migration history
 
 ## Where to Go Next
 
 - [Creating Addons](./creating.md) — scaffolding, services, contracts, publishing
 - [Consuming Addons](./consuming.md) — installing one and wiring what it declares
+- [Shipping Database Tables](./database.md) — an addon that needs tables, without creating any
 - [The addon surface](/docs/api-reference/addons) — every export available under `#pikku/addon/*`, door by door

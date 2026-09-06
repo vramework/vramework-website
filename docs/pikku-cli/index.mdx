@@ -247,7 +247,10 @@ npx pikku db generate   # Generate SQL migrations from detected schema changes
 npx pikku db seed       # Apply db/seed.sql to the dev database
 npx pikku db reset      # Wipe and recreate the dev database (migrate + seed)
 npx pikku db audit      # Report column classifications and flag columns with no anonymize strategy
+npx pikku db export     # Publish an addon's schema so a consumer can create its tables
 ```
+
+`db export` is run from an addon's build, not an application's — see [Shipping Database Tables](/docs/addon/database).
 
 ### `pikku binary`
 
