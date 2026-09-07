@@ -248,7 +248,9 @@ export default function Detail({ spec }: { spec: Spec }): React.ReactNode {
                   <Mark title={spec.title ?? spec.name} />
                   <span>
                     {spec.name}
-                    {spec.version && ` · v${spec.version}`}
+                    {/* Catalogue versions are mostly bare (`1.1.0`) but Google's are
+                        already prefixed (`v1beta1`), and `vv1beta1` reads as a typo. */}
+                    {spec.version && ` · ${/^v\d/.test(spec.version) ? '' : 'v'}${spec.version}`}
                   </span>
                 </span>
                 <H1>{spec.title ?? spec.name}</H1>
