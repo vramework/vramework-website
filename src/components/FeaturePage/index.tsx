@@ -20,6 +20,7 @@ import {
   RPCIcon, MCPIcon, CLIIcon, TriggerIcon, BotIcon, WorkflowIcon, GatewayIcon,
 } from '../WiringIcons';
 import { PaperPage, CodeCard } from '../PaperLayout';
+import { WireFanOut } from './WireFanOut';
 import styles from './feature-page.module.css';
 import snippetsMeta from '../../data/snippets-meta.json';
 import type {
@@ -83,7 +84,7 @@ function resolveIcon(name: string | undefined, size = 16, style?: React.CSSPrope
 
 /* ── collapseFunc: trim func: async body to // ... ──────── */
 
-function collapseFunc(code: string): string {
+export function collapseFunc(code: string): string {
   const lines = code.split('\n');
   const out: string[] = [];
   let inBody = false;
@@ -141,7 +142,7 @@ function renderCards(cards: CardItem[], columns = 3): React.ReactNode {
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: 16 }}>
+    <div className={styles.cardGrid} style={{ '--cols': columns } as React.CSSProperties}>
       {cards.map((c, i) => (
         <div key={i} className={styles.card} style={c.accentColor ? { borderTopWidth: 3, borderTopColor: c.accentColor } : undefined}>
           {c.icon && (
@@ -167,6 +168,10 @@ function renderCodeSpec(spec: CodeSpec): React.ReactNode {
       <CodeBlock language={spec.language ?? 'typescript'}>{code}</CodeBlock>
     </CodeCard>
   );
+}
+
+function isCode(col: ColContent): boolean {
+  return col.type === 'code' || col.type === 'codes';
 }
 
 function renderCol(col: ColContent): React.ReactNode {
@@ -235,7 +240,7 @@ function HeroRenderer({ s }: { s: HeroSection }) {
   const hasRight = !!s.right;
   return (
     <div className={styles.hero}>
-      <div className={styles.heroInner} style={!hasRight ? { gridTemplateColumns: '1fr', maxWidth: 720 } : undefined}>
+      <div className={`${styles.heroInner}${hasRight ? '' : ` ${styles.heroSolo}`}`}>
         <div>
           {s.badge && <span className={styles.badge}>{s.badge}</span>}
           <h1 className={styles.h1}>{parseText(s.h1)}</h1>
@@ -250,8 +255,8 @@ function HeroRenderer({ s }: { s: HeroSection }) {
         </div>
 
         {s.right?.type === 'wire-icon' && (
-          <div className={styles.heroIconBox}>
-            {(() => { const W = WIRE[s.right.name]; return W ? <W size={120} /> : null; })()}
+          <div className={styles.heroDiagram}>
+            <WireFanOut active={s.right.name} />
           </div>
         )}
 
@@ -267,13 +272,18 @@ function HeroRenderer({ s }: { s: HeroSection }) {
 
 function TwoColRenderer({ s }: { s: TwoColSection }) {
   useSectionAnchor(s.id);
+  // A lone code card fills the row so it ends level with the prose beside it.
+  // Two code cards are left alone: their lengths are unrelated, and stretching
+  // the shorter one only buys a tall panel of empty black.
+  const stretch = isCode(s.left) !== isCode(s.right);
+  const codeCol = (col: ColContent) => (stretch && isCode(col) ? styles.twoColCode : undefined);
   return (
     <section id={s.id} className={sectionClass(s.variant)}>
       <div className={styles.wrap}>
         <SectionHeader eyebrow={s.eyebrow} h2={s.h2} lead={s.lead} />
-        <div style={{ display: 'grid', gridTemplateColumns: s.columns ?? '1fr 1fr', gap: 40, alignItems: 'start' }}>
-          <div style={{ minWidth: 0 }}>{renderCol(s.left)}</div>
-          <div style={{ minWidth: 0 }}>{renderCol(s.right)}</div>
+        <div className={styles.twoCol} style={s.columns ? ({ '--cols': s.columns } as React.CSSProperties) : undefined}>
+          <div className={codeCol(s.left)}>{renderCol(s.left)}</div>
+          <div className={codeCol(s.right)}>{renderCol(s.right)}</div>
         </div>
         {s.below && <div style={{ marginTop: 32 }}>{renderCol(s.below)}</div>}
       </div>
@@ -316,7 +326,7 @@ function WideCodeRenderer({ s, flip = false }: { s: WideCodeSection; flip?: bool
             </div>
           </div>
         ) : (
-          <div style={{ maxWidth: 760 }}>{renderCodeSpec(s.code)}</div>
+          <div className={styles.wideSplitCode} style={{ maxWidth: 760 }}>{renderCodeSpec(s.code)}</div>
         )}
         {s.below && <div className={styles.wideBelow}>{renderCol(s.below)}</div>}
       </div>
@@ -333,7 +343,7 @@ function StepCardsRenderer({ s }: { s: StepCardsSection }) {
     <section id={s.id} className={sectionClass(s.variant)}>
       <div className={styles.wrap}>
         <SectionHeader eyebrow={s.eyebrow} h2={s.h2} lead={s.lead} />
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 14 }}>
+        <div className={styles.stepGrid} style={{ '--cols': cols } as React.CSSProperties}>
           {s.steps.map((step, i) => (
             <div key={i} className={styles.card}>
               <span className={styles.stepBadge} style={{ marginBottom: 10 }}>{i + 1}</span>
@@ -366,17 +376,22 @@ function CtaRenderer({ s }: { s: CtaSection }) {
   };
 
   return (
-    <section className={styles.sectionDark}>
+    <section className={styles.ctaSection}>
       <div className={styles.wrap}>
         <h2 className={styles.h2}>{parseText(s.h2)}</h2>
         {s.lead && <p className={styles.lead} style={{ marginBottom: 28 }}>{s.lead}</p>}
         {s.cmd && (
-          <div className={styles.cmdBlock} onClick={copy} style={{ paddingRight: 44 }}>
+          <button
+            className={styles.cmdBlock}
+            onClick={copy}
+            style={{ paddingRight: 44 }}
+            title={copied ? 'Copied' : 'Copy command'}
+          >
             <span className={styles.cmdPrompt}>$ </span>{s.cmd}
-            <button className={styles.copyBtn} onClick={e => { e.stopPropagation(); copy(); }} title="Copy">
+            <span className={styles.copyBtn} aria-hidden>
               {copied ? <Check size={13} /> : <Copy size={13} />}
-            </button>
-          </div>
+            </span>
+          </button>
         )}
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           {s.buttons.map((btn, i) => (
@@ -385,7 +400,7 @@ function CtaRenderer({ s }: { s: CtaSection }) {
               : <Link key={i} to={btn.to} className={styles.btnGhost}>{btn.label}</Link>
           ))}
         </div>
-        {s.footnote && <p style={{ marginTop: 24, fontSize: 13, color: '#9a9387' }}>{s.footnote}</p>}
+        {s.footnote && <p className={styles.ctaFootnote}>{s.footnote}</p>}
       </div>
     </section>
   );

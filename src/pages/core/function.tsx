@@ -111,13 +111,7 @@ function ThreeParamsSection() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'flex-start', gap: 48, marginBottom: 20, maxWidth: 820 }}>
-          <ArrowDown className="w-5 h-5" style={{ color: '#d4ccba' }} />
-          <ArrowDown className="w-5 h-5" style={{ color: '#d4ccba' }} />
-          <ArrowDown className="w-5 h-5" style={{ color: '#d4ccba' }} />
-        </div>
-
-        <div style={{ maxWidth: 580 }}>
+        <div style={{ maxWidth: 820 }}>
           <CodeCard sourceUrl={snippetSourceUrl('funcThreeParams')} filename="get-order.function.ts" badge="func.ts">
             <CodeBlock language="typescript">{threeParamsCode}</CodeBlock>
           </CodeCard>
@@ -149,7 +143,7 @@ function ServicesSection() {
           <p className={styles.lead}>Services are dependency-injected into every function. Register once, destructure anywhere.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, maxWidth: 900, alignItems: 'start' }}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 5fr) minmax(0, 7fr)', gap: 40, maxWidth: 1040, alignItems: 'start' }}
           className="lg:grid-cols-2 grid-cols-1">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {features.map((f) => (
@@ -211,7 +205,7 @@ function VersioningSection() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, maxWidth: 900, alignItems: 'start' }}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 5fr) minmax(0, 7fr)', gap: 40, maxWidth: 1040, alignItems: 'start' }}
           className="lg:grid-cols-2 grid-cols-1">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {steps.map((s) => (
@@ -293,7 +287,7 @@ function SessionSection() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, maxWidth: 900 }}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 20, maxWidth: 1040 }}
           className="lg:grid-cols-2 grid-cols-1">
           <CodeCard sourceUrl={snippetSourceUrl('sessionFunction')} filename="get-session.function.ts" badge="func.ts" icon={<Lock className="w-4 h-4" style={{ color: '#8a8475' }} />}>
             <CodeBlock language="typescript">{loginCode}</CodeBlock>
@@ -352,7 +346,7 @@ function EveryProtocolSection() {
           <code className={styles.protoCenterCode}>getBook(services, data, wire)</code>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, maxWidth: 900 }}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 20, maxWidth: 1040 }}
           className="lg:grid-cols-2 grid-cols-1">
           <CodeCard sourceUrl={snippetSourceUrl('getItem')} filename="getBook.func.ts" badge="func.ts">
             <CodeBlock language="typescript">{everyProtocolFunc}</CodeBlock>

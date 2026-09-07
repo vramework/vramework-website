@@ -65,6 +65,10 @@
   --paper-bg-alt:          #fffefb;   /* card / surface bg      */
   --paper-bg-dark:         #efece4;   /* footer / alt-section   */
 
+  /* --paper-accent is 2.6:1 on the dark ground — this is the same hue lifted
+     to 6.9:1 for accents that sit on --paper-code-bg. */
+  --paper-accent-on-dark:  #e8834a;
+
   /* Terminal widget backgrounds (dark, intentional) */
   --paper-code-bg:         #16140f;
   --paper-code-bg-bar:     #1f1c16;
