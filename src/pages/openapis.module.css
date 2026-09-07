@@ -1,0 +1,186 @@
+/* Browse page for the OpenAPI catalogue. Paper theme: the cards sit on the
+   cream ground the rest of the site uses, so the only strong colour is the
+   accent on a hovered card. */
+
+.notice {
+  font-size: 15px;
+  color: var(--paper-text-body);
+  padding: 28px 0;
+  margin: 0;
+}
+
+.notice code {
+  background: var(--paper-bg-dark);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 260px;
+  padding: 0 12px;
+  background: var(--paper-bg-alt);
+  border: 1px solid var(--paper-border);
+  border-radius: 8px;
+  color: var(--paper-text-muted);
+}
+
+.search {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 11px 0;
+  font: inherit;
+  font-size: 15px;
+  color: var(--paper-text);
+}
+
+.select {
+  flex: 0 1 auto;
+  max-width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--paper-text);
+  background: var(--paper-bg-alt);
+  border: 1px solid var(--paper-border);
+  border-radius: 8px;
+}
+
+.count {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--paper-text-muted);
+  margin: 0 0 16px;
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--paper-bg-alt);
+  border: 1px solid var(--paper-border);
+  border-radius: 10px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--paper-accent);
+  transform: translateY(-1px);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.logo,
+.logoFallback {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: var(--paper-bg);
+}
+
+.logoFallback {
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--paper-text-muted);
+  border: 1px solid var(--paper-border);
+}
+
+.cardTitles { min-width: 0; }
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--paper-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.provider {
+  font-size: 12px;
+  color: var(--paper-text-muted);
+  margin: 2px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardBody {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--paper-text-body);
+  margin: 0;
+  /* Descriptions vary wildly in length; three lines keeps the grid even. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 4px;
+  font-size: 12px;
+  color: var(--paper-text-muted);
+}
+
+.more {
+  display: block;
+  margin: 22px auto 0;
+  padding: 11px 22px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--paper-text);
+  background: var(--paper-bg-alt);
+  border: 1px solid var(--paper-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.more:hover { border-color: var(--paper-accent); }
+
+.footNote {
+  font-size: 15px;
+  color: var(--paper-text-body);
+  margin: 0;
+}
+
+.footNote a {
+  color: var(--paper-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

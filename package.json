@@ -17,7 +17,8 @@
     "sync-api-surface": "node scripts/generate-api-surface.mjs",
     "sync-submodules": "sh scripts/sync-submodules.sh",
     "install-hooks": "sh scripts/install-hooks.sh",
-    "screenshots": "node scripts/screenshots.mjs"
+    "screenshots": "node scripts/screenshots.mjs",
+    "sync-registry": "node scripts/generate-registry.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.2",
