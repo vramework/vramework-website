@@ -34,6 +34,7 @@ Errors related to Pikku configuration and schema generation.
 | PKU463 | Schema Reference Unresolved | [View](./pku463.md) |
 | PKU489 | Inline Schema           | [View](./pku489.md) |
 | PKU490 | Schema and Wiring Colocated | [View](./pku490.md) |
+| PKU491 | Schema Transform Not Supported | [View](./pku491.md) |
 
 ## HTTP Route & Auth Errors
 
@@ -62,6 +63,7 @@ Errors from `pikkuAgent` model and tool declarations.
 | PKU152 | Agent Tool Unknown Namespace | [View](./pku152.md) |
 | PKU153 | Agent Tool Not Found         | [View](./pku153.md) |
 | PKU154 | Agent Tool Missing Description | [View](./pku154.md) |
+| PKU155 | Agent Scorer Not Found       | [View](./pku155.md) |
 
 ## Addon Errors
 
@@ -71,6 +73,7 @@ Errors from `wireAddon` / `wireRemoteAddon` declarations and addon authoring rul
 | ------ | ------------------------------------ | ----------- |
 | PKU338 | Remote Addon Not a Dev Dependency    | [View](./pku338.md) |
 | PKU339 | Remote Addon Auth Unresolved         | [View](./pku339.md) |
+| PKU340 | Addon Not Installed                  | [View](./pku340.md) |
 | PKU920 | Addon Wiring Not Allowed             | [View](./pku920.md) |
 | PKU921 | Addon Contract Handlers Not Allowed  | [View](./pku921.md) |
 
@@ -86,10 +89,11 @@ Errors from `pikkuScenario` flows and their steps.
 | PKU678 | Scenario Step Target Not Static      | [View](./pku678.md) |
 | PKU679 | Scenario Not Extractable             | [View](./pku679.md) |
 | PKU680 | Scenario Has No Assertion            | [View](./pku680.md) |
+| PKU681 | Scenario Step Prose Names Its Actor  | [View](./pku681.md) |
 
 ## Secret Boundary Errors
 
-Errors and warnings from the secret-handling boundary. The revealed-secret sink scan (PKU953) runs only under `pikku all --security`.
+Errors and warnings from the secret-handling boundary. The sink scan (PKU953, PKU954) runs only under `pikku all --security`.
 
 | Code   | Description                | Link        |
 | ------ | -------------------------- | ----------- |
@@ -97,6 +101,7 @@ Errors and warnings from the secret-handling boundary. The revealed-secret sink 
 | PKU951 | Secret Not Declared        | [View](./pku951.md) |
 | PKU952 | Secret Key Not Static      | [View](./pku952.md) |
 | PKU953 | Secret Revealed Into Sink  | [View](./pku953.md) |
+| PKU954 | Personal Data Into Sink    | [View](./pku954.md) |
 
 ## Workflow Errors
 
@@ -155,6 +160,7 @@ Errors from `pikku versions` contract checking.
 | PKU498 | Dynamic Import in Function Body (lint)         | [View](./pku498.md) |
 | PKU717 | Duplicate @pikku/core Version                 | [View](./pku717.md) |
 | PKU718 | CLI / Core Version Skew                       | [View](./pku718.md) |
+| PKU719 | Split Type Identity                           | [View](./pku719.md) |
 | PKU724 | SingletonServices Type Unresolved             | [View](./pku724.md) |
 | PKU910 | PII in Output (data classification)           | [View](./pku910.md) |
 | PKU940 | RPC Invocation Type Cast                      | [View](./pku940.md) |
