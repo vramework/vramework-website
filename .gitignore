@@ -33,3 +33,9 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/plugins
 .pnp.*
+
+# Screenshot sweep (scripts/screenshots.mjs) — big, regenerable, not versioned
+/screenshots
+
+# Impeccable critique snapshots
+/.impeccable
