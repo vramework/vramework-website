@@ -1,27 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import type { Options } from 'asciinema-player';
 import 'asciinema-player/dist/bundle/asciinema-player.css';
 
 const sessions = {
     'installing': '/terminals/install.cast'
 }
 
-type AsciinemaPlayerProps = {
-    type: keyof typeof sessions,
-    // START asciinemaOptions
-    cols?: string;
-    rows?: string;
-    autoPlay?: boolean
-    preload?: boolean;
-    loop?: boolean | number;
-    startAt?: number | string;
-    speed?: number;
-    idleTimeLimit?: number;
-    theme?: string;
-    poster?: string;
-    fit?: string;
-    fontSize?: string;
-    // END asciinemaOptions
-};
+// Derived from the player's own Options rather than restated: the hand-kept
+// copy had drifted (cols/rows as string, fit as a bare string) and only the
+// typecheck noticed.
+type AsciinemaPlayerProps = { type: keyof typeof sessions } & Options;
 
 function AsciinemaPlayer({ type, ...asciinemaOptions }: AsciinemaPlayerProps) {
     const ref = useRef<HTMLDivElement>(null);
