@@ -32,6 +32,14 @@ type Addon = AddonEntry & {
 
 const PAGE = 60;
 
+/**
+ * Function descriptions come from the upstream API's own docs, which are
+ * markdown — links included. They render as plain text here, so flatten the
+ * link syntax to its label rather than showing `[text](https://…)`.
+ */
+const plain = (text: string) =>
+  text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/`([^`]*)`/g, '$1');
+
 // The namespace is the consumer's choice, but a plausible one makes the RPC
 // names on this page readable rather than abstract.
 const suggestedNamespace = (slug: string) =>
@@ -197,7 +205,7 @@ export default function Detail({ addon }: { addon: Addon }): React.ReactNode {
                         <span className={styles.tag}>sessionless</span>
                       )}
                     </div>
-                    {fn.description && <p className={styles.fnDesc}>{fn.description}</p>}
+                    {fn.description && <p className={styles.fnDesc}>{plain(fn.description)}</p>}
                     {(fn.input || fn.output) && (
                       <div className={styles.sig}>
                         {fn.input ?? 'void'}
