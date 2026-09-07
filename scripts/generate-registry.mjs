@@ -87,21 +87,6 @@ const readmeSummary = (dir) => {
   return paragraph.length ? paragraph.join(' ').replace(/\s+/g, ' ') : undefined
 }
 
-/**
- * A slug cannot carry brand casing, so `deepl` titleises to `Deepl`. The README
- * summary almost always spells the product properly — if it contains the same
- * letters, adopt its spelling rather than maintaining a list of brands here.
- */
-const brandCase = (title, description) => {
-  if (!description) return title
-  const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  for (const candidate of [title, title.replace(/\s+/g, '')]) {
-    const match = description.match(new RegExp(`(?<![\\w-])${escape(candidate)}(?![\\w-])`, 'i'))
-    if (match) return match[0]
-  }
-  return title
-}
-
 /** `mailer-lite` -> `Mailer Lite`, `aws-ses` -> `AWS SES`. */
 const UPPER = new Set(['aws', 'gcp', 'api', 'ai', 'crm', 'sms', 'ses', 'sns', 's3', 'db', 'ftp', 'id'])
 const titleise = (slug) =>
@@ -170,6 +155,11 @@ const collectAddons = (packagesDir) => {
       const pkg = readJson(join(dir, 'package.json'))
       if (!pkg?.name) continue
 
+      /* Every addon declares its own `addon.displayName` here — the brand as its
+         authors spell it (`DeepL`, `ElevenLabs`, `GitHub`). Trust that over
+         anything derived from the slug, which cannot carry inner capitals. */
+      const config = readJson(join(dir, 'pikku.config.json'))?.addon ?? {}
+
       const meta = join(dir, '.pikku/addon')
       const verbose = readJson(join(meta, 'function/pikku-functions-meta-verbose.gen.json')) ?? {}
       const plain = readJson(join(meta, 'function/pikku-functions-meta.gen.json')) ?? {}
@@ -195,6 +185,7 @@ const collectAddons = (packagesDir) => {
           displayName: secret.displayName,
           description: secret.description,
           secretId: secret.secretId,
+          optional: secret.optional ?? undefined,
         }))
         .sort((a, b) => a.name.localeCompare(b.name))
 
@@ -205,8 +196,8 @@ const collectAddons = (packagesDir) => {
         slug,
         category,
         version: pkg.version,
-        title: brandCase(titleise(slug), readmeSummary(dir)),
-        description: readmeSummary(dir),
+        title: config.displayName ?? titleise(slug),
+        description: readmeSummary(dir) ?? config.description,
         logo: svg ? `/addons/${slug}.svg` : undefined,
         functions,
         secrets,

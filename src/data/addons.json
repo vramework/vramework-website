@@ -2160,7 +2160,7 @@
       "slug": "binary",
       "category": "data",
       "version": "0.2.4",
-      "title": "binary",
+      "title": "Binary",
       "description": "Convert between binary file data (base64) and JSON, without any heavy parser dependencies. For format-specific parsing use `@pikku/addon-read-pdf`, `@pikku/addon-spreadsheet`, or `@pikku/addon-xml`.",
       "logo": "/addons/binary.svg",
       "functions": [
@@ -6553,7 +6553,7 @@
       "slug": "egoi",
       "category": "email",
       "version": "0.0.7",
-      "title": "Egoi",
+      "title": "E-goi",
       "description": "Consume the E-goi marketing API (contacts)",
       "logo": "/addons/egoi.svg",
       "functions": [
@@ -6732,7 +6732,8 @@
       "slug": "elevenlabs",
       "category": "ai",
       "version": "0.1.7",
-      "title": "Elevenlabs",
+      "title": "ElevenLabs",
+      "description": "ElevenLabs speech-to-text and text-to-speech",
       "logo": "/addons/elevenlabs.svg",
       "functions": [
         {
@@ -7197,7 +7198,7 @@
       "slug": "flyio",
       "category": "cloud",
       "version": "0.1.7",
-      "title": "Flyio",
+      "title": "Fly.io",
       "description": "Fly.io integration for Pikku",
       "logo": "/addons/flyio.svg",
       "functions": [
@@ -8309,7 +8310,7 @@
       "slug": "g-suite-admin",
       "category": "cloud",
       "version": "0.0.8",
-      "title": "G Suite Admin",
+      "title": "Google Workspace Admin",
       "description": "Manage Google Workspace users and groups via the Admin SDK Directory API",
       "logo": "/addons/g-suite-admin.svg",
       "functions": [
@@ -18880,7 +18881,7 @@
       "slug": "google-big-query",
       "category": "database",
       "version": "0.0.8",
-      "title": "Google Big Query",
+      "title": "Google BigQuery",
       "description": "Google BigQuery integration for Pikku",
       "logo": "/addons/google-big-query.svg",
       "functions": [
@@ -20399,7 +20400,7 @@
       "slug": "google-firebase-cloud-firestore",
       "category": "cloud",
       "version": "0.0.8",
-      "title": "Google Firebase Cloud Firestore",
+      "title": "Google Cloud Firestore",
       "description": "Interact with Google Firebase Cloud Firestore",
       "logo": "/addons/google-firebase-cloud-firestore.svg",
       "functions": [
@@ -20502,7 +20503,7 @@
       "slug": "google-firebase-realtime-database",
       "category": "database",
       "version": "0.0.7",
-      "title": "Google Firebase Realtime Database",
+      "title": "Firebase Realtime DB",
       "description": "firebase addon",
       "logo": "/addons/google-firebase-realtime-database.svg",
       "functions": [
@@ -21141,7 +21142,7 @@
       "slug": "hackernews",
       "category": "data",
       "version": "0.1.7",
-      "title": "Hackernews",
+      "title": "Hacker News",
       "description": "Hacker News API for stories, items, and users.",
       "logo": "/addons/hackernews.svg",
       "functions": [
@@ -21844,7 +21845,7 @@
       "slug": "html-extract",
       "category": "data",
       "version": "0.1.6",
-      "title": "Html Extract",
+      "title": "HTML Extract",
       "description": "Extract structured data from HTML using CSS selectors.",
       "logo": "/addons/html-extract.svg",
       "functions": [
@@ -22372,7 +22373,7 @@
       "slug": "icalendar",
       "category": "data",
       "version": "0.1.7",
-      "title": "iCalendar",
+      "title": "ICalendar",
       "description": "Generate iCalendar (.ics) files for events.",
       "logo": "/addons/icalendar.svg",
       "functions": [
@@ -22394,7 +22395,7 @@
       "slug": "imap",
       "category": "email",
       "version": "0.1.7",
-      "title": "IMAP",
+      "title": "IMAP Email",
       "description": "Read and manage emails via IMAP.",
       "logo": "/addons/imap.svg",
       "functions": [
@@ -33118,7 +33119,7 @@
       "slug": "microsoft-excel",
       "category": "documents",
       "version": "0.0.8",
-      "title": "Microsoft Excel",
+      "title": "Microsoft Excel (OneDrive)",
       "description": "Consume the Microsoft Excel API for workbooks stored in OneDrive",
       "logo": "/addons/microsoft-excel.svg",
       "functions": [
@@ -33341,7 +33342,7 @@
       "slug": "microsoft-one-drive",
       "category": "cloud",
       "version": "0.0.8",
-      "title": "Microsoft One Drive",
+      "title": "Microsoft OneDrive",
       "description": "Consume the Microsoft OneDrive API",
       "logo": "/addons/microsoft-one-drive.svg",
       "functions": [
@@ -40681,7 +40682,7 @@
       "slug": "monday-com",
       "category": "automation",
       "version": "0.0.7",
-      "title": "Monday Com",
+      "title": "Monday.com",
       "description": "Consume the Monday.com GraphQL API",
       "logo": "/addons/monday-com.svg",
       "functions": [
@@ -46390,7 +46391,7 @@
       "slug": "open-weather-map",
       "category": "data",
       "version": "0.0.7",
-      "title": "Open Weather Map",
+      "title": "OpenWeatherMap",
       "description": "Gets current and future weather information",
       "logo": "/addons/open-weather-map.svg",
       "functions": [
@@ -46962,6 +46963,7 @@
       "category": "database",
       "version": "0.2.3",
       "title": "Pinecone",
+      "description": "Vector search over a Pinecone index — embed a query and retrieve the nearest matches",
       "functions": [
         {
           "name": "ingest",
@@ -47028,7 +47030,7 @@
       "slug": "plentymarkets",
       "category": "ecommerce",
       "version": "0.2.3",
-      "title": "Plentymarkets",
+      "title": "PlentyMarkets",
       "description": "Plentymarkets e-commerce: orders, items, stock, warehouses, payments, and contacts.",
       "logo": "/addons/plentymarkets.svg",
       "functions": [
@@ -47527,7 +47529,7 @@
       "slug": "postgres",
       "category": "database",
       "version": "0.1.6",
-      "title": "Postgres",
+      "title": "PostgreSQL",
       "description": "PostgreSQL database operations.",
       "logo": "/addons/postgres.svg",
       "functions": [
@@ -47841,6 +47843,7 @@
       "category": "database",
       "version": "0.2.3",
       "title": "Qdrant",
+      "description": "Vector search over a Qdrant collection — embed a query and retrieve the nearest matches",
       "functions": [
         {
           "name": "ingest",
@@ -47907,7 +47910,7 @@
       "slug": "qrcode",
       "category": "data",
       "version": "0.1.7",
-      "title": "Qrcode",
+      "title": "QR Code",
       "description": "Generate and read QR codes.",
       "logo": "/addons/qrcode.svg",
       "functions": [
@@ -47988,7 +47991,7 @@
       "slug": "quickbase",
       "category": "database",
       "version": "0.0.7",
-      "title": "Quickbase",
+      "title": "Quick Base",
       "description": "Integrate with the Quick Base RESTful API",
       "functions": [
         {
@@ -48119,7 +48122,7 @@
       "slug": "quickbooks",
       "category": "payments",
       "version": "0.0.8",
-      "title": "QuickBooks",
+      "title": "QuickBooks Online",
       "description": "Consume the QuickBooks Online accounting API",
       "logo": "/addons/quickbooks.svg",
       "functions": [
@@ -48742,7 +48745,7 @@
       "slug": "read-pdf",
       "category": "data",
       "version": "0.1.7",
-      "title": "Read Pdf",
+      "title": "Read PDF",
       "description": "Extract text content from PDF files.",
       "logo": "/addons/read-pdf.svg",
       "functions": [
@@ -49290,7 +49293,7 @@
       "slug": "rss-feed",
       "category": "data",
       "version": "0.1.7",
-      "title": "Rss Feed",
+      "title": "RSS Feed",
       "description": "Parse RSS and Atom feeds.",
       "logo": "/addons/rss-feed.svg",
       "functions": [
@@ -55723,7 +55726,7 @@
       "slug": "stripe-commerce",
       "category": "payments",
       "version": "0.1.0",
-      "title": "Stripe Commerce",
+      "title": "Stripe Payments",
       "description": "A ready-made Stripe storefront: catalogue, cart, checkout, orders, fulfilment and refunds, with the tables it needs shipped as addon schema.",
       "logo": "/addons/stripe-commerce.svg",
       "functions": [
@@ -55937,7 +55940,8 @@
           "name": "webhook_secret",
           "displayName": "Stripe Webhook Signing Secret",
           "description": "Signing secret for the registered webhook endpoint. Absent, the receiver refuses every caller and payment state is only updated on redirect.",
-          "secretId": "STRIPE_WEBHOOK_SECRET"
+          "secretId": "STRIPE_WEBHOOK_SECRET",
+          "optional": true
         }
       ]
     },
@@ -58528,7 +58532,7 @@
       "slug": "twitter",
       "category": "communication",
       "version": "0.0.8",
-      "title": "Twitter",
+      "title": "X (Twitter)",
       "description": "Post, like, search tweets, send DMs, manage lists and users via the X API",
       "logo": "/addons/twitter.svg",
       "functions": [
@@ -59490,7 +59494,7 @@
       "slug": "whatsapp-baileys",
       "category": "communication",
       "version": "0.1.4",
-      "title": "Whatsapp Baileys",
+      "title": "WhatsApp (Baileys)",
       "description": "WhatsApp messaging via the unofficial [Baileys](https://github.com/WhiskeySockets/Baileys) Web client. Authenticate by scanning a QR code with your personal WhatsApp — no Business account needed.",
       "logo": "/addons/whatsapp-baileys.svg",
       "functions": [],

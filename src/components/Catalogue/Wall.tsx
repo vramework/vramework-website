@@ -65,9 +65,10 @@ export function Tile({ item }: { item: WallItem }): React.ReactNode {
     </>
   );
 
-  if (!item.href) return <div className={styles.tile}>{body}</div>;
+  // The name is clamped to two lines in the tile, so carry the full one.
+  if (!item.href) return <div className={styles.tile} title={item.title}>{body}</div>;
   return (
-    <Link className={styles.tile} to={item.href}>
+    <Link className={styles.tile} to={item.href} title={item.title}>
       {body}
     </Link>
   );
