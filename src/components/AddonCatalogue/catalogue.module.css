@@ -3,41 +3,22 @@
    one line per addon, counts in the margin. */
 
 /* ── masthead ─────────────────────────────────────────── */
-.masthead {
-  padding-bottom: 8px;
+.masthead { padding-bottom: 4px; }
+
+.mastheadTop {
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
 .tally {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 28px;
-  margin-top: 36px;
-  padding-top: 22px;
-  border-top: 1px solid var(--paper-border);
-}
-
-.tallyItem {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.tallyNum {
-  font-family: 'Newsreader', Georgia, serif;
-  font-size: 30px;
-  font-weight: 500;
-  letter-spacing: -0.5px;
-  color: var(--paper-text);
-  font-variant-numeric: tabular-nums;
-}
-
-.tallyLabel {
+  margin-left: auto;
+  padding-bottom: 10px;
   font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 12px;
   color: var(--paper-text-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .wireLine {
@@ -58,270 +39,6 @@
 .wireLine .tProp { color: var(--paper-code-light-prop); }
 .wireLine .tStr { color: var(--paper-code-light-str); }
 .wireLine .tPunct { color: var(--paper-code-light-punct); }
-
-/* ── two-column directory ─────────────────────────────── */
-.directory {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 56px;
-  align-items: start;
-  padding-bottom: 40px;
-}
-
-.rail {
-  position: sticky;
-  top: 84px;
-}
-
-.search {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--paper-border-strong);
-  border-radius: 6px;
-  background: var(--paper-bg);
-  color: var(--paper-text);
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-.search::placeholder { color: var(--paper-text-faint); }
-.search:focus {
-  outline: none;
-  border-color: var(--paper-accent);
-  box-shadow: var(--paper-accent-ring-sm);
-}
-
-.railHead {
-  margin: 26px 0 10px;
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--paper-text-muted);
-}
-
-.catList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-height: min(52vh, 520px);
-  overflow-y: auto;
-}
-
-.catBtn {
-  display: flex;
-  width: 100%;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 5px 8px;
-  border: 0;
-  border-radius: 5px;
-  background: transparent;
-  color: var(--paper-text-body);
-  font-family: 'Geist', sans-serif;
-  font-size: 13.5px;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.12s ease, color 0.12s ease;
-}
-.catBtn:hover { background: var(--paper-bg-alt); color: var(--paper-text); }
-.catBtn[aria-pressed='true'] {
-  background: var(--paper-accent-bg);
-  color: var(--paper-accent-darkest);
-  font-weight: 500;
-}
-.catBtn:focus-visible {
-  outline: 2px solid var(--paper-accent);
-  outline-offset: 1px;
-}
-
-.catCount {
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  color: var(--paper-text-faint);
-  font-variant-numeric: tabular-nums;
-}
-.catBtn[aria-pressed='true'] .catCount { color: var(--paper-accent-dark); }
-
-/* ── results ──────────────────────────────────────────── */
-.resultCount {
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--paper-text-muted);
-  margin-bottom: 6px;
-}
-
-.group + .group { margin-top: 40px; }
-
-.groupHead {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--paper-border-strong);
-}
-
-.groupName {
-  font-family: 'Newsreader', Georgia, serif;
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.4px;
-  color: var(--paper-text);
-  margin: 0;
-}
-
-.groupRule {
-  flex: 1;
-  height: 1px;
-}
-
-.groupCount {
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  color: var(--paper-text-faint);
-  font-variant-numeric: tabular-nums;
-}
-
-.ledger {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  padding: 13px 12px 13px 8px;
-  margin: 0 -12px 0 -8px;
-  border-bottom: 1px solid var(--paper-border);
-  border-radius: 6px;
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.14s ease, transform 0.14s ease;
-}
-.row:hover,
-.row:focus-visible {
-  background: var(--paper-bg-alt);
-  text-decoration: none;
-  color: inherit;
-  transform: translateX(3px);
-}
-.row:focus-visible {
-  outline: 2px solid var(--paper-accent);
-  outline-offset: -2px;
-}
-
-/* The one authored motion moment: the index sets itself as you land,
-   and re-settles when a filter changes the result set. */
-.row {
-  animation: settle 0.42s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
-  animation-delay: calc(var(--i, 0) * 22ms);
-}
-
-@keyframes settle {
-  from { opacity: 0; transform: translateY(7px); }
-  to   { opacity: 1; transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .row { animation: none; transition: background 0.14s ease; }
-  .row:hover, .row:focus-visible { transform: none; }
-}
-
-.mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--paper-border);
-  border-radius: 7px;
-  background: var(--paper-bg);
-  overflow: hidden;
-}
-.mark img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.initials {
-  font-family: 'Geist Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--paper-text-muted);
-}
-
-.rowMain { min-width: 0; }
-
-.rowTitle {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 9px;
-  font-family: 'Geist', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--paper-text);
-}
-
-.pkg {
-  font-family: 'Geist Mono', monospace;
-  font-size: 11.5px;
-  font-weight: 400;
-  color: var(--paper-text-faint);
-}
-
-.rowDesc {
-  display: block;
-  margin-top: 3px;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--paper-text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.rowCount {
-  font-family: 'Geist Mono', monospace;
-  font-size: 12px;
-  color: var(--paper-text-faint);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.empty {
-  padding: 64px 0;
-  text-align: center;
-}
-.emptyTitle {
-  font-family: 'Newsreader', Georgia, serif;
-  font-size: 24px;
-  color: var(--paper-text);
-  margin: 0 0 8px;
-}
-.emptyBody {
-  font-size: 14px;
-  color: var(--paper-text-muted);
-  margin: 0;
-}
-.reset {
-  margin-top: 18px;
-  padding: 8px 16px;
-  border: 1px solid var(--paper-border-strong);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--paper-text-body);
-  font-family: 'Geist', sans-serif;
-  font-size: 13.5px;
-  cursor: pointer;
-}
-.reset:hover { background: var(--paper-bg-alt); }
 
 /* ── detail page ──────────────────────────────────────── */
 .back {
@@ -344,18 +61,6 @@
   gap: 22px;
 }
 
-.markLarge {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 68px;
-  height: 68px;
-  border: 1px solid var(--paper-border);
-  border-radius: 14px;
-  background: var(--paper-bg);
-}
-.markLarge img { width: 40px; height: 40px; object-fit: contain; }
-.markLarge .initials { font-size: 22px; }
 
 .detailTitle {
   font-family: 'Newsreader', Georgia, serif;
@@ -542,6 +247,4 @@
   .rowCount { grid-column: 2; }
   .mark { width: 30px; height: 30px; }
   .detailHead { gap: 16px; }
-  .markLarge { width: 52px; height: 52px; border-radius: 11px; }
-  .markLarge img { width: 30px; height: 30px; }
 }

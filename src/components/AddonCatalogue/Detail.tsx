@@ -3,7 +3,8 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import CodeBlock from '@theme/CodeBlock';
 import { PaperPage, Section, Wrap } from '@site/src/components/PaperLayout';
-import { Mark, type AddonEntry } from './Browse';
+import { Mark, wall } from '@site/src/components/Catalogue/Wall';
+import type { AddonEntry } from './Browse';
 import styles from './catalogue.module.css';
 
 type AddonFunction = {
@@ -78,7 +79,7 @@ export default function Detail({ addon }: { addon: Addon }): React.ReactNode {
               </Link>
 
               <div className={styles.detailHead}>
-                <Mark addon={addon} large />
+                <Mark title={addon.title} logo={addon.logo} large />
                 <div>
                   <h1 className={styles.detailTitle}>{addon.title}</h1>
                   <div className={styles.detailMeta}>
@@ -169,7 +170,7 @@ export default function Detail({ addon }: { addon: Addon }): React.ReactNode {
             {functions.length > PAGE && (
               <input
                 type="search"
-                className={styles.search}
+                className={wall.search}
                 style={{ maxWidth: 320, marginBottom: 20 }}
                 placeholder="Filter functions…"
                 value={query}
@@ -182,7 +183,7 @@ export default function Detail({ addon }: { addon: Addon }): React.ReactNode {
             )}
 
             {matches.length === 0 ? (
-              <p className={styles.emptyBody}>No function matches “{query}”.</p>
+              <p className={wall.emptyBody}>No function matches “{query}”.</p>
             ) : (
               <ul className={styles.fnList}>
                 {visible.map((fn) => (
@@ -212,7 +213,7 @@ export default function Detail({ addon }: { addon: Addon }): React.ReactNode {
             {shown < matches.length && (
               <button
                 type="button"
-                className={styles.moreBtn}
+                className={wall.moreBtn}
                 onClick={() => setShown(shown + PAGE * 4)}
               >
                 Show {Math.min(PAGE * 4, matches.length - shown)} more

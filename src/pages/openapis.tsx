@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { PaperPage, Section, Wrap, H1, Lead } from '../components/PaperLayout';
-import { Search, ExternalLink } from 'lucide-react';
+import { Chips, Tiles, wall, type WallItem } from '../components/Catalogue/Wall';
 import styles from './openapis.module.css';
 
 /* The catalogue is vendored to static/registry/openapis.json by
@@ -29,7 +30,9 @@ interface Catalogue {
 
 type Status = 'loading' | 'ready' | 'empty' | 'error';
 
-const PAGE_SIZE = 48;
+const PAGE_SIZE = 96;
+/** More categories than this and the chip row stops being scannable. */
+const CHIP_LIMIT = 14;
 
 export default function OpenApis(): React.ReactNode {
   const url = useBaseUrl('/registry/openapis.json');
@@ -37,7 +40,7 @@ export default function OpenApis(): React.ReactNode {
   const [data, setData] = useState<Catalogue>({ apis: [], providers: [] });
   const [query, setQuery] = useState('');
   const [provider, setProvider] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState<string | null>(null);
   const [shown, setShown] = useState(PAGE_SIZE);
 
   useEffect(() => {
@@ -58,12 +61,15 @@ export default function OpenApis(): React.ReactNode {
     };
   }, [url]);
 
-  const categories = useMemo(() => {
+  const groups = useMemo(() => {
     const counts = new Map<string, number>();
     for (const api of data.apis) {
       for (const name of api.categories ?? []) counts.set(name, (counts.get(name) ?? 0) + 1);
     }
-    return [...counts.entries()].sort((a, b) => b[1] - a[1]);
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, CHIP_LIMIT)
+      .map(([key, count]) => ({ key, label: key.replace(/_/g, ' '), count }));
   }, [data.apis]);
 
   const results = useMemo(() => {
@@ -83,6 +89,15 @@ export default function OpenApis(): React.ReactNode {
   // A new filter should show the top of its results, not page 4 of the old ones.
   useEffect(() => setShown(PAGE_SIZE), [query, provider, category]);
 
+  const items: WallItem[] = results.slice(0, shown).map((api) => ({
+    id: api.id ?? api.name,
+    title: api.title ?? api.name,
+    subtitle: api.provider,
+    count: api.operations,
+    logo: api.logo,
+    externalLogo: true,
+  }));
+
   return (
     <Layout
       title="OpenAPI Catalogue"
@@ -91,13 +106,20 @@ export default function OpenApis(): React.ReactNode {
       <PaperPage>
         <Section>
           <Wrap wide>
-            <H1>
-              Every API, <em>already typed</em>
-            </H1>
+            <div className={styles.mastheadTop}>
+              <H1>
+                Every API, <em>already typed</em>
+              </H1>
+              {status === 'ready' && (
+                <span className={styles.tally}>
+                  {data.apis.length.toLocaleString()} specs ·{' '}
+                  {data.providers.length.toLocaleString()} providers
+                </span>
+              )}
+            </div>
             <Lead>
-              {status === 'ready'
-                ? `${data.apis.length.toLocaleString()} OpenAPI specifications from ${data.providers.length.toLocaleString()} providers. Point pikku at one and it generates the functions, the types and the secrets for you.`
-                : 'OpenAPI specifications pikku can generate typed functions from — point it at one and it writes the functions, the types and the secrets for you.'}
+              OpenAPI specifications pikku can generate typed functions from — point it
+              at one and it writes the functions, the types and the secrets for you.
             </Lead>
           </Wrap>
         </Section>
@@ -122,18 +144,15 @@ export default function OpenApis(): React.ReactNode {
 
             {status === 'ready' && (
               <>
-                <div className={styles.controls}>
-                  <label className={styles.searchWrap}>
-                    <Search size={16} aria-hidden />
-                    <input
-                      className={styles.search}
-                      type="search"
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                      placeholder="Search by name or provider…"
-                      aria-label="Search the OpenAPI catalogue"
-                    />
-                  </label>
+                <div className={wall.controls}>
+                  <input
+                    className={wall.search}
+                    type="search"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search by name or provider…"
+                    aria-label="Search the OpenAPI catalogue"
+                  />
 
                   <select
                     className={styles.select}
@@ -149,68 +168,50 @@ export default function OpenApis(): React.ReactNode {
                     ))}
                   </select>
 
-                  <select
-                    className={styles.select}
-                    value={category}
-                    onChange={(event) => setCategory(event.target.value)}
-                    aria-label="Filter by category"
-                  >
-                    <option value="">All categories</option>
-                    {categories.map(([name, count]) => (
-                      <option key={name} value={name}>
-                        {name.replace(/_/g, ' ')} ({count})
-                      </option>
-                    ))}
-                  </select>
+                  <p className={wall.resultCount} aria-live="polite">
+                    {results.length.toLocaleString()}{' '}
+                    {results.length === 1 ? 'specification' : 'specifications'}
+                  </p>
                 </div>
 
-                <p className={styles.count} role="status">
-                  {results.length.toLocaleString()}{' '}
-                  {results.length === 1 ? 'specification' : 'specifications'}
-                </p>
+                <Chips
+                  groups={groups}
+                  active={category}
+                  total={data.apis.length}
+                  onChange={setCategory}
+                />
 
-                <ul className={styles.grid}>
-                  {results.slice(0, shown).map((api) => (
-                    <li key={api.id ?? api.name} className={styles.card}>
-                      <div className={styles.cardHead}>
-                        {api.logo ? (
-                          <img className={styles.logo} src={api.logo} alt="" loading="lazy" />
-                        ) : (
-                          <span className={styles.logoFallback} aria-hidden>
-                            {(api.title ?? api.name ?? '?').slice(0, 1).toUpperCase()}
-                          </span>
-                        )}
-                        <div className={styles.cardTitles}>
-                          <h3 className={styles.cardTitle}>{api.title ?? api.name}</h3>
-                          {api.provider && <p className={styles.provider}>{api.provider}</p>}
-                        </div>
-                      </div>
-                      {api.description && <p className={styles.cardBody}>{api.description}</p>}
-                      <div className={styles.meta}>
-                        {typeof api.operations === 'number' && (
-                          <span>
-                            {api.operations} {api.operations === 1 ? 'operation' : 'operations'}
-                          </span>
-                        )}
-                        {api.version && <span>v{api.version}</span>}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                {results.length === 0 && (
-                  <p className={styles.notice}>
-                    Nothing matches that. Try a shorter search, or clear the filters.
-                  </p>
+                {results.length === 0 ? (
+                  <div className={wall.empty}>
+                    <p className={wall.emptyTitle}>Nothing matches that.</p>
+                    <p className={wall.emptyBody}>
+                      Try a shorter search, or clear the filters.
+                    </p>
+                    <button
+                      type="button"
+                      className={wall.reset}
+                      onClick={() => {
+                        setQuery('');
+                        setProvider('');
+                        setCategory(null);
+                      }}
+                    >
+                      Clear filters
+                    </button>
+                  </div>
+                ) : (
+                  <div style={{ marginTop: 26 }}>
+                    <Tiles items={items} />
+                  </div>
                 )}
 
                 {shown < results.length && (
                   <button
                     type="button"
-                    className={styles.more}
+                    className={wall.moreBtn}
                     onClick={() => setShown((count) => count + PAGE_SIZE)}
                   >
-                    Show {Math.min(PAGE_SIZE, results.length - shown)} more
+                    Show {Math.min(PAGE_SIZE, results.length - shown).toLocaleString()} more
                   </button>
                 )}
               </>
@@ -222,9 +223,7 @@ export default function OpenApis(): React.ReactNode {
           <Wrap>
             <p className={styles.footNote}>
               Looking for ready-made function packages instead?{' '}
-              <a href="/docs/addons">
-                Browse the addon catalogue <ExternalLink size={14} aria-hidden />
-              </a>
+              <Link to="/addons">Browse the addon catalogue</Link>
             </p>
           </Wrap>
         </Section>
