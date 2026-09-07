@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { PaperPage, Section, Wrap, Eyebrow, H1, Lead } from '../components/PaperLayout';
+import { PaperPage, Section, Wrap, H1, Lead } from '../components/PaperLayout';
 import { Search, ExternalLink } from 'lucide-react';
 import styles from './openapis.module.css';
 
@@ -91,7 +91,6 @@ export default function OpenApis(): React.ReactNode {
       <PaperPage>
         <Section>
           <Wrap wide>
-            <Eyebrow>Catalogue</Eyebrow>
             <H1>
               Every API, <em>already typed</em>
             </H1>

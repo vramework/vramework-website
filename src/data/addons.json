@@ -539,7 +539,7 @@
       "slug": "amqp",
       "category": "communication",
       "version": "0.0.7",
-      "title": "Amqp",
+      "title": "AMQP",
       "description": "AMQP sender integration for Pikku",
       "logo": "/addons/amqp.svg",
       "functions": [
@@ -839,7 +839,7 @@
       "slug": "assemblyai",
       "category": "ai",
       "version": "0.1.7",
-      "title": "Assemblyai",
+      "title": "AssemblyAI",
       "description": "Speech-to-text transcription via AssemblyAI.",
       "logo": "/addons/assemblyai.svg",
       "functions": [
@@ -1314,7 +1314,7 @@
       "slug": "aws-lambda",
       "category": "cloud",
       "version": "0.0.7",
-      "title": "AWS Lambda",
+      "title": "awslambda",
       "description": "awslambda addon",
       "logo": "/addons/aws-lambda.svg",
       "functions": [
@@ -1662,7 +1662,7 @@
       "slug": "aws-sns",
       "category": "communication",
       "version": "0.0.7",
-      "title": "AWS SNS",
+      "title": "awssns",
       "description": "awssns addon",
       "logo": "/addons/aws-sns.svg",
       "functions": [
@@ -1686,7 +1686,7 @@
       "slug": "aws-sqs",
       "category": "communication",
       "version": "0.0.7",
-      "title": "AWS Sqs",
+      "title": "awssqs",
       "description": "awssqs addon",
       "logo": "/addons/aws-sqs.svg",
       "functions": [
@@ -1770,7 +1770,7 @@
       "slug": "bamboo-hr",
       "category": "crm",
       "version": "0.0.7",
-      "title": "Bamboo Hr",
+      "title": "BambooHR",
       "description": "Consume the BambooHR HR API",
       "functions": [
         {
@@ -2160,8 +2160,8 @@
       "slug": "binary",
       "category": "data",
       "version": "0.2.4",
-      "title": "Binary",
-      "description": "Convert between binary file data (base64) and JSON, without any heavy parser",
+      "title": "binary",
+      "description": "Convert between binary file data (base64) and JSON, without any heavy parser dependencies. For format-specific parsing use `@pikku/addon-read-pdf`, `@pikku/addon-spreadsheet`, or `@pikku/addon-xml`.",
       "logo": "/addons/binary.svg",
       "functions": [
         {
@@ -2222,7 +2222,7 @@
       "slug": "bitly",
       "category": "automation",
       "version": "0.0.7",
-      "title": "Bitly",
+      "title": "bitly",
       "description": "bitly addon",
       "logo": "/addons/bitly.svg",
       "functions": [
@@ -2555,7 +2555,7 @@
       "slug": "clickup",
       "category": "automation",
       "version": "0.0.7",
-      "title": "Clickup",
+      "title": "ClickUp",
       "description": "Consume the ClickUp API",
       "logo": "/addons/clickup.svg",
       "functions": [
@@ -3485,7 +3485,7 @@
       "slug": "coingecko",
       "category": "crypto",
       "version": "0.1.6",
-      "title": "Coingecko",
+      "title": "CoinGecko",
       "description": "Cryptocurrency prices and market data via CoinGecko.",
       "logo": "/addons/coingecko.svg",
       "functions": [
@@ -3611,7 +3611,7 @@
       "slug": "convertkit",
       "category": "email",
       "version": "0.0.7",
-      "title": "Convertkit",
+      "title": "ConvertKit",
       "description": "Consume the ConvertKit API",
       "logo": "/addons/convertkit.svg",
       "functions": [
@@ -4266,7 +4266,7 @@
       "slug": "cratedb",
       "category": "database",
       "version": "0.0.7",
-      "title": "Cratedb",
+      "title": "CrateDB",
       "description": "Add and update data in CrateDB",
       "logo": "/addons/cratedb.svg",
       "functions": [
@@ -4314,7 +4314,7 @@
       "slug": "deepl",
       "category": "ai",
       "version": "0.1.6",
-      "title": "Deepl",
+      "title": "DeepL",
       "description": "Text translation via DeepL.",
       "logo": "/addons/deepl.svg",
       "functions": [
@@ -4357,7 +4357,7 @@
       "slug": "dhl",
       "category": "data",
       "version": "0.0.7",
-      "title": "Dhl",
+      "title": "DHL",
       "description": "DHL addon",
       "logo": "/addons/dhl.svg",
       "functions": [
@@ -4721,7 +4721,7 @@
       "slug": "docraptor",
       "category": "documents",
       "version": "0.1.6",
-      "title": "Docraptor",
+      "title": "DocRaptor",
       "description": "PDF and Excel document generation via DocRaptor.",
       "logo": "/addons/docraptor.svg",
       "functions": [
@@ -6938,7 +6938,7 @@
       "slug": "erpnext",
       "category": "crm",
       "version": "0.0.7",
-      "title": "Erpnext",
+      "title": "ERPNext",
       "description": "Consume the ERPNext REST API",
       "logo": "/addons/erpnext.svg",
       "functions": [
@@ -7011,7 +7011,7 @@
       "category": "devops",
       "version": "0.2.4",
       "title": "Execution",
-      "description": "Run shell commands and spawn processes from a Pikku workflow, capturing",
+      "description": "Run shell commands and spawn processes from a Pikku workflow, capturing `stdout`, `stderr`, and the process `exitCode`. Dependency-free — built on Node's `child_process`.",
       "logo": "/addons/execution.svg",
       "functions": [
         {
@@ -7090,7 +7090,7 @@
       "slug": "filemaker",
       "category": "database",
       "version": "0.0.7",
-      "title": "Filemaker",
+      "title": "FileMaker",
       "description": "Retrieve and manage data via the FileMaker Data API",
       "functions": [
         {
@@ -8816,7 +8816,7 @@
       "slug": "github",
       "category": "devops",
       "version": "0.1.8",
-      "title": "Github",
+      "title": "GitHub",
       "description": "GitHub integration for Pikku",
       "logo": "/addons/github.svg",
       "functions": [
@@ -18250,7 +18250,7 @@
       "slug": "gitlab",
       "category": "devops",
       "version": "0.1.7",
-      "title": "Gitlab",
+      "title": "GitLab",
       "description": "Interact with the GitLab API",
       "logo": "/addons/gitlab.svg",
       "functions": [
@@ -21802,7 +21802,7 @@
       "slug": "html",
       "category": "data",
       "version": "0.1.6",
-      "title": "Html",
+      "title": "HTML",
       "description": "Convert HTML to text, markdown, or structured tables.",
       "logo": "/addons/html.svg",
       "functions": [
@@ -21866,7 +21866,7 @@
       "slug": "hubspot",
       "category": "crm",
       "version": "0.1.6",
-      "title": "Hubspot",
+      "title": "HubSpot",
       "description": "HubSpot CRM for contacts, companies, deals, tickets, and engagements.",
       "logo": "/addons/hubspot.svg",
       "functions": [
@@ -22372,7 +22372,7 @@
       "slug": "icalendar",
       "category": "data",
       "version": "0.1.7",
-      "title": "Icalendar",
+      "title": "iCalendar",
       "description": "Generate iCalendar (.ics) files for events.",
       "logo": "/addons/icalendar.svg",
       "functions": [
@@ -22394,7 +22394,7 @@
       "slug": "imap",
       "category": "email",
       "version": "0.1.7",
-      "title": "Imap",
+      "title": "IMAP",
       "description": "Read and manage emails via IMAP.",
       "logo": "/addons/imap.svg",
       "functions": [
@@ -28243,7 +28243,7 @@
       "slug": "jotform",
       "category": "forms",
       "version": "0.1.6",
-      "title": "Jotform",
+      "title": "JotForm",
       "description": "JotForm forms and submissions.",
       "logo": "/addons/jotform.svg",
       "functions": [
@@ -28743,7 +28743,7 @@
       "slug": "ldap",
       "category": "infrastructure",
       "version": "0.1.6",
-      "title": "Ldap",
+      "title": "LDAP",
       "description": "LDAP directory operations.",
       "logo": "/addons/ldap.svg",
       "functions": [
@@ -29096,7 +29096,7 @@
       "slug": "lingvanex",
       "category": "ai",
       "version": "0.0.7",
-      "title": "Lingvanex",
+      "title": "LingvaNex",
       "description": "Consume the LingvaNex translation API",
       "functions": [
         {
@@ -29119,7 +29119,7 @@
       "slug": "linkedin",
       "category": "communication",
       "version": "0.0.8",
-      "title": "Linkedin",
+      "title": "LinkedIn",
       "description": "Consume LinkedIn API",
       "logo": "/addons/linkedin.svg",
       "functions": [
@@ -29354,7 +29354,7 @@
       "slug": "mailer-lite",
       "category": "email",
       "version": "0.0.7",
-      "title": "Mailer Lite",
+      "title": "MailerLite",
       "description": "Consume the MailerLite email marketing API",
       "logo": "/addons/mailer-lite.svg",
       "functions": [
@@ -29593,7 +29593,7 @@
       "category": "data",
       "version": "0.2.4",
       "title": "Math",
-      "description": "Evaluate mathematical expressions, take symbolic derivatives, and simplify",
+      "description": "Evaluate mathematical expressions, take symbolic derivatives, and simplify algebraically — powered by [mathjs](https://mathjs.org). Covers arithmetic, trigonometry, units, and calculus. No external services or API keys.",
       "logo": "/addons/math.svg",
       "functions": [
         {
@@ -40139,7 +40139,7 @@
       "slug": "microsoft-sql",
       "category": "database",
       "version": "0.0.7",
-      "title": "Microsoft Sql",
+      "title": "microsoftsql",
       "description": "microsoftsql addon",
       "logo": "/addons/microsoft-sql.svg",
       "functions": [
@@ -40645,7 +40645,7 @@
       "slug": "mocean",
       "category": "communication",
       "version": "0.0.7",
-      "title": "Mocean",
+      "title": "mocean",
       "description": "mocean addon",
       "logo": "/addons/mocean.svg",
       "functions": [
@@ -40909,7 +40909,7 @@
       "slug": "mongodb",
       "category": "database",
       "version": "0.1.6",
-      "title": "Mongodb",
+      "title": "MongoDB",
       "description": "MongoDB database operations.",
       "logo": "/addons/mongodb.svg",
       "functions": [
@@ -41060,7 +41060,7 @@
       "slug": "mqtt",
       "category": "communication",
       "version": "0.0.7",
-      "title": "Mqtt",
+      "title": "MQTT",
       "description": "Publish messages to an MQTT broker",
       "logo": "/addons/mqtt.svg",
       "functions": [
@@ -41084,7 +41084,7 @@
       "slug": "msg91",
       "category": "communication",
       "version": "0.0.7",
-      "title": "Msg91",
+      "title": "MSG91",
       "description": "MSG91 addon",
       "logo": "/addons/msg91.svg",
       "functions": [
@@ -41108,7 +41108,7 @@
       "slug": "mysql",
       "category": "database",
       "version": "0.1.6",
-      "title": "Mysql",
+      "title": "MySQL",
       "description": "MySQL database operations.",
       "logo": "/addons/mysql.svg",
       "functions": [
@@ -41283,7 +41283,7 @@
       "slug": "nasa",
       "category": "data",
       "version": "0.0.7",
-      "title": "Nasa",
+      "title": "NASA",
       "description": "Retrieve data from the NASA API",
       "logo": "/addons/nasa.svg",
       "functions": [
@@ -41691,7 +41691,7 @@
       "slug": "nocodb",
       "category": "database",
       "version": "0.0.7",
-      "title": "Nocodb",
+      "title": "NocoDB",
       "description": "NocoDB integration for Pikku",
       "logo": "/addons/nocodb.svg",
       "functions": [
@@ -46367,7 +46367,7 @@
       "slug": "open-thesaurus",
       "category": "esoteric",
       "version": "0.0.7",
-      "title": "Open Thesaurus",
+      "title": "openthesaurus",
       "description": "openthesaurus addon",
       "functions": [
         {
@@ -46426,7 +46426,7 @@
       "slug": "openai",
       "category": "ai",
       "version": "0.2.3",
-      "title": "Openai",
+      "title": "OpenAI",
       "description": "OpenAI API for chat, images, moderation, and embeddings.",
       "logo": "/addons/openai.svg",
       "functions": [
@@ -46728,7 +46728,7 @@
       "slug": "pagerduty",
       "category": "monitoring",
       "version": "0.1.6",
-      "title": "Pagerduty",
+      "title": "PagerDuty",
       "description": "PagerDuty incident and service management.",
       "logo": "/addons/pagerduty.svg",
       "functions": [
@@ -46901,7 +46901,7 @@
       "slug": "philips-hue",
       "category": "infrastructure",
       "version": "0.0.7",
-      "title": "Philips Hue",
+      "title": "philipshue",
       "description": "philipshue addon",
       "logo": "/addons/philips-hue.svg",
       "functions": [
@@ -47444,7 +47444,7 @@
       "slug": "postbin",
       "category": "data",
       "version": "0.0.7",
-      "title": "Postbin",
+      "title": "PostBin",
       "description": "Consume the PostBin API",
       "logo": "/addons/postbin.svg",
       "functions": [
@@ -47713,7 +47713,7 @@
       "slug": "posthog",
       "category": "analytics",
       "version": "0.1.6",
-      "title": "Posthog",
+      "title": "PostHog",
       "description": "PostHog product analytics.",
       "logo": "/addons/posthog.svg",
       "functions": [
@@ -47953,7 +47953,7 @@
       "slug": "quest-db",
       "category": "database",
       "version": "0.0.7",
-      "title": "Quest DB",
+      "title": "questdb",
       "description": "questdb addon",
       "functions": [
         {
@@ -48119,7 +48119,7 @@
       "slug": "quickbooks",
       "category": "payments",
       "version": "0.0.8",
-      "title": "Quickbooks",
+      "title": "QuickBooks",
       "description": "Consume the QuickBooks Online accounting API",
       "logo": "/addons/quickbooks.svg",
       "functions": [
@@ -48510,7 +48510,7 @@
       "slug": "quickchart",
       "category": "media",
       "version": "0.1.7",
-      "title": "Quickchart",
+      "title": "QuickChart",
       "description": "Create chart images via the QuickChart API",
       "logo": "/addons/quickchart.svg",
       "functions": [
@@ -48534,7 +48534,7 @@
       "slug": "rabbitmq",
       "category": "communication",
       "version": "0.0.7",
-      "title": "Rabbitmq",
+      "title": "rabbitmq",
       "description": "rabbitmq addon",
       "logo": "/addons/rabbitmq.svg",
       "functions": [
@@ -49230,7 +49230,7 @@
       "slug": "rocketchat",
       "category": "communication",
       "version": "0.0.7",
-      "title": "Rocketchat",
+      "title": "RocketChat",
       "description": "RocketChat integration for Pikku",
       "logo": "/addons/rocketchat.svg",
       "functions": [
@@ -50221,7 +50221,7 @@
       "slug": "security-scorecard",
       "category": "monitoring",
       "version": "0.0.7",
-      "title": "Security Scorecard",
+      "title": "SecurityScorecard",
       "description": "SecurityScorecard addon",
       "logo": "/addons/security-scorecard.svg",
       "functions": [
@@ -50502,7 +50502,7 @@
       "slug": "sendgrid",
       "category": "email",
       "version": "0.1.7",
-      "title": "Sendgrid",
+      "title": "SendGrid",
       "description": "SendGrid email delivery and contact management.",
       "logo": "/addons/sendgrid.svg",
       "functions": [
@@ -50863,7 +50863,7 @@
       "slug": "servicenow",
       "category": "crm",
       "version": "0.0.7",
-      "title": "Servicenow",
+      "title": "ServiceNow",
       "description": "Consume the ServiceNow ITSM API",
       "logo": "/addons/servicenow.svg",
       "functions": [
@@ -51398,7 +51398,7 @@
       "slug": "signl4",
       "category": "monitoring",
       "version": "0.0.7",
-      "title": "Signl4",
+      "title": "SIGNL4",
       "description": "Send and resolve SIGNL4 alerts",
       "functions": [
         {
@@ -54684,7 +54684,7 @@
       "slug": "ssh",
       "category": "infrastructure",
       "version": "0.1.7",
-      "title": "Ssh",
+      "title": "SSH",
       "description": "SSH remote command execution and file transfer.",
       "logo": "/addons/ssh.svg",
       "functions": [
@@ -55001,7 +55001,7 @@
       "category": "payments",
       "version": "0.1.8",
       "title": "Stripe",
-      "description": "Stripe payments and subscriptions: charges, refunds, customers, products, prices,",
+      "description": "Stripe payments and subscriptions: charges, refunds, customers, products, prices, coupons, sources, tokens, cards, meter events, subscriptions, invoices, checkout, payment intents, setup intents, Connect (marketplaces), and webhook handling.",
       "logo": "/addons/stripe.svg",
       "functions": [
         {
@@ -55724,7 +55724,7 @@
       "category": "payments",
       "version": "0.1.0",
       "title": "Stripe Commerce",
-      "description": "A ready-made Stripe storefront: catalogue, cart, checkout, orders, fulfilment",
+      "description": "A ready-made Stripe storefront: catalogue, cart, checkout, orders, fulfilment and refunds, with the tables it needs shipped as addon schema.",
       "logo": "/addons/stripe-commerce.svg",
       "functions": [
         {
@@ -56075,7 +56075,7 @@
       "slug": "survey-monkey",
       "category": "forms",
       "version": "0.1.6",
-      "title": "Survey Monkey",
+      "title": "SurveyMonkey",
       "description": "SurveyMonkey surveys and responses.",
       "logo": "/addons/survey-monkey.svg",
       "functions": [
@@ -56856,7 +56856,7 @@
       "slug": "the-hive",
       "category": "monitoring",
       "version": "0.0.7",
-      "title": "The Hive",
+      "title": "TheHive",
       "description": "Consume TheHive security incident response API",
       "logo": "/addons/the-hive.svg",
       "functions": [
@@ -57288,7 +57288,7 @@
       "slug": "timescale-db",
       "category": "database",
       "version": "0.0.7",
-      "title": "Timescale DB",
+      "title": "timescaledb",
       "description": "timescaledb addon",
       "logo": "/addons/timescale-db.svg",
       "functions": [
@@ -57675,7 +57675,7 @@
       "slug": "totp",
       "category": "automation",
       "version": "0.0.7",
-      "title": "Totp",
+      "title": "TOTP",
       "description": "TOTP addon",
       "logo": "/addons/totp.svg",
       "functions": [
@@ -58686,7 +58686,7 @@
       "slug": "uplead",
       "category": "crm",
       "version": "0.0.7",
-      "title": "Uplead",
+      "title": "uplead",
       "description": "uplead addon",
       "functions": [
         {
@@ -58721,7 +58721,7 @@
       "slug": "uproc",
       "category": "data",
       "version": "0.0.7",
-      "title": "Uproc",
+      "title": "uProc",
       "description": "uProc data tools API (email/phone/address/company data enrichment and validation)",
       "functions": [
         {
@@ -58744,7 +58744,7 @@
       "slug": "uptimerobot",
       "category": "monitoring",
       "version": "0.1.6",
-      "title": "Uptimerobot",
+      "title": "UptimeRobot",
       "description": "UptimeRobot uptime monitoring.",
       "logo": "/addons/uptimerobot.svg",
       "functions": [
@@ -58799,7 +58799,7 @@
       "slug": "url-scan-io",
       "category": "monitoring",
       "version": "0.0.7",
-      "title": "Url Scan Io",
+      "title": "urlscanio",
       "description": "urlscanio addon",
       "logo": "/addons/url-scan-io.svg",
       "functions": [
@@ -58847,7 +58847,7 @@
       "slug": "venafi-tls-protect-cloud",
       "category": "infrastructure",
       "version": "0.0.7",
-      "title": "Venafi Tls Protect Cloud",
+      "title": "Venafi TLS Protect Cloud",
       "description": "Consume the Venafi TLS Protect Cloud API",
       "logo": "/addons/venafi-tls-protect-cloud.svg",
       "functions": [
@@ -59447,7 +59447,7 @@
       "slug": "whatsapp",
       "category": "communication",
       "version": "0.1.8",
-      "title": "Whatsapp",
+      "title": "WhatsApp",
       "description": "WhatsApp messaging via the official [WhatsApp Business Cloud API](https://developers.facebook.com/docs/whatsapp/cloud-api). Requires a Meta Business account.",
       "logo": "/addons/whatsapp.svg",
       "functions": [
@@ -59501,7 +59501,7 @@
       "slug": "whisper-asr",
       "category": "ai",
       "version": "0.1.7",
-      "title": "Whisper Asr",
+      "title": "Whisper ASR",
       "description": "Speech-to-text via Whisper ASR webservice.",
       "logo": "/addons/whisper-asr.svg",
       "functions": [
@@ -59553,7 +59553,7 @@
       "category": "data",
       "version": "0.2.4",
       "title": "Wikipedia",
-      "description": "Search Wikipedia and fetch article summaries and full plain-text content via the",
+      "description": "Search Wikipedia and fetch article summaries and full plain-text content via the public [Wikimedia APIs](https://api.wikimedia.org/wiki/Core_REST_API). No API key is required — the addon sends a contactable `User-Agent` as Wikimedia's policy asks, and reads are anonymous.",
       "logo": "/addons/wikipedia.svg",
       "functions": [
         {
@@ -59771,7 +59771,7 @@
       "slug": "woocommerce",
       "category": "ecommerce",
       "version": "0.0.7",
-      "title": "Woocommerce",
+      "title": "WooCommerce",
       "description": "Consume the WooCommerce REST API (products, orders, customers)",
       "logo": "/addons/woocommerce.svg",
       "functions": [
@@ -59963,7 +59963,7 @@
       "slug": "wordpress",
       "category": "documents",
       "version": "0.0.7",
-      "title": "Wordpress",
+      "title": "WordPress",
       "description": "WordPress integration for Pikku",
       "logo": "/addons/wordpress.svg",
       "functions": [
@@ -62417,7 +62417,7 @@
       "slug": "xml",
       "category": "data",
       "version": "0.1.7",
-      "title": "Xml",
+      "title": "XML",
       "description": "Parse and generate XML.",
       "logo": "/addons/xml.svg",
       "functions": [
@@ -62496,7 +62496,7 @@
       "slug": "youtube",
       "category": "media",
       "version": "0.0.8",
-      "title": "Youtube",
+      "title": "YouTube",
       "description": "YouTube integration for Pikku",
       "logo": "/addons/youtube.svg",
       "functions": [

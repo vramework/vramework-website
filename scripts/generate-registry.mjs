@@ -13,11 +13,11 @@
  *   addons   ← the addons monorepo's per-package .pikku artifacts (local)
  *   openapis ← registry:listOpenApis on the fabric API (network)
  *
- * Nothing in docs/addons/ is written by hand — edits there are lost on the next
- * run. To change a page, change the addon's README or its function JSDoc.
+ * The pages themselves are React routes created by plugins/addon-catalogue.js
+ * from the vendored data — nothing here writes markdown.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, copyFileSync, readdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, readdirSync } from 'node:fs'
 import { dirname, resolve, basename, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -36,7 +36,6 @@ const ADDON_SOURCES = [
 const VENDORED_ADDONS = resolve(root, 'src/data/addons.json')
 const VENDORED_OPENAPIS = resolve(root, 'static/registry/openapis.json')
 const LOGO_DIR = resolve(root, 'static/addons')
-const OUT_DIR = resolve(root, 'docs/addons')
 
 const FABRIC = process.env.PIKKU_FABRIC_URL ?? 'https://api.pikkufabric.com'
 
@@ -73,11 +72,34 @@ const readmeSummary = (dir) => {
   if (!existsSync(path)) return undefined
   const lines = readFileSync(path, 'utf8').split('\n')
   const start = lines.findIndex((line) => line.startsWith('# '))
+  const paragraph = []
   for (const line of lines.slice(start + 1)) {
     const text = line.trim()
-    if (text && !text.startsWith('#')) return text
+    if (!text) {
+      if (paragraph.length) break
+      continue
+    }
+    if (text.startsWith('#')) break
+    // These summaries are hard-wrapped in the source READMEs, so a single line
+    // ends mid-sentence; take the whole paragraph and unwrap it.
+    paragraph.push(text)
   }
-  return undefined
+  return paragraph.length ? paragraph.join(' ').replace(/\s+/g, ' ') : undefined
+}
+
+/**
+ * A slug cannot carry brand casing, so `deepl` titleises to `Deepl`. The README
+ * summary almost always spells the product properly — if it contains the same
+ * letters, adopt its spelling rather than maintaining a list of brands here.
+ */
+const brandCase = (title, description) => {
+  if (!description) return title
+  const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  for (const candidate of [title, title.replace(/\s+/g, '')]) {
+    const match = description.match(new RegExp(`(?<![\\w-])${escape(candidate)}(?![\\w-])`, 'i'))
+    if (match) return match[0]
+  }
+  return title
 }
 
 /** `mailer-lite` -> `Mailer Lite`, `aws-ses` -> `AWS SES`. */
@@ -183,7 +205,7 @@ const collectAddons = (packagesDir) => {
         slug,
         category,
         version: pkg.version,
-        title: titleise(slug),
+        title: brandCase(titleise(slug), readmeSummary(dir)),
         description: readmeSummary(dir),
         logo: svg ? `/addons/${slug}.svg` : undefined,
         functions,
@@ -247,118 +269,6 @@ const syncOpenApis = async () => {
   }
 }
 
-// ── rendering ──────────────────────────────────────────────
-
-const renderAddonPage = (addon) => {
-  const label = CATEGORY_LABELS[addon.category] ?? titleise(addon.category)
-  const out = []
-  out.push('---')
-  out.push('format: md')
-  out.push(`title: ${addon.title}`)
-  if (addon.description) out.push(`description: ${JSON.stringify(summarise(addon.description, 200))}`)
-  out.push(`sidebar_label: ${addon.title}`)
-  out.push('---')
-  out.push('')
-  out.push(`# ${addon.title}`)
-  out.push('')
-  if (addon.description) out.push(addon.description, '')
-  out.push('```bash')
-  out.push(`npm install ${addon.name}`)
-  out.push('```')
-  out.push('')
-  out.push(`Category: **${label}** · Version: \`${addon.version}\` · Package: \`${addon.name}\``)
-  out.push('')
-
-  if (addon.functions.length > 0) {
-    out.push('## Functions', '')
-    out.push('| Function | Description | Services |')
-    out.push('| -------- | ----------- | -------- |')
-    for (const fn of addon.functions) {
-      out.push(`| \`${fn.name}\` | ${summarise(fn.description) || '—'} | ${fn.services.map((s) => `\`${s}\``).join(', ') || '—'} |`)
-    }
-    out.push('')
-  }
-
-  if (addon.secrets.length > 0) {
-    out.push('## Secrets', '')
-    for (const secret of addon.secrets) {
-      const title = secret.displayName ?? secret.name
-      out.push(`- \`${secret.secretId}\` — ${summarise(secret.description) || title}`)
-    }
-    out.push('')
-  }
-
-  out.push('## Wiring it up', '')
-  out.push('Declare the addon once, then reference its functions the way you would your own:', '')
-  out.push('```typescript title="addons.wiring.ts"')
-  out.push(`import { wireAddon } from '#pikku/addon'`)
-  out.push('')
-  out.push('wireAddon({')
-  out.push(`  name: '${addon.slug}',`)
-  out.push(`  package: '${addon.name}',`)
-  out.push('})')
-  out.push('```')
-  out.push('')
-  out.push('The `name` becomes the namespace its functions are called under. See [Consuming addons](/docs/addon/consuming) for the declare/wire rule and how `ref()` resolves.')
-  out.push('')
-  return out.join('\n')
-}
-
-const renderCategoryIndex = (category, addons) => {
-  const label = CATEGORY_LABELS[category] ?? titleise(category)
-  const out = []
-  out.push('---')
-  out.push(`title: ${label}`)
-  out.push('format: md')
-  out.push(`description: ${JSON.stringify(`${addons.length} pikku addons for ${label.toLowerCase()}.`)}`)
-  out.push('---')
-  out.push('')
-  out.push(`# ${label}`)
-  out.push('')
-  out.push(`${addons.length} addon${addons.length === 1 ? '' : 's'}.`)
-  out.push('')
-  out.push('| Addon | Package | Functions |')
-  out.push('| ----- | ------- | --------- |')
-  for (const addon of addons) {
-    out.push(`| [${addon.title}](./${addon.slug}.md) | \`${addon.name}\` | ${addon.functions.length} |`)
-  }
-  out.push('')
-  return out.join('\n')
-}
-
-const renderIndex = (addons, byCategory) => {
-  const functionCount = addons.reduce((count, addon) => count + addon.functions.length, 0)
-  const out = []
-  out.push('---')
-  out.push('title: Addons')
-  out.push('format: md')
-  out.push(`description: ${JSON.stringify(`${addons.length} pikku addons — ${functionCount} ready-made functions you can wire into your app.`)}`)
-  out.push('---')
-  out.push('')
-  out.push('# Addons')
-  out.push('')
-  out.push(
-    `**${addons.length} addons** shipping **${functionCount} functions** between them. An addon is a package of pikku functions someone else already wrote — you declare it once, and its functions become callable from yours through \`ref()\`, with the same types, permissions and tree-shaking as your own code.`
-  )
-  out.push('')
-  out.push('```bash')
-  out.push('npm install @pikku/addon-<name>')
-  out.push('```')
-  out.push('')
-  out.push('See [Addons](/docs/addon) for how to wire one up, and [writing an addon](/docs/addon) if you want to publish your own.')
-  out.push('')
-  out.push('## By category', '')
-  out.push('| Category | Addons | Functions |')
-  out.push('| -------- | ------ | --------- |')
-  for (const [category, list] of byCategory) {
-    const label = CATEGORY_LABELS[category] ?? titleise(category)
-    const functions = list.reduce((count, addon) => count + addon.functions.length, 0)
-    out.push(`| [${label}](./${category}/index.md) | ${list.length} | ${functions} |`)
-  }
-  out.push('')
-  return out.join('\n')
-}
-
 // ── run ────────────────────────────────────────────────────
 
 const source = ADDON_SOURCES.find((path) => existsSync(path))
@@ -395,28 +305,7 @@ for (const addon of addons) delete addon._svgPath
 mkdirSync(dirname(VENDORED_ADDONS), { recursive: true })
 writeFileSync(VENDORED_ADDONS, JSON.stringify({ addons }, null, 2))
 
-const byCategory = [...new Set(addons.map((addon) => addon.category))]
-  .sort()
-  .map((category) => [category, addons.filter((addon) => addon.category === category)])
-
-rmSync(OUT_DIR, { recursive: true, force: true })
-mkdirSync(OUT_DIR, { recursive: true })
-writeFileSync(resolve(OUT_DIR, 'index.md'), renderIndex(addons, byCategory))
-
-let pages = 1
-for (const [category, list] of byCategory) {
-  const dir = resolve(OUT_DIR, category)
-  mkdirSync(dir, { recursive: true })
-  writeFileSync(resolve(dir, 'index.md'), renderCategoryIndex(category, list))
-  pages++
-  for (const addon of list) {
-    writeFileSync(resolve(dir, `${addon.slug}.md`), renderAddonPage(addon))
-    pages++
-  }
-}
-
 const apiCount = await syncOpenApis()
 
-console.log(`[registry] wrote ${pages} addon pages -> ${OUT_DIR}`)
 console.log(`[registry] vendored ${VENDORED_ADDONS}`)
 console.log(`[registry] catalogue: ${addons.length} addons, ${apiCount} OpenAPI specs`)

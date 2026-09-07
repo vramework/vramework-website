@@ -89,6 +89,7 @@ const config: Config = {
 
   plugins: [
     tailwindPlugin,
+    require.resolve('./plugins/addon-catalogue.js'),
   ],
 
   presets: [
@@ -208,7 +209,7 @@ const config: Config = {
             { label: 'Built-in Services', to: '/core/built-in-services' },
             { label: 'Console', to: '/core/console' },
             { label: 'Addons', to: '/core/addons' },
-            { label: 'Addon Catalogue', to: '/docs/addons' },
+            { label: 'Addon Catalogue', to: '/addons' },
             { label: 'OpenAPI Catalogue', to: '/openapis' },
             { label: 'Benchmarks', to: '/benchmarks' },
           ],
