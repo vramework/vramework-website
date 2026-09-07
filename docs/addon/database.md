@@ -33,15 +33,15 @@ An addon that supports only one dialect is fine, and it fails loudly rather than
 
 ### 2. Publish it from the build
 
-```json
-{
-  "scripts": {
-    "prebuild": "pikku all && pikku db export"
-  }
-}
-```
+`pikku all` already does this. On every build it reads both migration directories and writes `<outDir>/db/pikku-db-meta.gen.json` — for each dialect, the SQL verbatim plus a table-and-column map used to work out what a consumer is already carrying.
 
-`pikku db export` reads both migration directories and writes `<outDir>/db/pikku-db-meta.gen.json` — for each dialect, the SQL verbatim plus a table-and-column map used to work out what a consumer is already carrying. If neither directory exists the command says so and writes nothing, which is the ordinary case for the many addons that need no tables.
+If neither directory exists the artifact is written **empty**, and that is deliberate: an addon with no tables has to say so in a file that ships, because a consumer reads an absent file as a package that cannot answer the question at all.
+
+`pikku db export` writes the same artifact on demand, if you want it outside a full build:
+
+```bash
+pikku db export
+```
 
 ### 3. Ship the artifact
 
@@ -56,8 +56,10 @@ The consumer resolves the artifact **through the package name**, so it has to be
 }
 ```
 
-:::warning An unshipped artifact fails silently
-A wired addon whose artifact cannot be resolved is treated as an addon that contributes no schema — the same as the majority that ship none. There is no error. The symptom appears much later, as an addon function failing at runtime against a table that was never created. If your addon ships tables and no migration is generated for it, check the `exports` entry and `files` before anything else.
+:::warning An unshipped artifact stops `db generate`
+Because the artifact is written unconditionally, a consumer that cannot resolve it knows the package cannot answer — the addon was built with an older CLI, or its `exports`/`files` do not carry the file. `db generate` fails and names both causes rather than continuing.
+
+An addon that genuinely has no tables is not this case: it publishes `{}` and is waved through in silence.
 :::
 
 ## In the consuming application

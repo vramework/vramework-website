@@ -91,6 +91,7 @@
   "shopIsAuthenticated": "wirings/shop.security.ts",
   "permissionFunction": "wirings/shop.security.ts",
   "shopIsOrderOwner": "wirings/shop.security.ts",
+  "shopHandlesAnyOrder": "wirings/shop.security.ts",
   "permissionsCompact": "wirings/shop.security.ts",
   "wireTrigger": "wirings/shop.trigger.ts",
   "triggerSource": "wirings/shop.trigger.ts",
