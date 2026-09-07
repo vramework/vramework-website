@@ -39,3 +39,9 @@ yarn-error.log*
 
 # Impeccable critique snapshots
 /.impeccable
+
+# Per-spec detail files for the OpenAPI catalogue: 20MB of generated input to
+# plugins/openapi-catalogue.js, rebuilt by `npm run sync-registry`.
+# src/data/openapi-spec-meta.json is the cache that keeps that rebuild to
+# minutes rather than an hour, and IS tracked.
+/src/data/openapi-specs/

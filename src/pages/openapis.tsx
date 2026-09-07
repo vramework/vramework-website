@@ -18,7 +18,19 @@ interface OpenApiEntry {
   categories?: string[];
   logo?: string;
   operations?: number;
+  /** Security schemes the spec declares: 'oauth2', 'bearer', 'apiKey:header'… */
+  auth?: string[];
   version?: string;
+  /* ── from fabric's enricher, absent on specs it has not read yet ──────── */
+  /** 'oauth2' | 'api_key' | 'bearer' | 'basic' | 'none' | 'custom' */
+  authType?: string;
+  /** 'active' | 'beta' | 'deprecated' | 'sunset' */
+  apiStatus?: string;
+  /** 'free' | 'freemium' | 'paid' | 'usage_based' | 'enterprise' */
+  pricingModel?: string;
+  freeTier?: boolean;
+  /** The vendor's own documentation, as found by the enricher. */
+  docsUrl?: string;
 }
 
 interface Catalogue {
@@ -27,6 +39,41 @@ interface Catalogue {
 }
 
 type Status = 'loading' | 'ready' | 'empty' | 'error';
+
+/* The scheme strings come straight from the spec's securitySchemes, which is
+   where the raw shapes like `apiKey:header` come from. Anything unlisted falls
+   back to the raw string rather than being hidden. */
+const AUTH_LABELS: Record<string, string> = {
+  oauth2: 'OAuth 2',
+  openIdConnect: 'OpenID Connect',
+  bearer: 'Bearer token',
+  basic: 'Basic auth',
+  'apiKey:header': 'API key (header)',
+  'apiKey:query': 'API key (query)',
+  'apiKey:cookie': 'API key (cookie)',
+};
+
+/* The enricher's own vocabulary, which is coarser than the spec's schemes and
+   covers specs whose schemes never parsed. 'Free tier' is the boolean, folded
+   into the same control because it is the question people actually ask. */
+const PRICING_LABELS: Record<string, string> = {
+  free: 'Free',
+  freemium: 'Freemium',
+  usage_based: 'Usage-based',
+  paid: 'Paid',
+  enterprise: 'Enterprise',
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  beta: 'Beta',
+  deprecated: 'Deprecated',
+  sunset: 'Sunset',
+};
+
+/** Matches `specSlug` in scripts/generate-registry.mjs, which names the files
+    the openapi-catalogue plugin turns into routes. */
+const specSlug = (name: string) =>
+  name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+/, '');
 
 const PAGE_SIZE = 96;
 /** More categories than this and the chip row stops being scannable. */
@@ -38,6 +85,8 @@ export default function OpenApis(): React.ReactNode {
   const [data, setData] = useState<Catalogue>({ apis: [], providers: [] });
   const [query, setQuery] = useState('');
   const [provider, setProvider] = useState('');
+  const [auth, setAuth] = useState('');
+  const [pricing, setPricing] = useState('');
   const [category, setCategory] = useState<string | null>(null);
   const [shown, setShown] = useState(PAGE_SIZE);
 
@@ -70,11 +119,48 @@ export default function OpenApis(): React.ReactNode {
       .map(([key, count]) => ({ key, label: key.replace(/_/g, ' '), count }));
   }, [data.apis]);
 
+  const authKinds = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const api of data.apis) {
+      for (const kind of api.auth ?? []) counts.set(kind, (counts.get(kind) ?? 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  }, [data.apis]);
+
+  /* `free-tier` is the boolean rather than a pricingModel value, so it is
+     counted separately and matched separately in `results`. */
+  const pricingKinds = useMemo(() => {
+    const counts = new Map<string, number>();
+    let freeTier = 0;
+    for (const api of data.apis) {
+      if (api.pricingModel) counts.set(api.pricingModel, (counts.get(api.pricingModel) ?? 0) + 1);
+      if (api.freeTier) freeTier += 1;
+    }
+    const models = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+    return freeTier > 0 ? [['free-tier', freeTier] as [string, number], ...models] : models;
+  }, [data.apis]);
+
+  /** How much of the catalogue the enricher has actually classified. */
+  const enrichedCount = useMemo(
+    () => data.apis.filter((api) => api.authType || api.pricingModel || api.docsUrl).length,
+    [data.apis],
+  );
+
+  /* Only worth stating once the specs have actually been read — before that it
+     would say "0 operations" across a catalogue of real APIs. */
+  const totalOperations = useMemo(
+    () => data.apis.reduce((sum, api) => sum + (api.operations ?? 0), 0),
+    [data.apis],
+  );
+
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return data.apis.filter((api) => {
       if (provider && api.provider !== provider) return false;
       if (category && !(api.categories ?? []).includes(category)) return false;
+      if (auth && !(api.auth ?? []).includes(auth)) return false;
+      if (pricing === 'free-tier' && !api.freeTier) return false;
+      if (pricing && pricing !== 'free-tier' && api.pricingModel !== pricing) return false;
       if (!needle) return true;
       return (
         api.name?.toLowerCase().includes(needle) ||
@@ -82,18 +168,24 @@ export default function OpenApis(): React.ReactNode {
         api.provider?.toLowerCase().includes(needle)
       );
     });
-  }, [data.apis, query, provider, category]);
+  }, [data.apis, query, provider, category, auth, pricing]);
 
   // A new filter should show the top of its results, not page 4 of the old ones.
-  useEffect(() => setShown(PAGE_SIZE), [query, provider, category]);
+  useEffect(() => setShown(PAGE_SIZE), [query, provider, category, auth, pricing]);
 
+  /* Every spec has a prerendered page of its own — what the generated addon
+     would be called, the functions it would ship, the secrets it would ask for.
+     The vendor's docs link lives on that page rather than on the tile. */
   const items: WallItem[] = results.slice(0, shown).map((api) => ({
     id: api.name,
     title: api.title ?? api.name,
-    subtitle: api.provider,
+    subtitle: STATUS_LABELS[api.apiStatus ?? '']
+      ? `${api.provider} · ${STATUS_LABELS[api.apiStatus!]}`
+      : api.provider,
     count: api.operations,
     logo: api.logo,
     externalLogo: true,
+    href: `/openapis/${specSlug(api.name)}`,
   }));
 
   return (
@@ -112,6 +204,9 @@ export default function OpenApis(): React.ReactNode {
                 <span className={styles.tally}>
                   {data.apis.length.toLocaleString()} specs ·{' '}
                   {data.providers.length.toLocaleString()} providers
+                  {totalOperations > 0 &&
+                    ` · ${totalOperations.toLocaleString()} operations`}
+                  {enrichedCount > 0 && ` · ${enrichedCount.toLocaleString()} classified`}
                 </span>
               )}
             </div>
@@ -171,6 +266,41 @@ export default function OpenApis(): React.ReactNode {
                     ))}
                   </select>
 
+                  {authKinds.length > 0 && (
+                    <select
+                      className={styles.select}
+                      value={auth}
+                      onChange={(event) => setAuth(event.target.value)}
+                      aria-label="Filter by authentication scheme"
+                    >
+                      <option value="">Any auth</option>
+                      {authKinds.map(([kind, count]) => (
+                        <option key={kind} value={kind}>
+                          {AUTH_LABELS[kind] ?? kind} ({count})
+                        </option>
+                      ))}
+                    </select>
+                  )}
+
+                  {pricingKinds.length > 0 && (
+                    <select
+                      className={styles.select}
+                      value={pricing}
+                      onChange={(event) => setPricing(event.target.value)}
+                      aria-label="Filter by pricing"
+                    >
+                      <option value="">Any pricing</option>
+                      {pricingKinds.map(([kind, count]) => (
+                        <option key={kind} value={kind}>
+                          {kind === 'free-tier'
+                            ? 'Has a free tier'
+                            : (PRICING_LABELS[kind] ?? kind)}{' '}
+                          ({count})
+                        </option>
+                      ))}
+                    </select>
+                  )}
+
                   <p className={wall.resultCount} aria-live="polite">
                     {results.length.toLocaleString()}{' '}
                     {results.length === 1 ? 'specification' : 'specifications'}
@@ -196,6 +326,8 @@ export default function OpenApis(): React.ReactNode {
                       onClick={() => {
                         setQuery('');
                         setProvider('');
+                        setAuth('');
+                        setPricing('');
                         setCategory(null);
                       }}
                     >

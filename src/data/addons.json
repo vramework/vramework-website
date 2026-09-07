@@ -18239,10 +18239,11 @@
       ],
       "secrets": [
         {
-          "name": "githubOAuthApp",
+          "name": "githubApp",
           "displayName": "GitHub OAuth App",
-          "description": "OAuth2 app credentials for GitHub",
-          "secretId": "GITHUB_OAUTH_APP"
+          "description": "OAuth2 app client id and secret for GitHub.",
+          "secretId": "GITHUB_OAUTH_APP",
+          "optional": true
         }
       ]
     },
@@ -18807,7 +18808,15 @@
           "sourceFile": "src/functions/threads/untrash.function.ts"
         }
       ],
-      "secrets": []
+      "secrets": [
+        {
+          "name": "gmailOAuthApp",
+          "displayName": "Gmail OAuth2 OAuth App",
+          "description": "OAuth2 app client id and secret for Gmail OAuth2.",
+          "secretId": "GMAIL_APP_CREDENTIALS",
+          "optional": true
+        }
+      ]
     },
     {
       "name": "@pikku/addon-google-analytics",
@@ -55725,7 +55734,7 @@
       "name": "@pikku/addon-stripe-commerce",
       "slug": "stripe-commerce",
       "category": "payments",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "title": "Stripe Payments",
       "description": "A ready-made Stripe storefront: catalogue, cart, checkout, orders, fulfilment and refunds, with the tables it needs shipped as addon schema.",
       "logo": "/addons/stripe-commerce.svg",

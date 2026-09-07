@@ -14,7 +14,8 @@
  *   openapis ← registry:listOpenApis on the fabric API (network)
  *
  * The pages themselves are React routes created by plugins/addon-catalogue.js
- * from the vendored data — nothing here writes markdown.
+ * and plugins/openapi-catalogue.js from the vendored data — nothing here writes
+ * markdown.
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, readdirSync } from 'node:fs'
@@ -231,16 +232,24 @@ const rpc = async (name) => {
  * the filters read. `description` alone was 2.25MB of 3.6MB and nothing renders
  * it — a detail page can fetch one spec from /registry/openapis/:name instead.
  */
+/**
+ * Every classification column defaults to the string 'unknown' rather than to
+ * NULL, so an unenriched row still answers each of them. Rendering that would
+ * put "unknown" on two thirds of the catalogue as though it meant something.
+ */
+const classified = (value) => (value && value !== 'unknown' ? value : undefined)
+
 const trimOpenApi = (entry) => ({
   name: entry.name,
   title: entry.title,
   provider: entry.provider,
   categories: entry.categories ?? [],
   logo: entry.logo,
-  /* Populated by the registry's enrichment pass, which has not run over the
-     catalogue yet — every entry currently reports 0. Carried through as
-     undefined so the tiles omit the count rather than printing a wrong one. */
+  /* Filled by fabric's meta-extraction pass. Rows it has not reached yet come
+     back 0, and the spec pass below fills those in from the spec itself. */
   operations: entry.totalOperations || undefined,
+  /* Security schemes the spec declares — same shape the spec pass produces. */
+  auth: entry.securitySchemes?.length ? entry.securitySchemes : undefined,
   version: entry.version,
   openapiVer: entry.openapiVer,
   /* The spec itself. `pikku new addon --openapi` reads a local path, so this is
@@ -249,6 +258,62 @@ const trimOpenApi = (entry) => ({
   /* 'public' | 'auth_required' | 'offline' | 'error' | 'unknown' */
   accessStatus: entry.accessStatus,
   updated: entry.updated,
+  /* ── from the enricher ─────────────────────────────────────────────────
+     A model reads each spec's docs and classifies it. Only the handful the
+     browse page filters or labels on travels in this file; the rest lands in
+     the per-spec detail file, which is fetched one at a time. */
+  authType: classified(entry.authType),
+  apiStatus: classified(entry.apiStatus),
+  pricingModel: classified(entry.pricingModel),
+  freeTier: entry.freeTier || undefined,
+  docsUrl: entry.enrichment?.docsUrl ?? undefined,
+})
+
+/**
+ * `codegen` as the page wants it. `functionCount` is the true total; `functions`
+ * is capped upstream, so a spec with 22,361 operations lists 300 and says so.
+ */
+const fromCodegen = (codegen) =>
+  codegen?.functions
+    ? { ...codegen, total: codegen.functionCount ?? codegen.functions.length }
+    : undefined
+
+/**
+ * Everything the API knows about one spec, for that spec's own page.
+ *
+ * Kept out of the browse file deliberately: it is fetched whole by every
+ * visitor, and these fields multiplied by 2,500 rows are megabytes nobody on
+ * the browse page reads.
+ */
+const detailFromApi = (entry) => ({
+  description: entry.description || undefined,
+  /* What `pikku new addon --openapi` would generate: the addon's name, the
+     functions it would ship, the secrets and variables it would declare.
+     Produced by fabric's meta extraction, which already has the document open
+     and runs the real generator over it — read here rather than re-derived,
+     so the page cannot drift from what the CLI writes. */
+  generated: fromCodegen(entry.codegen),
+  servers: entry.servers?.length ? entry.servers : undefined,
+  contentTypes: entry.contentTypes?.length ? entry.contentTypes : undefined,
+  http: entry.http,
+  authType: classified(entry.authType),
+  authLocation: classified(entry.authLocation),
+  authParamName: entry.authParamName ?? undefined,
+  authHeaderPrefix: entry.authHeaderPrefix ?? undefined,
+  tokenAcquisition: entry.tokenAcquisition ?? undefined,
+  perUser: entry.perUser ?? undefined,
+  apiStatus: classified(entry.apiStatus),
+  pricingModel: classified(entry.pricingModel),
+  freeTier: entry.freeTier ?? undefined,
+  deprecated: entry.deprecated || undefined,
+  pagination: classified(entry.pagination),
+  dataFormats: entry.dataFormats?.length ? entry.dataFormats : undefined,
+  enriched: entry.enriched || undefined,
+  enrichedAt: entry.enrichedAt ?? undefined,
+  enrichConfidence: entry.enrichConfidence ?? undefined,
+  /* docsUrl, signupUrl, pricingUrl, scopes, rateLimitTier, webhooks… — an
+     allowlisted projection, so whatever fabric sends here is safe to render. */
+  enrichment: entry.enrichment && Object.keys(entry.enrichment).length ? entry.enrichment : undefined,
 })
 
 /**
@@ -268,6 +333,243 @@ const listAllOpenApis = async () => {
   return all
 }
 
+/* ── spec-derived metadata ──────────────────────────────────────────────── */
+
+/**
+ * Operation counts, auth schemes and the per-spec operation list, read from the
+ * specs themselves.
+ *
+ * fabric's own extraction (registry:startMetaExtraction, nightly) fills the
+ * counts and the schemes, and whatever it has reached wins — this pass only
+ * covers the rows it has not got to yet. The operation *list* has no equivalent
+ * on the API at all, and it is what a spec's page is mostly made of, so this
+ * runs either way.
+ *
+ * Deliberately mirrors fabric's extractor, packages/addon-registry/src/functions/
+ * start-meta-extraction.function.ts, so the two agree on any spec they both read.
+ */
+const SPEC_META_CACHE = resolve(root, 'src/data/openapi-spec-meta.json')
+/**
+ * One file per spec. Input to plugins/openapi-catalogue.js, which turns each
+ * into its own prerendered route — so these are never served as-is, and none of
+ * them belongs in static/.
+ */
+const SPEC_DETAIL_DIR = resolve(root, 'src/data/openapi-specs')
+/**
+ * Catalogue names carry dots and colons (`amazonaws.com:ec2`), neither of which
+ * belongs in a URL segment — a path component with a dot in it reads as a file
+ * to more than one static server, and those pages 404 while their HTML sits
+ * right there on disk. Everything outside [a-z0-9] becomes a hyphen.
+ *
+ * Only the leading hyphens are trimmed. A trailing one looks like an oversight
+ * but is load-bearing: `vtex.local:Marketplace-APIs` and
+ * `vtex.local:Marketplace-APIs-` are two different entries in the catalogue and
+ * this is the only character telling them apart.
+ */
+const specSlug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+/, '')
+const SPEC_METHODS = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']
+/** Past this a "spec" is a document dump, not a contract worth parsing. */
+const MAX_SPEC_BYTES = 12 * 1024 * 1024
+const SPEC_TIMEOUT_MS = 30_000
+/** apis.guru is a free service — enough to finish in minutes, not enough to hurt. */
+const SPEC_CONCURRENCY = 8
+
+/**
+ * Operations kept per spec on its detail page. Microsoft Graph alone declares
+ * 22,361; nobody scrolls that, and storing every one would put tens of megabytes
+ * of third-party path strings in this repo. The true total is kept alongside, so
+ * a capped page says "300 of 22,361" rather than quietly under-reporting.
+ */
+const MAX_DETAIL_OPERATIONS = 300
+/** Enough tags to name what an API covers without listing its whole taxonomy. */
+const TOP_TAGS = 12
+
+const readSpecMeta = (doc) => {
+  const declared = doc.components?.securitySchemes ?? doc.securityDefinitions ?? {}
+  const auth = new Set()
+  for (const scheme of Object.values(declared)) {
+    if (!scheme || typeof scheme !== 'object') continue
+    if (scheme.type === 'oauth2') auth.add('oauth2')
+    else if (scheme.type === 'http') auth.add(scheme.scheme ?? 'http')
+    else if (scheme.type === 'apiKey') auth.add(`apiKey:${scheme.in ?? 'header'}`)
+    else if (scheme.type === 'openIdConnect') auth.add('openIdConnect')
+  }
+
+  let operations = 0
+  const methods = {}
+  const tagCounts = new Map()
+  const kept = []
+
+  for (const [path, item] of Object.entries(doc.paths ?? {})) {
+    for (const method of SPEC_METHODS) {
+      const operation = item?.[method]
+      if (!operation) continue
+      operations++
+      methods[method] = (methods[method] ?? 0) + 1
+      for (const tag of operation.tags ?? []) {
+        tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)
+      }
+      /* What `pikku new addon --openapi` would generate a function for, one
+         entry each. This is the "functions" half of the catalogue and it comes
+         entirely from the spec — fabric's enrichment carries no operations. */
+      if (kept.length < MAX_DETAIL_OPERATIONS) {
+        kept.push({
+          method,
+          path,
+          id: operation.operationId || undefined,
+          summary: operation.summary || undefined,
+          tags: operation.tags?.length ? operation.tags : undefined,
+        })
+      }
+    }
+  }
+
+  /* Where the spec itself says its documentation lives. This is the same pair
+     fabric's enricher seeds `docsUrl` from before it asks a model to refine it,
+     so it is the honest half of that field and needs no model to obtain. */
+  const docsUrl = doc.externalDocs?.url ?? doc.info?.contact?.url ?? undefined
+
+  const baseUrl = doc.servers?.length
+    ? doc.servers.find((server) => !/\{/.test(server.url ?? ''))?.url ?? doc.servers[0]?.url
+    : doc.host
+      ? `${doc.schemes?.[0] ?? 'https'}://${doc.host}${doc.basePath ?? ''}`
+      : undefined
+
+  return {
+    operations,
+    auth: [...auth],
+    methods,
+    tags: [...tagCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, TOP_TAGS)
+      .map(([tag]) => tag),
+    kept,
+    docsUrl,
+    baseUrl,
+    license: doc.info?.license?.name ?? undefined,
+  }
+}
+
+const fetchSpecMeta = async (url) => {
+  const response = await fetch(url, { signal: AbortSignal.timeout(SPEC_TIMEOUT_MS) })
+  if (!response.ok) throw new Error(`HTTP ${response.status}`)
+  const declaredSize = Number(response.headers.get('content-length') ?? 0)
+  if (declaredSize > MAX_SPEC_BYTES) {
+    throw new Error(`spec is ${Math.round(declaredSize / 1e6)}MB`)
+  }
+  return readSpecMeta(JSON.parse(await response.text()))
+}
+
+/** Bounded fan-out — Promise.all over 2,500 fetches would open 2,500 sockets. */
+const pool = async (items, size, worker) => {
+  let next = 0
+  const run = async () => {
+    while (next < items.length) await worker(items[next++])
+  }
+  await Promise.all(Array.from({ length: Math.min(size, items.length) }, run))
+}
+
+/**
+ * Fills `operations` and `auth` on each entry, in place.
+ *
+ * The cache is keyed by name@version and records failures as well as hits: a
+ * spec that 404s or is not JSON will do the same tomorrow, and re-fetching a few
+ * hundred dead URLs on every sync is the difference between a minute and an
+ * hour. Delete src/data/openapi-spec-meta.json to re-read the catalogue.
+ */
+const addSpecMeta = async (apis, specUrls) => {
+  const cache = readJson(SPEC_META_CACHE) ?? {}
+  mkdirSync(SPEC_DETAIL_DIR, { recursive: true })
+  /* A cache hit is not enough on its own: the operation list lives only in the
+     detail file, which is generated output and not in git, so a fresh checkout
+     has the cache but none of the files it summarises. Re-read those specs. */
+  const missing = apis.filter(
+    (api) =>
+      !cache[`${api.name}@${api.version}`] ||
+      !existsSync(join(SPEC_DETAIL_DIR, `${specSlug(api.name)}.json`)),
+  )
+
+  if (missing.length > 0) {
+    console.log(`[registry] specs: reading ${missing.length} of ${apis.length}…`)
+    let done = 0
+    await pool(missing, SPEC_CONCURRENCY, async (api) => {
+      const key = `${api.name}@${api.version}`
+      try {
+        const { kept, ...summary } = await fetchSpecMeta(specUrls.get(key))
+        /* The operation list is per-spec and only ever read by that spec's own
+           route, so it lands in its own file rather than in the shared cache —
+           which every build reads whole. */
+        writeFileSync(
+          join(SPEC_DETAIL_DIR, `${specSlug(api.name)}.json`),
+          JSON.stringify({
+            name: api.name,
+            title: api.title,
+            version: api.version,
+            specUrl: specUrls.get(key),
+            ...summary,
+            shown: kept.length,
+            functions: kept,
+          }),
+        )
+        cache[key] = summary
+      } catch (error) {
+        cache[key] = { error: String(error.message ?? error).slice(0, 120) }
+      }
+      if (++done % 250 === 0) console.log(`[registry] specs: ${done}/${missing.length}`)
+    })
+    writeFileSync(SPEC_META_CACHE, JSON.stringify(cache, null, 2))
+  }
+
+  let read = 0
+  for (const api of apis) {
+    const meta = cache[`${api.name}@${api.version}`]
+    if (!meta || meta.error) continue
+    read++
+    api.operations = api.operations ?? meta.operations ?? undefined
+    if (!api.auth?.length && meta.auth.length > 0) api.auth = meta.auth
+    /* Only the fields the browse page reads travel in the vendored file — the
+       whole thing is fetched by the client. Everything else stays in the cache
+       for the generator to build detail pages from. */
+    if (!api.docsUrl && meta.docsUrl) api.docsUrl = meta.docsUrl
+  }
+  console.log(`[registry] specs: ${read} of ${apis.length} parsed`)
+}
+
+/**
+ * Folds the API's answer for each spec into that spec's detail file.
+ *
+ * Merged rather than written fresh: the operation list in there came from the
+ * spec pass, which only fetches a given spec once, so a rewrite would drop it.
+ */
+const writeSpecDetails = (list, apis) => {
+  mkdirSync(SPEC_DETAIL_DIR, { recursive: true })
+  const trimmed = new Map(apis.map((api) => [api.name, api]))
+  let enriched = 0
+  for (const entry of list) {
+    const file = join(SPEC_DETAIL_DIR, `${specSlug(entry.name)}.json`)
+    const detail = detailFromApi(entry)
+    for (const [key, value] of Object.entries(detail)) {
+      if (value === undefined) delete detail[key]
+    }
+    const api = trimmed.get(entry.name)
+    writeFileSync(
+      file,
+      JSON.stringify({
+        ...(readJson(file) ?? {}),
+        name: entry.name,
+        title: entry.title,
+        version: entry.version,
+        specUrl: entry.swaggerUrl,
+        ...(api?.operations ? { operations: api.operations } : {}),
+        ...(api?.auth ? { auth: api.auth } : {}),
+        ...detail,
+      }),
+    )
+    if (detail.enriched) enriched++
+  }
+  console.log(`[registry] specs: ${list.length} detail files, ${enriched} enriched by fabric`)
+}
+
 const syncOpenApis = async () => {
   try {
     const [list, providers] = await Promise.all([
@@ -275,6 +577,11 @@ const syncOpenApis = async () => {
       get('/registry/openapis/providers'),
     ])
     const apis = list.map(trimOpenApi)
+    await addSpecMeta(
+      apis,
+      new Map(list.map((entry) => [`${entry.name}@${entry.version}`, entry.swaggerUrl])),
+    )
+    writeSpecDetails(list, apis)
     mkdirSync(dirname(VENDORED_OPENAPIS), { recursive: true })
     writeFileSync(VENDORED_OPENAPIS, JSON.stringify({ apis, providers }))
     console.log(`[registry] openapis: ${apis.length} APIs from ${providers.length} providers -> ${VENDORED_OPENAPIS}`)

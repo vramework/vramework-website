@@ -90,6 +90,7 @@ const config: Config = {
   plugins: [
     tailwindPlugin,
     require.resolve('./plugins/addon-catalogue.js'),
+    require.resolve('./plugins/openapi-catalogue.js'),
   ],
 
   presets: [

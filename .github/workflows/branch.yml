@@ -20,4 +20,8 @@ jobs:
           cache: yarn
       - run: yarn install
       - run: yarn sync-snippets
+      # The OpenAPI catalogue's per-spec detail files are generated, not tracked
+      # (20MB). Without this step the plugin finds nothing and every
+      # /openapis/<spec> route disappears from the build.
+      - run: yarn sync-registry
       - run: yarn build
