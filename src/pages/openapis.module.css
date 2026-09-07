@@ -55,3 +55,11 @@
   align-items: center;
   gap: 5px;
 }
+
+.headLink {
+  margin: 18px 0 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12.5px;
+}
+.headLink a { color: var(--paper-accent); }
+.headLink a:hover { color: var(--paper-accent-dark); text-decoration: none; }

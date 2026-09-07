@@ -12,11 +12,9 @@ import styles from './openapis.module.css';
    shell and fills in on the client. */
 
 interface OpenApiEntry {
-  id: string;
   name: string;
   title?: string;
   provider?: string;
-  description?: string;
   categories?: string[];
   logo?: string;
   operations?: number;
@@ -90,7 +88,7 @@ export default function OpenApis(): React.ReactNode {
   useEffect(() => setShown(PAGE_SIZE), [query, provider, category]);
 
   const items: WallItem[] = results.slice(0, shown).map((api) => ({
-    id: api.id ?? api.name,
+    id: api.name,
     title: api.title ?? api.name,
     subtitle: api.provider,
     count: api.operations,
@@ -121,6 +119,11 @@ export default function OpenApis(): React.ReactNode {
               OpenAPI specifications pikku can generate typed functions from — point it
               at one and it writes the functions, the types and the secrets for you.
             </Lead>
+            <p className={styles.headLink}>
+              <Link to="/docs/addon/creating#openapi-generation">
+                How OpenAPI generation works →
+              </Link>
+            </p>
           </Wrap>
         </Section>
 

@@ -210,6 +210,12 @@ const collectAddons = (packagesDir) => {
 
 // ── the OpenAPI catalogue ──────────────────────────────────
 
+const get = async (path) => {
+  const response = await fetch(`${FABRIC}${path}`)
+  if (!response.ok) throw new Error(`GET ${path} -> HTTP ${response.status}`)
+  return response.json()
+}
+
 const rpc = async (name) => {
   const response = await fetch(`${FABRIC}/rpc/${name}`, {
     method: 'POST',
@@ -221,29 +227,54 @@ const rpc = async (name) => {
 }
 
 /**
- * The full listing is ~4MB, most of it spec detail the browse page never shows.
- * Trim to what the cards and the filters actually read, so the asset the
- * browser downloads stays reasonable.
+ * The browse page fetches this whole file, so it carries only what the tiles and
+ * the filters read. `description` alone was 2.25MB of 3.6MB and nothing renders
+ * it — a detail page can fetch one spec from /registry/openapis/:name instead.
  */
 const trimOpenApi = (entry) => ({
-  id: entry.id ?? entry.name,
   name: entry.name,
-  title: entry.title ?? entry.info?.title,
+  title: entry.title,
   provider: entry.provider,
-  description: entry.description ?? entry.info?.description,
   categories: entry.categories ?? [],
-  logo: entry.logo ?? entry.info?.['x-logo']?.url,
-  operations: entry.operationCount ?? entry.operations ?? undefined,
+  logo: entry.logo,
+  /* Populated by the registry's enrichment pass, which has not run over the
+     catalogue yet — every entry currently reports 0. Carried through as
+     undefined so the tiles omit the count rather than printing a wrong one. */
+  operations: entry.totalOperations || undefined,
   version: entry.version,
+  openapiVer: entry.openapiVer,
+  /* The spec itself. `pikku new addon --openapi` reads a local path, so this is
+     what a detail page has to hand the reader before the command can run. */
+  specUrl: entry.swaggerUrl,
+  /* 'public' | 'auth_required' | 'offline' | 'error' | 'unknown' */
+  accessStatus: entry.accessStatus,
+  updated: entry.updated,
 })
+
+/**
+ * The unpaginated listing is ~4MB and the endpoint 500s on it, which read as an
+ * outage for a while. Page through instead — 1,000 at a time is well inside
+ * what it will serve.
+ */
+const PAGE = 1000
+const listAllOpenApis = async () => {
+  const all = []
+  for (let offset = 0; ; offset += PAGE) {
+    const page = await get(`/registry/openapis?limit=${PAGE}&offset=${offset}`)
+    const apis = page.apis ?? []
+    all.push(...apis)
+    if (apis.length < PAGE || all.length >= (page.total ?? Infinity)) break
+  }
+  return all
+}
 
 const syncOpenApis = async () => {
   try {
     const [list, providers] = await Promise.all([
-      rpc('registry:listOpenApis'),
-      rpc('registry:listOpenApiProviders'),
+      listAllOpenApis(),
+      get('/registry/openapis/providers'),
     ])
-    const apis = (Array.isArray(list) ? list : (list.apis ?? [])).map(trimOpenApi)
+    const apis = list.map(trimOpenApi)
     mkdirSync(dirname(VENDORED_OPENAPIS), { recursive: true })
     writeFileSync(VENDORED_OPENAPIS, JSON.stringify({ apis, providers }))
     console.log(`[registry] openapis: ${apis.length} APIs from ${providers.length} providers -> ${VENDORED_OPENAPIS}`)

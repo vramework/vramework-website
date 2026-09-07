@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './wall.module.css';
@@ -40,10 +40,21 @@ export function Mark({
   const hosted = useBaseUrl(logo && !external ? logo : '/');
   const src = external ? logo : hosted;
   const size = large ? 40 : 20;
+  /* A good share of the catalogue's logos are apis.guru cache URLs that no
+     longer resolve. Left alone the browser paints its broken-image glyph, so
+     fall back to the initials the tile would have shown anyway. */
+  const [broken, setBroken] = useState(false);
   return (
     <span className={large ? `${styles.mark} ${styles.markLarge}` : styles.mark}>
-      {logo ? (
-        <img src={src} alt="" loading="lazy" width={size} height={size} />
+      {logo && !broken ? (
+        <img
+          src={src}
+          alt=""
+          loading="lazy"
+          width={size}
+          height={size}
+          onError={() => setBroken(true)}
+        />
       ) : (
         <span className={styles.initials}>{initials(title)}</span>
       )}
