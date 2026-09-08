@@ -302,3 +302,9 @@
   font-weight: 700;
   flex-shrink: 0;
 }
+
+/* ── Terminal: real `pikku dev` output ─────────────────────── */
+.termBody { text-align: left; }
+.tSpacer  { height: 0.95em; }
+.tList    { padding-left: 2ch; }
+.tBullet  { color: var(--paper-code-dim); }

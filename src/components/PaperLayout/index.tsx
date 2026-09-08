@@ -106,6 +106,8 @@ export function CodeCard({ filename, badge, icon, sourceUrl, children }: {
 }
 
 /* ── Terminal ──────────────────────────────────────────── */
+/* Lines below are the real output of `pikku dev` against the online-shop
+   template — verbatim, only the noise a first run does not have is dropped. */
 export function Terminal() {
   return (
     <div className={styles.term}>
@@ -113,16 +115,24 @@ export function Terminal() {
         <span className={styles.termDot} style={{ background: '#e06c5b' }} />
         <span className={styles.termDot} style={{ background: '#e0b34b' }} />
         <span className={styles.termDot} style={{ background: '#79b06a' }} />
-        <span className={styles.termTitle}>~/product — zsh</span>
+        <span className={styles.termTitle}>~/shop — zsh</span>
       </div>
       <div className={styles.termBody}>
         <div><span className={styles.tPrompt}>$</span> npx pikku dev</div>
-        <div className={styles.tDim}>◇ starting local platform…</div>
-        <div><span className={styles.tOk}>✓</span> database <span className={styles.tHl}>postgres</span> — introspected, types generated</div>
-        <div><span className={styles.tOk}>✓</span> auth, content, secrets — ready</div>
-        <div><span className={styles.tOk}>✓</span> email previews · workflows · agents — mounted</div>
-        <div><span className={styles.tOk}>✓</span> console <span className={styles.tUrl}>localhost:3000/console</span></div>
-        <div><span className={styles.tOk}>✓</span> api <span className={styles.tUrl}>localhost:3000</span> <span className={styles.cursor} /></div>
+        <div className={styles.tDim}>◇◆ pikku ::</div>
+        <div className={styles.tSpacer} />
+        <div className={styles.tDim}>pikku all (completed in 1.8s)</div>
+        <div className={styles.tList}>
+          <div><span className={styles.tBullet}>•</span> <span className={styles.tHl}>41</span> HTTP routes</div>
+          <div><span className={styles.tBullet}>•</span> <span className={styles.tHl}>6</span> Queue workers</div>
+          <div><span className={styles.tBullet}>•</span> <span className={styles.tHl}>4</span> Scheduled tasks</div>
+          <div><span className={styles.tBullet}>•</span> <span className={styles.tHl}>10</span> Workflows</div>
+          <div><span className={styles.tBullet}>•</span> <span className={styles.tHl}>7</span> MCP endpoints</div>
+        </div>
+        <div className={styles.tSpacer} />
+        <div>All schemas loaded</div>
+        <div>Pikku Console available at <span className={styles.tUrl}>http://localhost:3000/console</span></div>
+        <div>pikku: ready on <span className={styles.tUrl}>http://localhost:3000</span> <span className={styles.cursor} /></div>
       </div>
     </div>
   );

@@ -3,23 +3,8 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import { NavbarPageToggle } from '../components/HomepageShared';
 import { PaperPage, Terminal } from '../components/PaperLayout';
+import { StackMatrix } from '../components/StackMatrix';
 import styles from './index.module.css';
-import snippets from '../data/snippets.json';
-
-/* ── Screenshot frame with browser chrome ────────────────────── */
-function ScreenshotFrame({ src, alt, addr, wide = false }: { src: string; alt: string; addr: string; wide?: boolean }) {
-  return (
-    <div className={`${styles.screenshotFrame} ${wide ? styles.wide : ''}`}>
-      <div className={styles.screenshotChrome}>
-        <span className={styles.termDot} style={{ background: '#e06c5b' }} />
-        <span className={styles.termDot} style={{ background: '#e0b34b' }} />
-        <span className={styles.termDot} style={{ background: '#79b06a' }} />
-        <span className={styles.screenshotAddr}>{addr}</span>
-      </div>
-      <img src={src} alt={alt} loading="lazy" />
-    </div>
-  );
-}
 
 /* ── Click-to-copy command chip ──────────────────────────────── */
 function CopyCmd({ cmd }: { cmd: string }) {
@@ -74,7 +59,6 @@ function TrustStrip() {
   const logos: { name: string; url: string; img?: string }[] = [
     { name: 'marta', img: 'marta-dark.svg', url: 'https://marta.de' },
     { name: 'BambooRose', url: 'https://bamboorose.com' },
-    { name: 'AgreeWe', url: 'https://www.agreewe.com' },
     { name: 'HeyGermany', img: 'heygermany-light.svg', url: 'https://hey-germany.com' },
     { name: 'Calligraphy Cut', img: 'calligraphycut-light.svg', url: 'https://calligraphy-cut.com' },
   ];
@@ -105,13 +89,13 @@ function TrustStrip() {
    ════════════════════════════════════════════════════════════════ */
 function PlatformSection() {
   const cells = [
-    { n: '01', title: 'Database & types', body: 'SQLite to start, or point it at Postgres — it reads your schema and generates end-to-end types automatically. No setup, no drift.' },
-    { n: '02', title: 'SSO', body: 'Standard OAuth and OIDC out of the box. Point it at Google, Microsoft, Okta — or any provider — and your team signs in. Nothing to build.' },
-    { n: '03', title: 'Content & secrets', body: 'A managed content layer and type-safe secrets, handled the same way on a laptop as in production.' },
-    { n: '04', title: 'Email, with previews', body: 'Generate transactional email and preview every message live in the console — before a single one is sent.' },
-    { n: '05', title: 'Workflows & agents', body: 'Durable, restart-proof workflows and AI agents run natively — no separate engine to operate.' },
-    { n: '06', title: 'One binary', body: 'The entire platform is a single command. No container orchestration to maintain just to run "hello world."' },
-    { n: '07', title: 'Audit trails', body: 'Every action can leave a record — who, what, when — no matter which entry point it came through. History your auditors will actually accept.', wide: true },
+    { n: '01', title: 'Database & types', href: '/docs/storage', body: 'Point it at Postgres, MySQL, SQLite or D1 — it reads your schema and generates end-to-end types automatically. No setup, no drift.' },
+    { n: '02', title: 'SSO', href: '/docs/middleware/better-auth', body: 'Standard OAuth and OIDC out of the box. Point it at Google, Microsoft, Okta — or any provider — and your team signs in. Nothing to build.' },
+    { n: '03', title: 'Content & secrets', href: '/docs/core-features/secrets', body: 'A managed content layer and type-safe secrets, handled the same way on a laptop as in production.' },
+    { n: '04', title: 'Email, with previews', href: '/docs/api/email-service', body: 'Generate transactional email and preview every message live in the console — before a single one is sent.' },
+    { n: '05', title: 'Workflows & agents', href: '/docs/wiring/workflows', body: 'Durable, restart-proof workflows and AI agents run natively — no separate engine to operate.' },
+    { n: '06', title: 'One binary', href: '/docs/deploy', body: 'The entire platform is a single command. No container orchestration to maintain just to run "hello world."' },
+    { n: '07', title: 'Audit trails', href: '/docs/api/audit-service', body: 'Every action can leave a record — who, what, when — no matter which entry point it came through. History your auditors will actually accept.', wide: true },
   ];
 
   return (
@@ -125,11 +109,16 @@ function PlatformSection() {
         </p>
         <div className={styles.platformGrid}>
           {cells.map((c) => (
-            <div key={c.n} className={`${styles.cell}${c.wide ? ` ${styles.cellWide}` : ''}`}>
+            <Link
+              key={c.n}
+              href={c.href}
+              className={`${styles.cell}${c.wide ? ` ${styles.cellWide}` : ''}`}
+            >
               <div className={styles.cellNum}>{c.n}</div>
               <h3>{c.title}</h3>
               <p>{c.body}</p>
-            </div>
+              <span className={styles.cellGo} aria-hidden="true">Read the docs →</span>
+            </Link>
           ))}
         </div>
       </div>
@@ -138,165 +127,192 @@ function PlatformSection() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Parity — "Local equals production"
+   What Pikku is — the adapter story and the parity story, one diagram
    ════════════════════════════════════════════════════════════════ */
-const PARITY_FEATURES = ['Console', 'Workflows', 'Agents', 'Auth', 'Queues', 'Schedules', 'MCP'];
-
-function ParitySection() {
+function WhatPikkuIsSection() {
   return (
-    <section id="parity" className={styles.section}>
+    <section id="what-it-is" className={styles.section}>
       <div className={styles.wrap}>
-        <div className={styles.eyebrow}>Local equals production</div>
-        <h2 className={styles.h2}>What your team builds is <em>what you ship.</em></h2>
-        <div className={styles.parityGrid}>
-          <div className={styles.parityVis}>
-            <div className={styles.envCards}>
-              <div className={`${styles.envCard} ${styles.envCardLocal}`}>
-                <span className={styles.envCardLabel}>Local</span>
-                <code className={styles.envCardCmd}>npx pikku dev</code>
-                <div className={styles.envPills}>
-                  {PARITY_FEATURES.map(f => <span key={f} className={styles.envPill}>{f}</span>)}
-                </div>
-              </div>
-              <div className={styles.envCardEq}>=</div>
-              <div className={`${styles.envCard} ${styles.envCardProd}`}>
-                <span className={styles.envCardLabel}>Production</span>
-                <code className={styles.envCardCmd}>pikku deploy</code>
-                <div className={styles.envPills}>
-                  {PARITY_FEATURES.map(f => <span key={f} className={styles.envPill}>{f}</span>)}
-                </div>
-              </div>
-            </div>
-          </div>
-          <ul className={styles.parityList}>
-            <li>The same auth, permissions and validation run in both places.</li>
-            <li>Switch from SQLite to Postgres by swapping the connection string and running migrations — your functions stay untouched.</li>
-            <li>The console you debug in is the console you operate with in production.</li>
-            <li>No "works on my machine." No environment you can't reproduce.</li>
-          </ul>
-        </div>
+        <div className={styles.eyebrow}>What Pikku is</div>
+        <h2 className={styles.h2}>Everything plugs in. <em>Nothing locks in.</em></h2>
+        <p className={styles.secLede}>
+          This isn't a new stack asking you to abandon the one you have. You write functions and say
+          how they're reachable; Pikku wires them to the libraries you'd have picked anyway — and then
+          to whatever the place you're deploying to happens to provide.
+        </p>
+        <StackMatrix />
+        <p className={styles.matrixCaption}>
+          The top two bands never change. That's the whole parity claim:{' '}
+          <code>pikku dev</code> and <code>pikku deploy</code> run the same code against the same
+          libraries — only the bottom row swaps.
+        </p>
       </div>
     </section>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Enterprise — "From day one"
+   Platform ready — what you'd otherwise spend two quarters building
    ════════════════════════════════════════════════════════════════ */
-function EnterpriseSection() {
-  const cards: Array<{ title: string; body: React.ReactNode; code: string }> = [
+function PlatformReadySection() {
+  const cards: Array<{ title: string; cost: string; body: React.ReactNode }> = [
     {
-      title: 'SSO with any provider',
-      body: <>Built on standard OAuth and OIDC. Provide credentials for Google, Microsoft, Okta — or any provider — and your organization signs in. <strong>No authentication code to write or own.</strong></>,
-      code: snippets.betterAuthConfig,
+      title: 'Sign-in your customers already have',
+      cost: 'usually a quarter of work',
+      body: <>Built on standard OAuth and OIDC. Provide credentials for Google, Microsoft, Okta — or any provider — and an organisation signs in with the accounts it already manages. <strong>No authentication code to write, review or own.</strong></>,
     },
     {
-      title: 'Full audit trails',
-      body: <>Decide what to audit and Pikku records who did what, and when — across every entry point. <strong>Compliance-grade history without a separate system.</strong></>,
-      code: snippets.auditDispatch,
+      title: 'A history your auditors accept',
+      cost: 'usually a separate system',
+      body: <>Decide what to audit and Pikku records who did what, and when — across every entry point, not just the ones someone remembered to instrument. <strong>Compliance-grade history with nothing extra to run.</strong></>,
     },
     {
-      title: 'Multitenancy & permissions',
-      body: <>Organizations and tenants are first-class — isolated data, scoped access, and fine-grained permissions wired through everything. <strong>Multi-tenant SaaS without the usual plumbing.</strong></>,
-      code: snippets.permissionsCompact,
+      title: 'Multitenancy that was there from the start',
+      cost: 'usually a rewrite',
+      body: <>Organisations and tenants are first-class — isolated data, scoped access, and fine-grained permissions wired through every entry point. <strong>The thing that is painful to retrofit, already done.</strong></>,
     },
     {
-      title: 'Your own internal tools',
-      body: <>Turn any capability into a command-line tool for your ops and support teams — same auth, same permissions, same audit. <strong>Internal tooling that's safe by default.</strong></>,
-      code: snippets.cliSubcommands,
+      title: "Safe tools for the people who aren't engineers",
+      cost: 'usually a backlog item forever',
+      body: <>Turn any capability into a command your ops and support teams can run — carrying the same auth, the same permissions and the same audit trail as everything else. <strong>Internal tooling that cannot quietly go around the rules.</strong></>,
     },
   ];
 
   return (
-    <section id="enterprise" className={styles.sectionDark}>
+    <section id="platform-ready" className={styles.sectionDark}>
       <div className={styles.wrap}>
-        <div className={styles.eyebrow}>Enterprise from day one</div>
-        <h2 className={styles.h2}>The requirements your platform needs — <em>already met.</em></h2>
+        <div className={styles.eyebrow}>Platform ready</div>
+        <h2 className={styles.h2}>The work that usually comes <em>after launch.</em></h2>
         <p className={styles.secLede}>
-          SSO, audit, multitenancy and granular permissions aren't a premium tier or a future quarter.
-          They ship in the open-source binary.
+          SSO, audit, multitenancy and granular permissions are the things that hold a deal up
+          eighteen months from now. They are in the open-source binary on day one, not behind a
+          sales call or a future quarter.
         </p>
         <div className={styles.entGrid}>
           {cards.map((c) => (
             <div key={c.title} className={styles.entCard}>
+              <div className={styles.entCost}>{c.cost}</div>
               <h3>{c.title}</h3>
               <p>{c.body}</p>
-              <pre className={styles.miniCode}>{c.code}</pre>
             </div>
           ))}
         </div>
+        <p className={styles.entFoot}>
+          Engineers who want to see the code —{' '}
+          <Link href="/developers">it's all on the developer page →</Link>
+        </p>
       </div>
     </section>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Console — screenshots
+   Console — a carousel through the real pages
    ════════════════════════════════════════════════════════════════ */
+const CONSOLE_SLIDES: { id: string; label: string; blurb: string; src?: string }[] = [
+  { id: 'overview',  label: 'Overview',  blurb: 'Every function, wiring and service in the system, on one page.', src: '/img/console-screenshot.webp' },
+  { id: 'http',      label: 'HTTP',      blurb: 'Browse and call every route, with the real types and the real permissions.' },
+  { id: 'queues',    label: 'Queues',    blurb: 'Watch workers drain, inspect payloads, retry what failed.' },
+  { id: 'workflows', label: 'Workflows', blurb: 'Step through a run, see where it paused, replay it from any point.' },
+  { id: 'agents',    label: 'Agents',    blurb: 'The playground — run an agent, read its tool calls, approve what it wants to do.' },
+  { id: 'emails',    label: 'Emails',    blurb: 'Preview every transactional message before one is ever sent.' },
+  { id: 'audit',     label: 'Audit',     blurb: 'Who did what, when, and through which entry point.' },
+  { id: 'security',  label: 'Security',  blurb: 'Permissions, scopes and personas — what each caller can actually reach.' },
+];
+
 function ConsoleSection() {
+  const [i, setI] = React.useState(0);
+  const slide = CONSOLE_SLIDES[i];
+  const go = (d: number) => setI((n) => (n + d + CONSOLE_SLIDES.length) % CONSOLE_SLIDES.length);
+
   return (
     <section id="console" className={styles.sectionAlt}>
       <div className={styles.wrap}>
         <div className={styles.eyebrow}>The console</div>
         <h2 className={styles.h2}>See everything running. <em>Nothing is a black box.</em></h2>
         <p className={styles.secLede}>
-          The operating console ships with the platform. Inspect functions, watch queues, replay workflows,
-          preview email, review tests and permissions — for the exact system in front of you.
+          The operating console ships with the platform — locally and in production, for the exact
+          system in front of you.
         </p>
 
-        <div className={styles.consoleGrid}>
-          <ScreenshotFrame
-            src="/img/console-screenshot.webp"
-            alt="Pikku Console — browse and run functions, inspect wirings"
-            addr="localhost:3000/console — Pikku Console"
-            wide
-          />
+        <div className={styles.carousel}>
+          <div className={styles.carTabs} role="tablist" aria-label="Console pages">
+            {CONSOLE_SLIDES.map((sl, n) => (
+              <button
+                key={sl.id}
+                type="button"
+                role="tab"
+                aria-selected={n === i}
+                className={`${styles.carTab} ${n === i ? styles.carTabOn : ''}`}
+                onClick={() => setI(n)}
+              >
+                {sl.label}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.carStage}>
+            <button type="button" className={styles.carArrow} onClick={() => go(-1)} aria-label="Previous page">‹</button>
+
+            <div className={styles.carFrame} key={slide.id}>
+              <div className={styles.screenshotChrome}>
+                <span className={styles.termDot} style={{ background: '#e06c5b' }} />
+                <span className={styles.termDot} style={{ background: '#e0b34b' }} />
+                <span className={styles.termDot} style={{ background: '#79b06a' }} />
+                <span className={styles.screenshotAddr}>localhost:3000/console/{slide.id}</span>
+              </div>
+              {slide.src ? (
+                <img src={slide.src} alt={`Pikku Console — ${slide.label}`} loading="lazy" />
+              ) : (
+                <div className={styles.carPlaceholder}>
+                  <span className={styles.carPlaceholderLabel}>{slide.label}</span>
+                  <span className={styles.carPlaceholderNote}>screenshot coming</span>
+                </div>
+              )}
+            </div>
+
+            <button type="button" className={styles.carArrow} onClick={() => go(1)} aria-label="Next page">›</button>
+          </div>
+
+          <p className={styles.carBlurb}>
+            <span className={styles.carBlurbLabel}>{slide.label}</span>
+            {slide.blurb}
+          </p>
         </div>
-        <p className={styles.consoleCaption}>
-          Browse functions · watch queues · replay workflows · preview email · inspect permissions
-        </p>
       </div>
     </section>
   );
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Deploy — "You choose the destination"
+   Deploy — the open-source path, positioned plainly
    ════════════════════════════════════════════════════════════════ */
 function DeploySection() {
   const tiers: {
-    step: string;
     title: string;
     who: string;
     body: string;
     cmd: React.ReactNode;
-    pill: 'oss' | 'managed';
     featured?: boolean;
   }[] = [
     {
-      step: 'OPTION 01',
       title: 'Standalone',
-      who: 'Run it anywhere you control.',
-      body: 'Bundle the entire platform into a single executable and run it on your own infrastructure. A complete server in one file.',
+      who: 'One file. Server or desktop.',
+      body: 'Bundles the API, the console and your frontend into a single Node bundle or compiled Bun binary. Copy it onto a box and run it — or wrap it as a desktop app.',
       cmd: <><span className={styles.thl}>pikku</span> deploy apply -p standalone</>,
-      pill: 'oss',
-    },
-    {
-      step: 'OPTION 02',
-      title: 'Your cloud',
-      who: 'Your account, your bill.',
-      body: 'Deploy the open-source way to AWS or Cloudflare. Same application, your infrastructure, no lock-in.',
-      cmd: <><span className={styles.thl}>pikku</span> deploy apply -p aws · cloudflare</>,
-      pill: 'oss',
-    },
-    {
-      step: 'OPTION 03',
-      title: 'Fabric',
-      who: 'Managed, with an AI that knows your system.',
-      body: 'Push and forget. Every function becomes a serverless worker, fully observable — and you can talk to your platform in plain language.',
-      cmd: <><span className={styles.thl}>pikku</span> fabric deploy apply</>,
-      pill: 'managed',
       featured: true,
+    },
+    {
+      title: 'Your cloud, serverful',
+      who: 'A long-running server you control.',
+      body: 'Deploy to any host that runs Node or Bun — a VM, a container, your existing platform. Nothing about the application changes.',
+      cmd: <><span className={styles.thl}>pikku</span> deploy apply -p aws</>,
+    },
+    {
+      title: 'Your cloud, serverless',
+      who: 'Scales to zero, and back.',
+      body: 'Every function becomes the primitive its wiring implies — Lambda and SQS on AWS, Workers and Queues on Cloudflare. Same code, no rewrite.',
+      cmd: <><span className={styles.thl}>pikku</span> deploy apply -p cloudflare</>,
     },
   ];
 
@@ -304,22 +320,20 @@ function DeploySection() {
     <section id="deploy" className={styles.section}>
       <div className={styles.wrap}>
         <div className={styles.eyebrow}>When you're ready to ship</div>
-        <h2 className={styles.h2}>One command to deploy. <em>You choose the destination.</em></h2>
+        <h2 className={styles.h2}>Deploy it. Host it yourself. <em>Pick server or serverless.</em></h2>
         <p className={styles.secLede}>
-          The same application ships three ways. Stay fully in control, run it in your own cloud,
-          or hand operations to us — without rewriting anything.
+          One command, and it's live on infrastructure you own. The choice between a long-running
+          server and functions that scale to zero is a flag — not an architecture you commit to on
+          day one and regret on day four hundred.
         </p>
         <div className={styles.tiers}>
           {tiers.map((t) => (
             <div key={t.title} className={`${styles.tier} ${t.featured ? styles.tierFeatured : ''}`}>
-              <div className={styles.tierStep}>{t.step}</div>
               <h3>{t.title}</h3>
               <div className={styles.tierWho}>{t.who}</div>
               <p>{t.body}</p>
               <code className={styles.tierCode}>{t.cmd}</code>
-              <span className={t.pill === 'oss' ? styles.pillOss : styles.pillManaged}>
-                {t.pill === 'oss' ? 'open source' : 'managed'}
-              </span>
+              <span className={styles.pillOss}>open source</span>
             </div>
           ))}
         </div>
@@ -329,7 +343,7 @@ function DeploySection() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Fabric — "Talk to your platform"
+   Fabric — the managed option, stated once
    ════════════════════════════════════════════════════════════════ */
 function FabricSection() {
   return (
@@ -339,45 +353,19 @@ function FabricSection() {
           <div>
             <div className={styles.fabricEyebrow}>Fabric — the managed home for Pikku</div>
             <h2 className={styles.fabricH2}>
-              Talk to your platform. <em>It already understands it.</em>
+              Or don't host it at all. <em>We'll run it.</em>
             </h2>
             <p className={styles.fabricP}>
-              Because Pikku knows your entire system, Fabric gives you an assistant that understands your
-              data, your logic and your operations. Ask for a change in plain language — and watch it
-              happen, live.
+              The same application, hosted and observable, with an assistant that understands your
+              data and your logic because Pikku already describes them. Push and forget.
             </p>
             <p className={styles.fabricP}>
-              It's the same application your team ran locally, now hosted, observable, and conversational.
-            </p>
-            <p className={styles.fabricP}>
-              <strong>Not a developer?</strong> This works for you too — describe the product you want and
-              the assistant builds the data, the screens, the emails, and the deployment. No terminal, no code.
+              Nothing about your code changes when you move either way — Fabric is a deploy target,
+              not a different product.
             </p>
             <Link href="https://pikkufabric.com" className={styles.fabricBtn}>
               Explore Fabric
             </Link>
-          </div>
-          <div className={styles.fabricChat}>
-            <div className={styles.fmsg}>
-              <div className={`${styles.fav} ${styles.favU}`}>You</div>
-              <div className={styles.fbub}>Add a weekly summary email for active customers.</div>
-            </div>
-            <div className={styles.fmsg}>
-              <div className={`${styles.fav} ${styles.favA}`}>✦</div>
-              <div className={`${styles.fbub} ${styles.fbubAi}`}>
-                Done — created the job, scheduled it weekly, and built the email. Preview it in the console.
-              </div>
-            </div>
-            <div className={styles.fmsg}>
-              <div className={`${styles.fav} ${styles.favU}`}>You</div>
-              <div className={styles.fbub}>Ship it.</div>
-            </div>
-            <div className={styles.fmsg}>
-              <div className={`${styles.fav} ${styles.favA}`}>✦</div>
-              <div className={`${styles.fbub} ${styles.fbubAi}`}>
-                <span className={styles.fbubMono}>✓ live</span> — deployed as a serverless worker.
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -429,8 +417,8 @@ export default function Home() {
         <Hero />
         <TrustStrip />
         <PlatformSection />
-        <ParitySection />
-        <EnterpriseSection />
+        <WhatPikkuIsSection />
+        <PlatformReadySection />
         <ConsoleSection />
         <DeploySection />
         <FabricSection />

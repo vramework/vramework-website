@@ -76,7 +76,7 @@ Eliminate the copy-paste-drift cycle. Instead of writing separate handlers for e
 ## Objections
 | Objection | Response |
 |-----------|----------|
-| "Is this production-ready?" | Used in production by 5 companies (AgreeWe, marta, BambooRose, etc.) |
+| "Is this production-ready?" | Used in production by 4 companies (marta, BambooRose, HeyGermany, Calligraphy Cut) |
 | "Isn't pikkuFunc() still framework code?" | It's a thin wrapper — your logic is a plain TypeScript function. No decorators, no magic. |
 | "What if I only need HTTP?" | Start with HTTP. Add protocols later without touching your functions. Zero upfront cost. |
 | "How is this different from NestJS?" | Plain functions, not classes with decorators. No DI container. No magic — just functions and wirings. |
@@ -103,7 +103,7 @@ Eliminate the copy-paste-drift cycle. Instead of writing separate handlers for e
 **Rules:** Never fabricate statistics. Don't claim "no framework boilerplate." Respect the reader's intelligence.
 
 ## Proof Points
-**Production users:** AgreeWe, HeyGermany, marta, BambooRose, Calligraphy Cut
+**Production users:** HeyGermany, marta, BambooRose, Calligraphy Cut
 **Testimonials:**
 > "So many places in my code base have like three entry points: CLI, public HTTP API and internally from within the API. Would be so nice having everything just an invoke away. With Nest it's a pain because you basically have to start the whole API up just to run CLI command." — Alex Harley, CTO @ Bamboo Rose
 **Open source:** MIT licensed, GitHub at pikkujs/pikku

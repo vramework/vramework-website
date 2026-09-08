@@ -123,7 +123,6 @@ export function AsciiHero() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-2 md:gap-6">
             {[
-              { name: 'AgreeWe', logo: 'agreewe-dark.png', url: 'https://www.agreewe.com' },
               { name: 'HeyGermany', logo: 'heygermany-dark.svg', url: 'https://hey-germany.com' },
               { name: 'marta', logo: 'marta-light.svg', url: 'https://marta.de' },
               { name: 'BambooRose', logo: 'bamboorose-dark.png', url: 'https://bamboorose.com' },
