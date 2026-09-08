@@ -341,3 +341,38 @@
 
 /* ── Fabric card is single-column now ──────────────────────── */
 .fabricCard { grid-template-columns: 1fr; }
+
+/* ── Console: the two surfaces ─────────────────────────────── */
+.groupToggle {
+  display: inline-flex; gap: 4px; margin-top: 30px; padding: 4px;
+  border-radius: 999px; border: 1px solid var(--paper-border);
+  background: var(--paper-bg);
+}
+.groupBtn {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  padding: 9px 18px; border-radius: 999px; cursor: pointer;
+  border: none; background: transparent; color: var(--paper-text-muted);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.groupBtn:hover { color: var(--paper-text); }
+.groupBtn:focus-visible { outline: 2px solid var(--paper-accent); outline-offset: 2px; }
+.groupBtnOn { background: var(--paper-accent); color: var(--paper-bg-alt); }
+.groupBtnOn:hover { color: var(--paper-bg-alt); }
+@media (max-width: 560px) {
+  .groupToggle { display: flex; flex-direction: column; border-radius: 14px; }
+  .groupBtn { border-radius: 10px; }
+}
+
+.groupTagline {
+  margin: 14px 0 0; max-width: 62ch;
+  font-family: 'Newsreader', Georgia, serif; font-style: italic;
+  font-size: 16.5px; line-height: 1.5; color: var(--paper-text-muted);
+}
+
+.carousel { margin-top: 30px; }
+
+.consoleFoot {
+  margin: 34px auto 0; max-width: 70ch; text-align: center;
+  padding-top: 24px; border-top: 1px solid var(--paper-border);
+  font-size: 15px; line-height: 1.6; color: var(--paper-text-muted);
+}

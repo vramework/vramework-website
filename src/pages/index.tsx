@@ -207,23 +207,59 @@ function PlatformReadySection() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   Console — a carousel through the real pages
+   Two surfaces, two audiences.
+
+   @pikku/addon-console is the local surface — it edits code, so it belongs
+   on a laptop. @pikku/addon-admin is the deployed one — the user directory,
+   roles and scopes, credentials and the audit trail, as ordinary RPCs, which
+   is what someone operating a live system actually needs.
    ════════════════════════════════════════════════════════════════ */
-const CONSOLE_SLIDES: { id: string; label: string; blurb: string; src?: string }[] = [
-  { id: 'overview',  label: 'Overview',  blurb: 'Every function, wiring and service in the system, on one page.', src: '/img/console-screenshot.webp' },
-  { id: 'http',      label: 'HTTP',      blurb: 'Browse and call every route, with the real types and the real permissions.' },
-  { id: 'queues',    label: 'Queues',    blurb: 'Watch workers drain, inspect payloads, retry what failed.' },
-  { id: 'workflows', label: 'Workflows', blurb: 'Step through a run, see where it paused, replay it from any point.' },
-  { id: 'agents',    label: 'Agents',    blurb: 'The playground — run an agent, read its tool calls, approve what it wants to do.' },
-  { id: 'emails',    label: 'Emails',    blurb: 'Preview every transactional message before one is ever sent.' },
-  { id: 'audit',     label: 'Audit',     blurb: 'Who did what, when, and through which entry point.' },
-  { id: 'security',  label: 'Security',  blurb: 'Permissions, scopes and personas — what each caller can actually reach.' },
+type Slide = { id: string; label: string; blurb: string; src?: string };
+
+const CONSOLE_GROUPS: {
+  id: string;
+  name: string;
+  tagline: string;
+  slides: Slide[];
+}[] = [
+  {
+    id: 'console',
+    name: 'Console — while you build',
+    tagline: 'Runs on your laptop and edits code: change a function body, a template, an agent config, and the server picks it up.',
+    slides: [
+      { id: 'overview', label: 'Overview', blurb: 'Every function, wiring and service in the system, on one page.', src: '/img/console-screenshot.webp' },
+      { id: 'functions', label: 'Functions', blurb: 'Read a function body, change it, and watch the server pick it up.' },
+      { id: 'apis', label: 'APIs', blurb: 'Every route, channel and RPC with its real types — call any of them from here.' },
+      { id: 'workflow', label: 'Workflows', blurb: 'The graph as written, next to the runs that went through it.' },
+      { id: 'emails', label: 'Emails', blurb: 'Edit a template and preview the message before one is ever sent.' },
+      { id: 'agents', label: 'Agents', blurb: 'Tune an agent config, then run it in the playground against real tools.' },
+      { id: 'scenarios', label: 'Scenarios', blurb: 'The end-to-end tests, and what they covered on the last run.' },
+    ],
+  },
+  {
+    id: 'admin',
+    name: 'Admin — once it is live',
+    tagline: 'Ships with the deployment for whoever operates it. Changes take effect on the running system — no deploy, no engineer, everything audited.',
+    slides: [
+      { id: 'users', label: 'Users', blurb: 'The directory — invite, ban, reset a password, revoke every session someone has open.' },
+      { id: 'scopes', label: 'Roles & scopes', blurb: 'Build a role, grant scopes, move people in and out of it while the system runs.' },
+      { id: 'audit', label: 'Audit', blurb: 'Who did what, when, and through which entry point — including every change made on these screens.' },
+      { id: 'secrets', label: 'Secrets', blurb: 'Read and rotate secrets in place, without a redeploy to pick them up.' },
+      { id: 'credentials', label: 'Credentials', blurb: 'Per-user provider credentials — set, inspect status, revoke.' },
+      { id: 'auth-providers', label: 'Auth providers', blurb: 'Which identity providers are live, and for whom.' },
+      { id: 'workflow', label: 'Workflow runs', blurb: 'What is in flight, what paused for approval, what failed and where.' },
+      { id: 'agents/threads', label: 'AI conversations', blurb: 'Every agent thread, message by message, with the tool calls it made.' },
+    ],
+  },
 ];
 
 function ConsoleSection() {
+  const [g, setG] = React.useState(0);
   const [i, setI] = React.useState(0);
-  const slide = CONSOLE_SLIDES[i];
-  const go = (d: number) => setI((n) => (n + d + CONSOLE_SLIDES.length) % CONSOLE_SLIDES.length);
+  const group = CONSOLE_GROUPS[g];
+  const slide = group.slides[i];
+  const go = (d: number) => setI((n) => (n + d + group.slides.length) % group.slides.length);
+  const pickGroup = (n: number) => { setG(n); setI(0); };
 
   return (
     <section id="console" className={styles.sectionAlt}>
@@ -231,13 +267,30 @@ function ConsoleSection() {
         <div className={styles.eyebrow}>The console</div>
         <h2 className={styles.h2}>See everything running. <em>Nothing is a black box.</em></h2>
         <p className={styles.secLede}>
-          The operating console ships with the platform — locally and in production, for the exact
-          system in front of you.
+          Two surfaces, both shipped with the platform, both running against the exact system in
+          front of you. One is for building it. The other is for whoever has to operate it after
+          you've stopped touching it.
         </p>
 
+        <div className={styles.groupToggle} role="tablist" aria-label="Console surface">
+          {CONSOLE_GROUPS.map((gr, n) => (
+            <button
+              key={gr.id}
+              type="button"
+              role="tab"
+              aria-selected={n === g}
+              className={`${styles.groupBtn} ${n === g ? styles.groupBtnOn : ''}`}
+              onClick={() => pickGroup(n)}
+            >
+              {gr.name}
+            </button>
+          ))}
+        </div>
+        <p className={styles.groupTagline}>{group.tagline}</p>
+
         <div className={styles.carousel}>
-          <div className={styles.carTabs} role="tablist" aria-label="Console pages">
-            {CONSOLE_SLIDES.map((sl, n) => (
+          <div className={styles.carTabs} role="tablist" aria-label={`${group.name} pages`}>
+            {group.slides.map((sl, n) => (
               <button
                 key={sl.id}
                 type="button"
@@ -254,7 +307,7 @@ function ConsoleSection() {
           <div className={styles.carStage}>
             <button type="button" className={styles.carArrow} onClick={() => go(-1)} aria-label="Previous page">‹</button>
 
-            <div className={styles.carFrame} key={slide.id}>
+            <div className={styles.carFrame} key={`${group.id}-${slide.id}`}>
               <div className={styles.screenshotChrome}>
                 <span className={styles.termDot} style={{ background: '#e06c5b' }} />
                 <span className={styles.termDot} style={{ background: '#e0b34b' }} />
@@ -279,6 +332,12 @@ function ConsoleSection() {
             {slide.blurb}
           </p>
         </div>
+
+        <p className={styles.consoleFoot}>
+          The admin half is the internal tool you were going to build anyway — users, roles,
+          secrets, audits — except it already knows your permissions, and every change it makes
+          lands in the same audit trail as everything else.
+        </p>
       </div>
     </section>
   );
