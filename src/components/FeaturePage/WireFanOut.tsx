@@ -9,7 +9,7 @@ import styles from './wire-fan-out.module.css';
 // Sidebar order (sidebars.ts) — the site's canonical ordering of the wires.
 const WIRES = [
   'rpc', 'http', 'websocket', 'queue', 'cron', 'workflow',
-  'bot', 'mcp', 'cli', 'trigger', 'gateway',
+  'agent', 'mcp', 'cli', 'trigger', 'gateway',
 ] as const;
 
 // 366 leaves the longest label ('websocket') the same 12px margin the node

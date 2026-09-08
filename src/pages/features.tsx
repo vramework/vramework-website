@@ -9,7 +9,7 @@ import snippets from '../data/snippets.json';
 import { wireTypes, wireCategories, type WireCategory } from '../data/wireTypes';
 import {
   GitBranch, Wrench, Shield, Copy, Check, Scissors,
-  Package, Puzzle, Monitor, Key, ArrowRight,
+  Package, Puzzle, Monitor, Key, ArrowRight, Gauge,
 } from 'lucide-react';
 import styles from './features.module.css';
 
@@ -66,6 +66,12 @@ const frameworkCards: FeatureCard[] = [
     url: '/core/console',
     description: 'Visual control plane — explore functions, run workflows, test agents, and manage config.',
     icon: Monitor,
+  },
+  {
+    title: 'Scorers & Judges',
+    url: '/wires/agent#scoring',
+    description: 'Grade what an agent actually did — in code or with a second model, in tests and on live traffic.',
+    icon: Gauge,
   },
   {
     title: 'Addons',

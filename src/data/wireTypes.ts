@@ -100,10 +100,10 @@ export const wireTypes: WireType[] = [
   },
   // AI & Orchestration
   {
-    id: 'bot',
+    id: 'agent',
     label: 'AI Agents',
     description: 'Conversational AI with tools',
-    url: '/wires/bot',
+    url: '/wires/agent',
     category: 'AI & Orchestration',
     icon: BotIcon,
     badge: 'Alpha',

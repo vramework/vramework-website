@@ -198,13 +198,15 @@ const config: Config = {
             { label: 'Triggers', to: '/wires/trigger' },
             { label: 'CLI', to: '/wires/cli' },
             // AI & Orchestration
-            { label: 'AI Agents', to: '/wires/bot' },
+            { label: 'AI Agents', to: '/wires/agent' },
             { label: 'Workflows', to: '/wires/workflow' },
             { label: 'Gateway', to: '/wires/gateway' },
+            { label: 'Scorers & Judges', to: '/wires/agent#scoring' },
             // Deployment
             { label: 'Cloudflare Workers', to: '/deploy/cloudflare' },
             { label: 'AWS Serverless', to: '/deploy/serverless' },
             { label: 'Azure Functions', to: '/deploy/azure' },
+            { label: 'Standalone', to: '/deploy/standalone' },
             // Platform
             { label: 'Tree-Shaking', to: '/core/treeshaking' },
             { label: 'Built-in Services', to: '/core/built-in-services' },

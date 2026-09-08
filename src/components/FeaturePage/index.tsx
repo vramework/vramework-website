@@ -13,7 +13,7 @@ import {
   Globe, GitBranch, Pause, Wifi, Send, Radio, Power,
   UserPlus, CreditCard, FileText, Calendar, SkipForward,
   Webhook, Plug, FolderTree, Link2, Paintbrush, Terminal,
-  Sparkles, Play, Code2,
+  Sparkles, Play, Code2, Gauge, Scale,
 } from 'lucide-react';
 import {
   HttpIcon, WebSocketIcon, SSEIcon, CronIcon, QueueIcon,
@@ -64,6 +64,7 @@ const LUCIDE: Record<string, React.FC<{ size?: number; className?: string; style
   'webhook': Webhook, 'plug': Plug, 'folder-tree': FolderTree,
   'link-2': Link2, 'paintbrush': Paintbrush, 'terminal': Terminal,
   'sparkles': Sparkles, 'play': Play, 'code-2': Code2,
+  'gauge': Gauge, 'scale': Scale,
 };
 
 const WIRE: Record<string, React.FC<{ size?: number }>> = {

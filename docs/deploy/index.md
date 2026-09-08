@@ -228,15 +228,29 @@ npm install @pikku/deploy-azure
 - Timer triggers (cron)
 - `host.json` and `local.settings.json`
 
-### Standalone Binary
+### Standalone
 
-Bundles your entire project into a single executable using `@yao-pkg/pkg`. Includes a uWebSockets.js server and in-process scheduler — no cloud provider needed.
+Collapses the entire project into a single artifact — HTTP server, in-process scheduler and queue workers, database migrations and, optionally, your built frontend. No cloud provider needed.
 
 ```bash
-npm install @pikku/deploy-standalone
+npm install -D @pikku/deploy-standalone
 ```
 
-Good for self-hosted deployments, on-premise, or edge devices.
+Two runtimes, chosen with `--runtime`:
+
+- `node` (default) — a `bundle.js` served by `@pikku/node-http-server`, the same server `pikku dev` runs. Start it with `node bundle.js`.
+- `bun` — compiled into a self-contained executable with `bun build --compile`, served by `@pikku/bun-server`. Nothing needs installing on the target host.
+
+```bash
+npx pikku deploy apply --provider standalone
+npx pikku deploy apply --provider standalone --runtime bun
+```
+
+The artifact answers `--version` and `--help` without opening a database, and runs its own migrations with `./my-app db migrate`. Point `PIKKU_DATA_DIR` at a directory that outlives a release so a SQLite database is not replaced along with the bundle.
+
+Adding `--desktop` to a `--runtime bun` build also generates a Tauri shell that runs the binary as a sidecar; `--desktop-url` points that shell at an already-deployed server and bundles nothing. Desktop builds are unsigned and do not auto-update.
+
+Good for self-hosted deployments, on-premise, edge devices, or handing someone an app.
 
 ## Build Output
 
