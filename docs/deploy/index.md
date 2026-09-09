@@ -52,6 +52,124 @@ Add a `deploy` section to your `pikku.config.json`:
 | `providers` | `Record<string, string>` | Map of provider names to adapter packages |
 | `defaultProvider` | `string` | Which provider to use when `--provider` isn't passed |
 | `serverlessIncompatible` | `string[]` | Function names that can't run serverless (routed to a server fallback) |
+| `defaultTarget` | `"serverless"` \| `"server"` | Target for functions with no explicit `deploy` flag (default: `serverless`) |
+| `grouping` | `object` | How many deployment units the app's functions collapse into — see below |
+
+## Deployment unit grouping
+
+By default every function becomes its own deployment unit — its own worker, its
+own bundle, its own bindings. That gives maximum isolation, and it is the right
+default, but it is not always the right shape: a large app can reach a hundred
+workers whose bundles are mostly the same framework and third-party code
+repeated, and every one of them is a build and an upload.
+
+`deploy.grouping` decides how many units you actually deploy.
+
+```json
+{
+  "deploy": {
+    "defaultTarget": "serverless",
+    "serverlessIncompatible": ["pdfService"],
+    "grouping": {
+      "strategy": "single",
+      "rules": [
+        { "unit": "console", "addon": "console" },
+        { "unit": "pdf", "tags": ["pdf"] },
+        { "unit": "webhooks", "routes": ["/api/webhooks/*"] }
+      ]
+    }
+  }
+}
+```
+
+### `strategy`
+
+What happens to a function that no rule matches.
+
+| Value | Behaviour |
+|-------|-----------|
+| `"function"` | One unit per function. The default, and what you get with no `grouping` block at all. |
+| `"single"` | Every unmatched function shares one unit named `app`. |
+
+### `rules`
+
+Rules are evaluated **in order, first match wins**. Which direction a rule works
+in depends on the strategy: under `"function"` a rule *merges* functions into a
+shared unit, under `"single"` it *carves* them out of the shared one.
+
+| Key | Matches |
+|-----|---------|
+| `unit` | The deployment unit name. Required, and must be unique across rules. |
+| `tags` | A function carrying **any** of these tags, from the function itself or from any wiring that reaches it. |
+| `addon` | An addon namespace — places all of that addon's exposed functions in the unit. |
+| `routes` | Glob patterns matched against a function's wired HTTP routes, with or without `globalHTTPPrefix`. |
+
+Predicates within a single rule are ANDed, so
+`{ "unit": "a", "tags": ["admin"], "routes": ["/api/admin/*"] }` matches only
+functions that are both tagged `admin` and served under `/api/admin`. A rule
+must carry at least one predicate.
+
+:::tip Tags usually come from the wiring
+Most projects tag the wiring rather than the function:
+
+```typescript
+wireHTTP({ method: 'get', route: '/todos', func: getTodos, tags: ['todos'] })
+```
+
+A rule matching `todos` picks up `getTodos` from that wiring. The same holds for
+`wireQueueWorker`, `wireScheduledTask`, `wireChannel` and the MCP wirings — a
+function inherits the tags of every wiring that points at it, unioned with any
+it declares itself.
+:::
+
+Addons keep their own unit (`addon-<namespace>`) unless an `addon` rule says
+otherwise — an addon is a separate package, so folding it into the app's unit
+is something you opt into.
+
+### What merging does
+
+| Field | Merged as |
+|-------|-----------|
+| `functionIds` | Union |
+| `services` | Union by capability and source service name |
+| `dependsOn` | Union, minus the unit itself |
+| `tags` | Union |
+| HTTP routes | Folded into one `fetch` handler |
+| Queue and scheduled handlers | Kept as separate handler entries — one worker can serve all three |
+
+### Grouping never changes a target
+
+Functions that resolve to different deploy targets cannot share a unit. If a
+rule would put a `serverless` and a `server` function together, the build fails
+naming both sides rather than promoting the group to `server`:
+
+```
+deploy.grouping: unit "app" would hold both serverless and server functions
+(listRetreats vs adminPurge). Give the server-target functions their own rule,
+or drop them from "app".
+```
+
+The fix is a carve-out rule for the server-target functions. This is deliberate:
+a grouping rule is about packaging, and it must not be able to move a function
+off serverless as a side effect.
+
+### Choosing a shape
+
+Grouping is authored, not inferred. There is no automatic packing by bundle
+size, because bundle overlap is near-total — the shared framework floor is in
+every unit — so clustering on shared bytes puts everything in one bin, and
+clustering on *unique* bytes has almost no signal to work with. It would also be
+unstable: adding one function reshuffles the bins and churns unrelated workers.
+
+Tags are the packing. Pick boundaries that mean something to you — a domain, a
+secret scope, a deploy cadence — and write them down.
+
+:::info Grouping widens secret scope
+Every function in a unit can read every secret and credential that unit is
+granted. Grouping is therefore a security decision as well as a packaging one:
+prefer a carve-out to merging something that holds a secret the rest of the
+group has no business reading.
+:::
 
 ## Commands
 

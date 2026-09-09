@@ -273,6 +273,7 @@ Configure deployment providers and settings.
 | `deploy.defaultProvider` | `string` | Default provider for `pikku deploy` commands (default: `cloudflare`) |
 | `deploy.serverlessIncompatible` | `string[]` | Function names that can't run in serverless (routed to server fallback) |
 | `deploy.defaultTarget` | `"serverless"` \| `"server"` | Default deploy target for functions without an explicit `deploy` flag (default: `serverless`) |
+| `deploy.grouping` | `object` | How many deployment units the app's functions collapse into — see [Deployment unit grouping](../deploy/index.md#deployment-unit-grouping) |
 
 ## Addon Mode
 
