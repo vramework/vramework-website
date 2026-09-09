@@ -153,6 +153,26 @@ The fix is a carve-out rule for the server-target functions. This is deliberate:
 a grouping rule is about packaging, and it must not be able to move a function
 off serverless as a side effect.
 
+### Reading back why a unit is where it is
+
+`deployment-manifest.json` records the decision, not just the outcome. Each unit
+carries two optional fields:
+
+| Field | Present when | Says |
+|-------|--------------|------|
+| `groupedBy` | A rule matched | The rule that put these functions together, verbatim |
+| `targetForcedBy` | The target was forced | The `serverlessIncompatible` services that crossed the unit to `server` |
+
+Their absence carries the same weight as their presence. A unit with no
+`groupedBy` came from the fallback — one unit per function, or the shared `app`
+unit under `strategy: "single"`. A unit with no `targetForcedBy` is on the
+target it was *asked* for, through a function's own `deploy` flag or through
+`defaultTarget`, rather than one it was pushed onto.
+
+That is what makes the refusal above diagnosable: read `targetForcedBy` on the
+server-target unit to see which service crossed it, and `groupedBy` to see which
+rule to carve the function out of.
+
 ### Choosing a shape
 
 Grouping is authored, not inferred. There is no automatic packing by bundle
