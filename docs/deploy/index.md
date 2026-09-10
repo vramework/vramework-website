@@ -89,13 +89,48 @@ What happens to a function that no rule matches.
 | Value | Behaviour |
 |-------|-----------|
 | `"function"` | One unit per function. The default, and what you get with no `grouping` block at all. |
+| `"services"` | One unit per distinct set of singleton services. |
 | `"single"` | Every unmatched function shares one unit named `app`. |
+
+#### `"services"` in detail
+
+The middle ground when one-per-function is too many units and `"single"` is too
+coarse. Functions are keyed on the singleton services their bodies destructure,
+minus the ones every unit builds regardless — `config`, `logger`, `variables`,
+`schema`, `secrets`, and the per-request `rpc`, `mcp`, `channel` and
+`userSession`.
+
+Each unit is named for its set, so a plan reads as what each unit builds:
+
+```
+svc-base                    19 functions   (nothing beyond the defaults)
+svc-todo-store               9 functions
+svc-event-hub-todo-store     4 functions
+svc-workflow-service         4 functions
+svc-kysely                   1 function
+```
+
+Every such unit records its key as `servicesKey` in `deployment-manifest.json`,
+which is what tells two units apart when their capability lists look identical —
+`workflowService` and `workflowRunService` both report as `workflow-state`.
+
+The deploy target is part of the key. A `server` unit is named with a `-server`
+suffix and never merges with its serverless twin, which is why this strategy
+cannot produce the mixed-target refusal described below: two functions can need
+exactly the same services and still run in different places, because a function
+may declare `deploy: "server"` itself without any service crossing it.
+
+How much this saves depends on how varied the app's service use is. On the
+`templates/functions` app it turns 44 units into 10. On an app where nearly every
+function reaches the same database it collapses to something close to `"single"`
+with a few carve-outs — worth checking the plan before adopting it.
 
 ### `rules`
 
-Rules are evaluated **in order, first match wins**. Which direction a rule works
-in depends on the strategy: under `"function"` a rule *merges* functions into a
-shared unit, under `"single"` it *carves* them out of the shared one.
+Rules are evaluated **in order, first match wins**, and always beat the
+strategy. Which direction a rule works in depends on the strategy: under
+`"function"` a rule *merges* functions into a shared unit, under `"single"` or
+`"services"` it *carves* them out.
 
 | Key | Matches |
 |-----|---------|
