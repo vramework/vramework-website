@@ -126,6 +126,15 @@ Addons keep their own unit (`addon-<namespace>`) unless an `addon` rule says
 otherwise — an addon is a separate package, so folding it into the app's unit
 is something you opt into.
 
+A unit only bootstraps the addons it actually uses. The `wireAddon` call that
+declares an instance lives in one of your source files, and that file is
+imported into a unit's generated bootstrap only while at least one addon it
+wires survives that unit's filter — so a unit holding none of an addon's
+functions neither registers them nor bundles the addon's dependencies. Wiring
+several addons from a single file keeps them together: the file is the unit of
+attribution, so give an addon its own wiring file if you want it dropped
+independently.
+
 ### What merging does
 
 | Field | Merged as |
