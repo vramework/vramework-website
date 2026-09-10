@@ -165,6 +165,12 @@ functions, middleware and permissions reach. A `services.ts` that constructs
 unconditionally opts out of that entirely: every unit builds every service, and
 the split costs bytes without saving any.
 
+Runtimes are split the same way. `wire.rpc.agent` is offered by every unit, but
+the agent runtime behind it is registered by `@pikku/core/agent` on import
+rather than named by the RPC primitive — so a unit that holds an agent bundles
+it and a unit that holds none does not, instead of every unit paying ~52 KB for
+a runtime it never calls.
+
 ### Why This Isn't More Magical
 
 Unlike dependency injection frameworks like NestJS, Pikku:
