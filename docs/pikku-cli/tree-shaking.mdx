@@ -126,7 +126,7 @@ export const createServices = pikkuServices(async () => {
 When you need one bundle to serve multiple filtered deployments, Pikku uses conditional loading:
 
 ```typescript
-import { requiredSingletonServices } from './required-services.gen'
+import { requiredSingletonServices } from '.pikku/pikku-services.gen.js'
 
 export const createServices = pikkuServices(async (config) => {
   const logger = new ConsoleLogger()
@@ -158,6 +158,12 @@ export const createServices = pikkuServices(async (config) => {
 ```
 
 The `pikkuServices` wrapper ensures type safety and proper integration with Pikku's service system.
+
+A deploy split regenerates this map **per unit**, so one `services.ts` sees a
+different map in every bundle and each unit constructs only what its own
+functions, middleware and permissions reach. A `services.ts` that constructs
+unconditionally opts out of that entirely: every unit builds every service, and
+the split costs bytes without saving any.
 
 ### Why This Isn't More Magical
 
