@@ -88,14 +88,15 @@ What happens to a function that no rule matches.
 
 | Value | Behaviour |
 |-------|-----------|
-| `"function"` | One unit per function. The default, and what you get with no `grouping` block at all. |
-| `"services"` | One unit per distinct set of singleton services. |
+| `"services"` | One unit per distinct set of singleton services. The default, and what you get with no `grouping` block at all. |
+| `"function"` | One unit per function. |
 | `"single"` | Every unmatched function shares one unit named `app`. |
 
 #### `"services"` in detail
 
-The middle ground when one-per-function is too many units and `"single"` is too
-coarse. Functions are keyed on the singleton services their bodies destructure,
+The default, because it is the middle ground: one-per-function is a cold start
+and a deploy step for every function, and `"single"` is too coarse to reason
+about. Functions are keyed on the singleton services their bodies destructure,
 minus the ones every unit builds regardless — `config`, `logger`, `variables`,
 `schema`, `secrets`, and the per-request `rpc`, `mcp`, `channel` and
 `userSession`.
@@ -121,9 +122,20 @@ exactly the same services and still run in different places, because a function
 may declare `deploy: "server"` itself without any service crossing it.
 
 How much this saves depends on how varied the app's service use is. On the
-`templates/functions` app it turns 44 units into 10. On an app where nearly every
-function reaches the same database it collapses to something close to `"single"`
-with a few carve-outs — worth checking the plan before adopting it.
+`templates/functions` app it is 10 units where one-per-function is 44. On an app
+where nearly every function reaches the same database it collapses to something
+close to `"single"` with a few carve-outs — run `pikku deploy plan` and read the
+unit list. Set `"strategy": "function"` to get a unit per function back.
+
+:::warning Changing the strategy renames units
+A unit name is what a queue consumer, a scheduled task and a `dependsOn` point
+at. The manifest rewrites all three for you, but anything holding a unit name
+outside the manifest does not follow.
+
+Units that fall out of the manifest are also not deleted — `deploy()` is
+upsert-only ([#543](https://github.com/pikkujs/pikku/issues/543)), so the
+previous generation of workers stays live until something removes it.
+:::
 
 ### `rules`
 
